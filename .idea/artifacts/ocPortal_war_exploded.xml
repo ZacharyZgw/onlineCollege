@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ocPortal:war exploded">
+    <output-path>$PROJECT_DIR$/ocPortal/target/ocPortal</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ocPortal" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="ocCommon-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="ocCommon" />
+          </element>
+          <element id="archive" name="ocService-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="ocService" />
+          </element>
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/ocPortal/target/ocPortal/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="ocPortal/web/Web" />
+    </root>
+  </artifact>
+</component>

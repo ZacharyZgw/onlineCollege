@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ocCommon:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ocCommon_jar</output-path>
+    <root id="archive" name="ocCommon.jar">
+      <element id="module-output" name="ocCommon" />
+    </root>
+  </artifact>
+</component>
