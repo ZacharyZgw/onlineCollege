@@ -1,0 +1,329 @@
+<header class="cd-main-header" style="height: 80px">
+    <div class="cd-main-header__logo">
+        <a href="${s.base}" class="logo" title="在线教育平台">
+            <!--<img src="${s.base}/res/i/cd-logo.svg" alt="Logo" style="width: inherit;height: inherit">-->
+        </a>
+    </div>
+    <nav class="cd-main-nav pull-left" >
+        <ul class="cd-main-nav__list">
+            <li class="cd-main-nav__list__left">
+                <a class="cd-main-nav__item" href="${s.base}" style="color: #fff">首页</a>
+            </li>
+            <li class="cd-main-nav__list__left">
+                <a class="cd-main-nav__item" href="${s.base}/course/list" style="color: #fff">课程</a>
+            </li>
+            <li class="cd-main-nav__list__left">
+                <a class="cd-main-nav__item" href="${s.base}/course/list" style="color: #fff">实战</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="pull-left search-warp" style="min-width: 32px; height: 72px;background: none">
+        <div class="pa searchTags" >
+            <a href="#" target="_blank" style="display: inline">前端入门</a>
+            <a href="#" target="_blank" style="display: inline">Java入门</a>
+        </div>
+        <div class="search-area" data-search="top-banner">
+            <input class="search-input search_views" data-suggest-trigger="suggest-trigger" type="text" autocomplete="off">
+            <!--<input type="hidden" class="btn_search" data-search-btn="search-btn">-->
+            <ul class="search-area-result" data-suggest-result="suggest-result" style=""></ul>
+        </div>
+        <div class="showhide-search" data-show="no"><i class="clipboard fa fa-search"></i></div>
+    </div>
+    <nav class="cd-main-nav js-main-nav ">
+        <ul class="cd-main-nav__list js-signin-modal-trigger">
+            <!-- inser more links here -->
+            <@shiro.guest>
+            <li><a class="cd-main-nav__item cd-main-nav__item--signin" href="#0" data-signin="login" style="color: #fff">登录</a></li>
+            <li><a class="cd-main-nav__item cd-main-nav__item--signup" href="#0" data-signin="signup" style="color: #fff">注册</a></li>
+            </@shiro.guest>
+            <@shiro.user>
+            <li class="set_btn user-card-box">
+                <a href="">
+                    <img class="headImg" id="headerImg" src='<@shiro.principal property="header"/>' alt="">
+                </a>
+                <div class="g-user-card" style="z-index: 99">
+                    <div class="card-inner">
+                        <div class="card-top clearfix">
+                            <a href="" class="pull-left">
+                                <img src="/ocPortal/res/i/header1.jpg" alt="南冬">
+                            </a>
+                            <a href="">
+                                <span class="name text-ellipsis"><@shiro.principal property="username"/></span>
+                            </a>
+
+                        </div>
+                        <div class="user-center-box">
+                            <ul class="clearfix">
+                                <li class="pull-left">
+                                    <a href="" target="_blank">
+                                        <span class="user-center-icon icon-tick"></span>我的课程</a>
+                                </li>
+                                <li class="pull-left">
+                                    <a href="//order.imooc.com/myorder" target="_blank">
+                                        <span class="user-center-icon icon-receipt"></span>订单中心</a>
+                                </li>
+                                <li class="pull-left">
+                                    <a href="" target="_blank">
+                                        <span class="user-center-icon icon-score_shop"></span>积分商城</a>
+                                </li>
+                                <li class="pull-left">
+                                    <a href="" target="_blank">
+                                        <span class="user-center-icon icon-set"></span>个人设置</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-history">
+                        <span class="history-item">
+                        <span class="tit text-ellipsis">Java SSM快速开发仿慕课网在线教育平台</span>
+                        <span class="media-name text-ellipsis">6-11 ——课程详情页——03课程评论、问答</span>
+                        <i class="icon-clock"></i>
+                         <a href="//coding.imooc.com/lesson/110.html#mid=6761" class="continue" title="Java SSM快速开发仿慕课网在线教育平台
+                                 6-11  ——课程详情页——03课程评论、问答">继续</a>
+                        </span>
+                        </div>
+                        <div class="card-sets clearfix"><a href="${s.base}/auth/logout" class="l">安全退出</a></div>
+                    </div>
+                </div>
+            </li>
+        </@shiro.user>
+        </ul>
+    </nav>
+</header>
+<@shiro.guest>
+<div class="cd-signin-modal js-signin-modal"> <!-- this is the entire modal form, including the background -->
+    <div class="cd-signin-modal__container"> <!-- this is the container wrapper -->
+        <ul class="cd-signin-modal__switcher js-signin-modal-switcher js-signin-modal-trigger">
+            <li><a href="#0" data-signin="login" data-type="login">登录</a></li>
+            <li><a href="#0" data-signin="signup" data-type="signup">注册</a></li>
+        </ul>
+
+        <div class="cd-signin-modal__block js-signin-modal-block" data-type="login"> <!-- log in form -->
+            <form class="cd-signin-modal__form" action="${s.base}/auth/doAjaxLogin" method="post" id="loginForm">
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signin-email">E-mail</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-email" type="text" placeholder="请输入用户名" name="username">
+                    <span style="display: none;color: red;" id="signinUserNameError">error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-password">Password</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-password" type="text"  placeholder="请输入密码" name="password">
+                    <a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+                    <span style="display: none;color: red;" id="signinPasswordError">error message here?</span>
+                </p>
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-identity">验证码</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-identity" type="text" name="identiryCode" placeholder="请输入验证码" style="width: 80%">
+                    <!--<a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>-->
+                    <a class="vali-base" style="display: inline-block;margin-bottom: -15px;"><img  onclick="reloadIndityImg('signinIdentity');" id="signinIdentity"  src="${s.base}/tools/identiry/code" style="width:80px;height:40px;float:left;margin-left:10px;"></a>
+                    <span style="display: none;color: red;" id="signinIdentiryError">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <input type="checkbox" id="remember-me" checked class="cd-signin-modal__input " value="1" name="rememberMe">
+                    <label for="remember-me">Remember me</label>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width" type="button" onclick="doAjaxLogin();" value="登录">
+                </p>
+            </form>
+
+            <p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="reset">Forgot your password?</a></p>
+        </div> <!-- cd-signin-modal__block -->
+
+        <div class="cd-signin-modal__block js-signin-modal-block" data-type="signup"> <!-- sign up form -->
+            <form class="cd-signin-modal__form" action="${s.base}/auth/doAjaxRegister" id="signUpForm" method="post">
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--username cd-signin-modal__label--image-replace" for="signup-username">用户名</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-username" type="text" placeholder="请输入用户名" name="username">
+                    <span  style="display: none;color: red;" id="signUpUserNameError">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signup-email">E-mail</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-email" type="email" placeholder="请输入邮箱地址" name="email">
+                    <span style="display: none;color: red;" id="signUpEmailError">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password">Password</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-password" type="text"  placeholder="请输入密码" name="password">
+                    <a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+                    <span style="display: none;color: red;" id="signUpPasswordError">Error message here!</span>
+                </p>
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="resignup-password">rePassword</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="resignup-password" type="text"  placeholder="请确认密码">
+                    <a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+                    <span style="display: none;color: red;" id="reSignUpPasswordError">Error message here!</span>
+                </p>
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="register-identity">验证码</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="register-identity" type="text"  placeholder="请输入验证码" style="width: 80%" name="identiryCode">
+                    <!--<a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>-->
+                    <a class="vali-base" style="display: inline-block;margin-bottom: -15px;"><img  onclick="reloadIndityImg('indeityImgRegister');" id="indeityImgRegister"  src="${s.base}/tools/identiry/code" style="width:80px;height:40px;float:left;margin-left:10px;"></a>
+                    <span style="display: none;color: red;" id="signUpIdentityError">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <input type="checkbox" id="accept-terms" class="cd-signin-modal__input " checked="checked" >
+                    <label for="accept-terms">I agree to the <a style="display: inline-block" href="#0">Terms</a></label>
+                    <span style="display: none;color: red;" id="acceptTermsError">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" onclick="doAjaxRegister();" type="button" value="注册新账号" id="singup-button">
+                </p>
+            </form>
+        </div> <!-- cd-signin-modal__block -->
+
+        <div class="cd-signin-modal__block js-signin-modal-block" data-type="reset"> <!-- reset password form -->
+            <p class="cd-signin-modal__message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+
+            <form class="cd-signin-modal__form">
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="reset-email">E-mail</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="reset-email" type="email" placeholder="邮箱地址">
+                    <span class="cd-signin-modal__error">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" type="submit" value="找回密码">
+                </p>
+            </form>
+
+            <p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="login">返回登录</a></p>
+        </div> <!-- cd-signin-modal__block -->
+        <a href="#0" class="cd-signin-modal__close js-close">Close</a>
+    </div> <!-- cd-signin-modal__container -->
+</div> <!-- cd-signin-modal -->
+</@shiro.guest>
+<script type="text/javascript" src="${s.base}/res/js/placeholders.min.js"></script>
+<script type="text/javascript" src="${s.base}/res/js/modal.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var userHeader = $('#headerImg').attr('src');
+        if (userHeader == '' && userHeader==null && userHeader=="null"){
+            var headerPhoto = '/ocPortal/res/i/header.jpg';
+            $('#headerImg').attr('src',headerPhoto);
+        }
+    });
+    function reloadIndityImg(eleId) {
+        document.getElementById(eleId).src = "${s.base}" + "/tools/identiry/code?ticket=" + Math.random();
+    }
+    function doAjaxRegister() {
+        var signUpUsername = $('#signup-username').val();
+        if (oc.isEmpty(signUpUsername)){
+            /*this.toggleError($('#signup-username'),true);*/
+            $('#signUpUserNameError').show().html("用户名不能为空");
+            return;
+        }
+        if(!oc.enNumValid(signUpUsername)) {
+            $('#signUpUserNameError').show().html("用户名只能为英文或数字");
+            return;
+        }
+        var signUpEmail = $('#signup-email').val();
+        if(!oc.emailValid(signUpEmail)){
+            $('#signUpEmailError').html('邮箱格式错误').show();
+            return;
+        }
+        var signUpPassword = $('#signup-password').val();
+        var reSignUpPassword = $('#resignup-password').val();
+        if(oc.isEmpty(signUpPassword) || signUpPassword.length<6){
+            $('#signUpPasswordError').html('密码至少为六位').show();
+            return;
+        }
+        if (oc.isEmpty(reSignUpPassword)){
+            $('#reSignUpPasswordError').html("确认密码不能为空").show();
+            return;
+        }
+        if (signUpPassword!=reSignUpPassword){
+            $('#reSignUpPasswordError').html('请确认密码是否正确').show();
+            return;
+        }
+        var identiryCode = $('#register-identity').val();
+        if (oc.isEmpty(identiryCode)){
+            $('#signUpIdentityError').html('验证码不能为空').show();
+            return;
+        }
+        if (!$('#accept-terms').attr('checked')){
+            $('#acceptTermsError').html('请阅读并同意用户协议').show();
+            return;
+        }
+        $('#signUpForm').ajaxSubmit({
+            datatype:'json',
+            success:function (respText) {
+                var resp = $.parseJSON(respText);
+                if (resp.errcode ==0){
+                    $('#singup-button').attr("value","注册成功,3s后请登录");
+                    setTimeout(function () {
+                        $('#loginForm').hide().show();
+                    },3000);
+                }else if(resp.errcode==1){
+                    $('#signUpUserNameError').html('该用户名已被注册,请更换').show();
+                }else if(resp.errcode ==2){
+                    $('#signUpIdentityError').html('验证码错误').show();
+                    reloadIndityImg('indeityImgRegister');
+                }
+            },
+            error:function (xhr) {
+                
+            }
+        })
+
+
+
+    }
+    function doAjaxLogin() {
+        var signinUsername = $('#signin-email').val();
+        var signinPassword = $('#signin-password').val();
+        var identirycode = $('#signin-identity').val();
+
+        if (oc.isEmpty(signinUsername)){
+            $('#signinUserNameError').show().html('用户名不能为空');
+            return;
+        }
+        if (!oc.enNumValid(signinUsername)){
+            $('#signinUserNameError').html("用户名只能为英文或数字").show();
+            return;
+        }
+        if (oc.isEmpty(signinPassword) || signinPassword.length <6){
+            $('#signinPasswordError').html('密码至少6位').show();
+            return;
+
+        }else if (!oc.enNumValid(signinPassword)){
+            $('#signinPasswordError').html('密码只能为数字或英文字母').show();
+            return;
+        }
+
+        if (oc.isEmpty(identirycode)){
+            $('#signinIdentiryError').html("请输入验证码").show();
+            return;
+        }
+
+        $('#loginForm').ajaxSubmit({
+            datatype:'json',
+            success:function (respText) {
+                var resp = $.parseJSON(respText);
+                if (resp.errcode ==0){
+                    window.location.reload();
+                }else if(resp.errcode ==1){
+                    $('#signinUserNameError').html('用户名或密码错误!').show();
+                    $('#signinPasswordError').html('用户名或密码错误').show();
+                }else if (resp.errcode ==2){
+                    $('#signinIdentiryError').html('验证码错误').show();
+                    reloadIndityImg('signinIdentity');
+                }
+            },
+            error:function (xhr) {
+                
+            }
+        })
+
+
+
+
+
+    }
+</script>

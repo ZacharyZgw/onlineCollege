@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zgw.core.consts.dao.ISiteCarouselDao">
+
+    <sql id="All_Columns">
+        name, picture, url, weight, enable, create_time, create_user,
+        update_time, update_user, del, id
+    </sql>
+
+    <select id="selectAllSiteCarousel" parameterType="int" resultType="com.zgw.core.consts.entity.SiteCarousel">
+        select
+        <include refid="All_Columns"/>
+        from site_carousel
+        WHERE enable=1
+        ORDER BY weight DESC
+        limit 0,#{count}
+    </select>
+
+    <select id="selectSiteCarouselById" parameterType="long" resultType="com.zgw.core.consts.entity.SiteCarousel">
+        SELECT
+        <include refid="All_Columns"/>
+        from site_carousel
+        WHERE id=#{id}
+    </select>
+
+</mapper>

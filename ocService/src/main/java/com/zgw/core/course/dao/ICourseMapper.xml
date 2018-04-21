@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zgw.core.course.dao.ICourseDao">
+    <sql id="All_Columns">
+        course_id,name, type, classify, classify_name, sub_classify, sub_classify_name, direction, username,
+        level, free, price, time, onsale, brief, picture,studybefore,teachersay,
+        recommend, weight, study_count, create_time, create_user, update_time,
+        update_user, del, id
+    </sql>
+
+    <select id="getByCourseId" parameterType="long" resultType="com.zgw.core.course.entity.Course">
+        SELECT
+        <include refid="All_Columns"/>
+        from course
+        WHERE del=0
+        AND course_id=#{courseId}
+    </select>
+
+    <select id="queryList"  parameterType="com.zgw.core.course.entity.CourseQueryDto"
+            resultType="com.zgw.core.course.entity.Course">
+        SELECT
+        <include refid="All_Columns" />
+        FROM course
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            <if test="type != null">
+                AND type = #{type}
+            </if>
+            <if test="classify != null">
+                AND classify = #{classify}
+            </if>
+            <if test="subClassify != null">
+                AND sub_classify = #{subClassify}
+            </if>
+            <if test="direction != null">
+                AND direction = #{direction}
+            </if>
+            <if test="username != null">
+                AND username = #{username}
+            </if>
+            <if test="free != null">
+                AND free = #{free}
+            </if>
+            <if test="onsale != null">
+                AND onsale = #{onsale}
+            </if>
+        </trim>
+        <if test="sortField != null">
+            ORDER BY #{sortField}  #{sortDirection}
+        </if>
+        <if test="start != null and end != null">
+            LIMIT #{start} , #{end}
+        </if>
+    </select>
+
+    <select id="getTotalItemsCount" parameterType="com.zgw.core.course.entity.Course" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM course
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            AND del = 0
+            <if test="type != null">
+                AND type = #{type}
+            </if>
+            <if test="classify != null">
+                AND classify = #{classify}
+            </if>
+            <if test="subClassify != null">
+                AND sub_classify = #{subClassify}
+            </if>
+            <if test="onsale != null">
+                AND onsale = #{onsale}
+            </if>
+            <if test="name != null">
+                AND name like CONCAT('%',#{name},'%' )
+            </if>
+        </trim>
+    </select>
+    <select id="getById" parameterType="java.lang.Long" resultType="com.zgw.core.course.entity.Course">
+        SELECT
+        <include refid="All_Columns"  />
+        FROM course
+        WHERE id = #{id}
+        AND del = 0
+    </select>
+
+    <select id="getFiveCourses" parameterType="com.zgw.core.course.entity.Course"  resultType="com.zgw.core.course.entity.Course">
+        SELECT
+        <include refid="All_Columns"  />
+        FROM t_course
+        WHERE free = #{free}
+        AND del = 0
+        LIMIT 0 , 5
+    </select>
+
+    <select id="queryPage" resultType="com.zgw.core.course.entity.Course">
+        SELECT
+        <include refid="All_Columns" />
+        FROM course
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            AND del = 0
+            <if test="param1.type != null">
+                AND type = #{param1.type}
+            </if>
+            <if test="param1.classify != null">
+                AND classify = #{param1.classify}
+            </if>
+            <if test="param1.subClassify != null">
+                AND sub_classify = #{param1.subClassify}
+            </if>
+            <if test="param1.onsale != null">
+                AND onsale = #{param1.onsale}
+            </if>
+            <if test="param1.name != null">
+                AND name like CONCAT('%',#{param1.name},'%' )
+            </if>
+        </trim>
+        <if test="param2.sortField != null and param2.sortField != ''">
+            ORDER BY ${param2.sortField}  ${param2.sortDirection}
+        </if>
+        LIMIT #{param2.startIndex} , #{param2.pageSize}
+    </select>
+
+
+
+</mapper>

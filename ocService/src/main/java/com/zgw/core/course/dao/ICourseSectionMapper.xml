@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zgw.core.course.dao.ICourseSectionDao">
+
+    <sql id="All_Columns">
+        course_id, parent_id, name, sort, time, onsale, video_url,
+        create_time, create_user, update_time, update_user, del, brief,id
+    </sql>
+  <select id="selectCourseSectionById" parameterType="long"
+          resultType="com.zgw.core.course.entity.CourseSection">
+      SELECT
+      <include refid="All_Columns"/>
+      from course_section
+      WHERE del=0
+      AND onsale=1
+      and id=#{id}
+  </select>
+    <select id="getTotalItemsCount" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        from course_section
+        WHERE del=0
+    </select>
+    <select id="selectCourseSectionByCourseId" parameterType="long"
+            resultType="com.zgw.core.course.entity.CourseSection">
+        SELECT
+        <include refid="All_Columns"/>
+        from course_section
+        WHERE del=0
+        AND onsale-1
+        AND course_id = #{courseId}
+    </select>
+    <select id="selectAll"  parameterType="com.zgw.core.course.entity.CourseSection" resultType="com.zgw.core.course.entity.CourseSection">
+        SELECT
+        <include refid="All_Columns"/>
+        from course_section
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            del=0
+            <if test="courseId != null">
+                AND course_id=#{courseId}
+            </if>
+            <if test="onsale != null">
+                and onsale=#{onsale}
+            </if>
+        </trim>
+        ORDER BY parent_id , sort
+    </select>
+    <select id="getMaxSort" parameterType="long" resultType="java.lang.Integer">
+        SELECT MAX(sort)
+		FROM course_section
+		WHERE course_id = #{courseId, jdbcType=INTEGER}
+		AND parent_id = 0
+		ORDER BY sort DESC
+    </select>
+    <select id="queryPage" resultType="com.zgw.core.course.entity.CourseSection">
+        SELECT
+        <include refid="All_Columns"/>
+        from course_section
+        WHERE del=0
+        ORDER BY id
+        limit #{param2.startIndex, jdbcType=INTEGER},#{param2.pageSize, jdbcType=INTEGER}
+    </select>
+    <select id="getSortSectionMax" 
+            parameterType="com.zgw.core.course.entity.CourseSection"
+            resultType="com.zgw.core.course.entity.CourseSection">
+        SELECT
+        <include refid="All_Columns"  />
+        FROM course_section
+        WHERE course_id = #{courseId}
+        AND parent_id = #{parentId}
+        <![CDATA[ AND sort > #{sort} ]]>
+        ORDER BY sort ASC
+        LIMIT 0,1;
+    </select>
+    <select id="getSortSectionMin"
+            parameterType="com.zgw.core.course.entity.CourseSection"
+            resultType="com.zgw.core.course.entity.CourseSection">
+        SELECT
+        <include refid="All_Columns"  />
+        FROM course_section
+        WHERE course_id = #{courseId}
+        AND parent_id = #{parentId}
+        <![CDATA[ AND sort < #{sort} ]]>
+        ORDER BY sort DESC
+        LIMIT 0,1;
+    </select>
+
+</mapper>

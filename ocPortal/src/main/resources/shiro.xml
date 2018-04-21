@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							 http://www.springframework.org/schema/mvc
+							 http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<mvc:annotation-driven/>
+	<context:component-scan base-package="com.zgw.**.dao,com.zgw.**.service,com.zgw.core.auth"/>
+    <!-- 会话Cookie模板 -->  
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">  
+        <constructor-arg value="sid"/>  
+        <property name="httpOnly" value="true"/>  
+        <property name="maxAge" value="-1"/>  
+    </bean>
+    
+    <!-- rememberMe Cookie  -->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">  
+        <constructor-arg value="rememberMe"/>
+        <property name="path" value="/"/>  
+        <property name="domain" value="onlinecollege.com"/>  
+        <property name="httpOnly" value="true"/>  
+        <property name="maxAge" value="2592000"/><!-- 30天 -->  
+    </bean>
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">  
+	    <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>  
+     	<property name="cookie" ref="rememberMeCookie"/>  
+	</bean>
+	
+    <!-- 自定义Realm -->  
+    <bean id="authRealm" class="com.zgw.web.auth.AuthRealm"></bean>
+    
+    <!-- 保存在内存 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="authRealm" />
+		<property name="rememberMeManager" ref="rememberMeManager"/>  
+	</bean>
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>  
+	
+	<!-- 自定义 filter -->
+	<bean id="authFilter" class="com.zgw.web.auth.AuthFilter" />
+	
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="unauthorizedUrl" value="/error/403.html" />
+		<property name="successUrl" value="/" />
+		<property name="loginUrl" value="/auth/login" />
+		<property name="filters">
+			<map>
+				<entry key="authc" value-ref="authFilter" />
+			</map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				/error/** = anon
+				/res/** = anon
+				/tools/** = anon
+				/index* = anon
+				/auth/** = anon
+				/auth/logout.html = logout 
+				
+				/course/list* = anon
+				/course/to=anon
+				/course/learn/* = anon
+				/course/video/* = authc
+				
+				/courseComment/segment* = anon
+				
+				<!--/** = authc-->
+			</value>
+		</property>
+	</bean>
+	
+</beans>
+

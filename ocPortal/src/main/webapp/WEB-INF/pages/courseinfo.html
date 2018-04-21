@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;">
+    <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>慕课网</title>
+
+    <!-- Bootstrap -->
+    <link href="${s.base}/res/css/navstyle.css" rel="stylesheet">
+
+    <link href="${s.base}/res/css/font-awesome.css" rel="stylesheet">
+    <link href="${s.base}/res/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${s.base}/res/css/css.css" rel="stylesheet">
+
+    <script src="${s.base}/res/js/jquery-1.11.3.min.js"></script>
+    <script src="${s.base}/res/js/bootstrap.min.js"></script>
+    <#include "./common/globe.html">
+
+</head>
+<body class="bodyView">
+<!--导航部分-->
+<div id="header" class="clearfix">
+    <div id="logo" class="pull-left logo"><a href="" target="_self" class="hide-text" title="首页"></a></div>
+    <div class="page-container" id="nav">
+        <div class="pull-left navList">
+            <ul class="pull-left navView">
+                <li><a href="${s.base}">首页</a></li>
+                <li><a href="${s.base}/course/list">课程<i class="icn-new"></i></a></li>
+                <li><a href="">实战</a></li>
+                <li><a href="">猿问</a></li>
+                <li><a href="">手记</a></li>
+            </ul>
+        </div>
+        <div class="pull-left search-warp" style="min-width: 32px; height: 72px;">
+            <div class="pa searchTags">
+                <a href="#" target="_blank">前端入门</a>
+                <a href="#" target="_blank">Java入门</a>
+            </div>
+            <div class="search-area" data-search="top-banner">
+                <input class="search-input search_views" data-suggest-trigger="suggest-trigger" type="text" autocomplete="off">
+                <!--<input type="hidden" class="btn_search" data-search-btn="search-btn">-->
+                <ul class="search-area-result" data-suggest-result="suggest-result" style=""></ul>
+            </div>
+            <div class="showhide-search" data-show="no"><i class="clipboard fa fa-search"></i></div>
+        </div>
+        <div class="pull-right headInfo cd-main-nav js-main-nav ">
+            <ul class="clearfix login-area cd-main-nav__list js-signin-modal-trigger">
+                <@shiro.guest>
+                <li><a class=" cd-main-nav__item--signin" href="#0" data-signin="login" style="color: #fff">登录</a></li>
+                <li><a class=" cd-main-nav__item--signup" href="#0" data-signin="signup" style="color: #fff">注册</a></li>
+                </@shiro.guest>
+                <@shiro.user>
+                <li class="set_btn user-card-box">
+                    <a href="">
+                        <img class="headImg" src="/ocPortal/res/i/header1.jpg" alt="">
+                    </a>
+                    <div class="g-user-card">
+                        <div class="card-inner">
+                            <div class="card-top clearfix">
+                                <a href="" class="pull-left">
+                                    <img src="/ocPortal/res/i/header1.jpg" alt="南冬"></a>
+                                <div class="card-top-right-box pull-left">
+                                    <a href="">
+                                        <span class="name text-ellipsis">南冬</span></a>
+                                    <div class="meta">
+                                        <a href="">经验
+                                            <b id="js-user-mp">5,723</b></a>
+                                        <a href="">积分
+                                            <b id="js-user-credit">2</b></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-center-box">
+                                <ul class="clearfix">
+                                    <li class="pull-left">
+                                        <a href="" target="_blank">
+                                            <span class="user-center-icon icon-tick"></span>我的课程</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-history">
+                              <span class="history-item">
+                                <span class="tit text-ellipsis">Java SSM快速开发仿慕课网在线教育平台</span>
+                                <span class="media-name text-ellipsis">6-11 ——课程详情页——03课程评论、问答</span>
+                                <i class="icon-clock"></i>
+                                <a href="//coding.imooc.com/lesson/110.html#mid=6761" class="continue" title="Java SSM快速开发仿慕课网在线教育平台
+                                6-11  ——课程详情页——03课程评论、问答">继续</a>
+                              </span>
+                            </div>
+                            <div class="card-sets clearfix"><a href="" class="l">安全退出</a></div>
+                        </div>
+                    </div>
+                </li>
+                </@shiro.user>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="head_cont">
+    <div class="container">
+        <#if course??>
+        <div class="home_hn">
+            <a href="${s.base}/course/list">课程</a>
+            <i>\</i>
+            <a href="${s.base}/course/list?pageNUm=1&c=${course.classify}&sort=last">${course.classifyName}</a>
+            <i>\</i>
+            <a href="${s.base}/course/list?pageNUm=1&c=${course.subClassify}&sort=last">${course.subClassifyName}</a>
+            <i>\</i>
+            <a href="">${course.name}</a>
+        </div>
+        </#if>
+    <div class="home_h1">${courseName}</div>
+        <div class="clearfix user_infos">
+            <#if courseTeacher??>
+            <img class="pull-left user_header" src="${courseTeacher.header}" alt="">
+            <div class="pull-left user_t1">
+                <a>${courseTeacher.username}<i class="icon-imooc"></i></a>
+                <p>${courseTeacher.title}</p>
+            </div>
+            </#if>
+            <#if course??>
+            <div class="pull-left info_t1">
+                <span class="name_t1">难度</span>
+                <#if course.level ==1>
+                <span class="cont_t1">初级</span>
+                <#elseif item.level == 2>
+                <span class="cont_t1">中级</span>
+                <#else>
+                <span class="cont_t1">高级</span>
+                </#if>
+            </div>
+            <div class="pull-left info_t1">
+                <span class="name_t1">时长</span>
+                <span class="cont_t1">${course.time!}</span>
+            </div>
+            <div class="pull-left info_t1">
+                <span class="name_t1">学习人数</span>
+                <span class="cont_t1">${course.studyCount!}</span>
+            </div>
+            </#if>
+        </div>
+        <div class="extra">
+            <div class="share-action" data-bd-bind="">
+                <!--收藏-->
+                <div class="share js-follow-action" data-cid="974" data-cmd="follow" title="收藏"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span>收藏</span></div>
+                <!--<a href="javascript:;" class="share wx js-share icon-share-weichat" data-cmd="weixin" title="分享到微信"><i class="clipboard fa fa-weixin"></i></a>
+                <a href="javascript:;" class="share qq js-share icon-share-qq" data-cmd="qzone" title="分享到QQ空间"><i class="clipboard fa fa-qq"></i></a>
+                <a href="javascript:;" class="share sina js-share icon-share-weibo" data-cmd="tsina" title="分享到新浪微博"><i class="clipboard fa fa-weibo"></i></a>-->
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="tabNavs">
+    <div class="container">
+        <ul class="clearfix">
+            <li class="active"><a href="">课程章节</a></li>
+            <li><span>78</span><a href="">问答评论</a></li>
+            <li><a href="">同学笔记</a></li>
+            <li><span>13</span><a href="">用户评价</a></li>
+        </ul>
+    </div>
+</div>
+<div class="mainView">
+    <div class="container clearfix">
+        <div class="pull-left content-wrap">
+            <div class="content">
+                <div class="course-wrap">简介：${course.brief}</div>
+                <#if courseSectionList??>
+                <#list courseSectionList as item>
+                <div class="course-wrap">
+                    <div class="chapter">
+                        <h3>${item.name}</h3>
+                        <div class="chapter-description">
+                            ${item.brief}
+                        </div>
+                        <ul class="video">
+                            <#if item.subSectionList??>
+                            <#list item.subSectionList as section>
+                            <li data-media-id="16905">
+                                <a href="" class="J-media-item">
+                                    <i class="clipboard fa fa-check-circle done"></i>
+                                    <i class="clipboard fa fa-play-circle type"></i>
+                                    ${section.name}
+                                    (${section.time})
+                                </a>
+                            </li>
+                            </#list>
+                             </#if>
+                            <!--<li data-media-id="16907"><em class="laststudy">最近学习</em>
+                                <a href="" class="J-media-item">
+                                    <i class="clipboard fa fa-adjust ing"></i>
+                                    <i class="clipboard fa fa-play-circle type"></i>
+                                    1-3 小程序官方文档介绍
+                                    (05:07)
+
+
+                                </a>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+                </#list>
+                </#if>
+            </div>
+        </div>
+        <!--</div>-->
+        <div class="pull-right aside">
+            <div class="course-wrap course-aside-info js-usercard-box">
+                <div class="learn-btn">
+                    <div class="learn-info">
+                        <span>已学 8% </span>学习耗时 3小时 7分
+                    </div>
+                    <div class="progress">
+                        <ins data-progress="8" style="display: inline-block; width: 8%;"></ins>
+                    </div>
+                    <div class="learn-info-media">上次学至 1-3 小程序官方文档介绍</div>
+                    <a href="" class="moco-btn moco-btn-red moco-btn-lg">继续学习</a>
+                </div>
+
+                <div class="course-info-tip">
+                    <dl class="first">
+                        <dt>课程须知</dt>
+                        <dd class="autowrap">${course.studybefore}</dd>
+                    </dl>
+                    <dl>
+                        <dt>老师告诉你能学到什么？</dt>
+                        <dd class="autowrap">${course.teachersay}</dd>
+                    </dl>
+                </div>
+
+
+
+            </div>
+            <div class="js-commend-box">
+                <div class="mb40 recom-course-list-box">
+                    <h4>推荐课程</h4>
+                    <ul class="js-recom-course recom-course-list">
+                        <#if recomdCourseList??>
+                        <#list recomdCourseList as item>
+                        <li>
+                            <a href="${s.base}/course/learn/${item.courseId}" target="_blank">
+                                <div class="clearfix">
+                                    <div class="pull-left course-img" style="background-image: url('${item.picture}');"></div>
+                                    <div class="pull-left content-box">
+                                        <p class="smalle-title">${item.name}</p>
+                                        <div class="clearfix learn-detail">
+                                            ${item.type}<span>·</span>
+                                            ${item.level}<span>·</span>
+                                            <i class="fa fa-user"></i>11672
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        </#list>
+                        </#if>
+                    </ul>
+                </div>
+            </div>
+            <div class="js-tag-box">
+                <div class="mb40 all-attention-box">
+                    <h4>热门专题标签</h4>
+                    <div class="js-all-attention all-attention">
+                        <a href="" target="_blank" data-id="37" class="style6">web前端开发需要会什么</a>
+                        <a href="" target="_blank" data-id="36" class="style4">编程入门</a>
+                        <a href="" target="_blank" data-id="86" class="style1">数据科学</a>
+                    </div>
+                </div>
+            </div>
+            <div class="js-commend-box">
+                <div class="mb40 recom-course-list-box">
+                    <h4>相关课程</h4>
+                    <ul class="js-recom-course recom-course-list">
+
+                        <li>
+                            <a href="" target="_blank">
+                                <div class="clearfix">
+                                    <div class="pull-left course-img" style="background-image: url(//img4.mukewang.com/szimg/583e42fb0001e04f05400300-360-202.jpg);"></div>
+                                    <div class="pull-left content-box">
+                                        <p class="smalle-title">星级评分原理和实现（上）</p>
+                                        <div class="clearfix learn-detail">
+                                            初级<span>·</span>
+                                            <i class="fa fa-user"></i>11672
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="" target="_blank">
+                                <div class="clearfix">
+                                    <div class="pull-left course-img" style="background-image: url(//img4.mukewang.com/szimg/583e42fb0001e04f05400300-360-202.jpg);"></div>
+                                    <div class="pull-left content-box">
+                                        <p class="smalle-title">星级评分原理和实现（上）</p>
+                                        <div class="clearfix learn-detail">
+                                            初级<span>·</span>
+                                            <i class="fa fa-user"></i>11672
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">
+                                <div class="clearfix">
+                                    <div class="pull-left course-img" style="background-image: url(//img4.mukewang.com/szimg/583e42fb0001e04f05400300-360-202.jpg);"></div>
+                                    <div class="pull-left content-box">
+                                        <p class="smalle-title">星级评分原理和实现（上）</p>
+                                        <div class="clearfix learn-detail">
+                                            初级<span>·</span>
+                                            <i class="fa fa-user"></i>11672
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">
+                                <div class="clearfix">
+                                    <div class="pull-left course-img" style="background-image: url(//img4.mukewang.com/szimg/583e42fb0001e04f05400300-360-202.jpg);"></div>
+                                    <div class="pull-left content-box">
+                                        <p class="smalle-title">星级评分原理和实现（上）</p>
+                                        <div class="clearfix learn-detail">
+                                            初级<span>·</span>
+                                            <i class="fa fa-user"></i>11672
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="footer">
+    <div class="container">
+        <div class="footerwaper clearfix">
+            <div class="pull-right followus">
+                <a class="followus-weixin" href="javascript:;" target="_blank" title="微信">
+                    <div class="flw-weixin-box"></div>
+                </a>
+                <a class="followus-weibo" href="http://weibo.com/u/3306361973" target="_blank" title="新浪微博"></a>
+                <a class="followus-qzone" href="http://user.qzone.qq.com/1059809142/" target="_blank" title="QQ空间"></a>
+            </div>
+            <div class="footer_intro pull-left">
+                <div class="footer_link">
+                    <ul>
+                        <li><a href="" target="_blank">网站首页</a></li>
+                        <li><a href="" target="_blank" title="企业合作">企业合作</a></li>
+                        <li><a href="" target="_blank">人才招聘</a></li>
+                        <li><a href="" target="_blank">联系我们</a></li>
+                        <li><a href="" target="_blank">讲师招募</a></li>
+                        <li><a href="" target="_blank">常见问题</a></li>
+                        <li><a href="" target="_blank">意见反馈</a></li>
+                        <li><a href="" target="_blank">慕课大学</a></li>
+                        <li><a href="" target="_blank">友情链接</a></li>
+
+                    </ul>
+                </div>
+                <p>Copyright © 2018 imooc.com All Rights Reserved | 京ICP备 12003892号-11 </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--右边浮动框-->
+<div id="J_GotoTop" class="elevator">
+    <a href="" class="elevator-msg" target="_blank">
+        <i class="fa fa-info-circle"></i>
+        <span class="">意见反馈</span>
+    </a>
+    <a href="" class="elevator-faq" target="_blank">
+        <i class="fa fa-question-circle-o"></i>
+        <span class="">常见问题</span>
+    </a>
+    <a href="" target="_blank" class="elevator-app">
+        <i class="fa fa-download"></i>
+        <span class="">APP下载</span>
+        <div class="elevator-app-box"></div>
+    </a>
+    <a href="" class="elevator-weixin no-goto" id="js-elevator-weixin">
+        <i class="fa fa-comments"></i>
+        <span class="">官方微信</span>
+        <div class="elevator-weixin-box"></div>
+    </a>
+    <a href="javascript:window.scrollTo( 0, 0 );" class="elevator-top no-goto" style="display: none;" id="backTop" >
+        <i class="glyphicon glyphicon-menu-up"></i>
+        <span class="">返回顶部</span>
+    </a>
+</div>
+<div class="cd-signin-modal js-signin-modal"> <!-- this is the entire modal form, including the background -->
+    <div class="cd-signin-modal__container"> <!-- this is the container wrapper -->
+        <ul class="cd-signin-modal__switcher js-signin-modal-switcher js-signin-modal-trigger">
+            <li><a href="#0" data-signin="login" data-type="login">登录</a></li>
+            <li><a href="#0" data-signin="signup" data-type="signup">注册</a></li>
+        </ul>
+
+        <div class="cd-signin-modal__block js-signin-modal-block" data-type="login"> <!-- log in form -->
+            <form class="cd-signin-modal__form">
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signin-email">用户名</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-email" type="email" placeholder="请输入用户名">
+                    <span class="cd-signin-modal__error">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-password">密码</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-password" type="text"  placeholder="请输入密码">
+                    <a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+                    <span class="cd-signin-modal__error">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <input type="checkbox" id="remember-me" checked class="cd-signin-modal__input ">
+                    <label for="remember-me">记住我</label>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width" type="submit" value="登录">
+                </p>
+            </form>
+
+            <p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="reset">Forgot your password?</a></p>
+        </div> <!-- cd-signin-modal__block -->
+
+        <div class="cd-signin-modal__block js-signin-modal-block" data-type="signup"> <!-- sign up form -->
+            <form class="cd-signin-modal__form">
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--username cd-signin-modal__label--image-replace" for="signup-username">用户名</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-username" type="text" placeholder="请输入用户名">
+                    <span class="cd-signin-modal__error">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signup-email">E-mail</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-email" type="email" placeholder="请输入邮箱地址">
+                    <span class="cd-signin-modal__error">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password">Password</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-password" type="text"  placeholder="请输入密码">
+                    <a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+                    <span class="cd-signin-modal__error">Error message here!</span>
+                </p>
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password">rePassword</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="resignup-password" type="text"  placeholder="请确认密码">
+                    <a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+                    <span class="cd-signin-modal__error">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <input type="checkbox" id="accept-terms" class="cd-signin-modal__input ">
+                    <label for="accept-terms">I agree to the <a style="display: inline-block" href="#0">Terms</a></label>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" type="submit" value="注册新账号">
+                </p>
+            </form>
+        </div> <!-- cd-signin-modal__block -->
+
+        <div class="cd-signin-modal__block js-signin-modal-block" data-type="reset"> <!-- reset password form -->
+            <p class="cd-signin-modal__message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+
+            <form class="cd-signin-modal__form">
+                <p class="cd-signin-modal__fieldset">
+                    <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="reset-email">E-mail</label>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="reset-email" type="email" placeholder="邮箱地址">
+                    <span class="cd-signin-modal__error">Error message here!</span>
+                </p>
+
+                <p class="cd-signin-modal__fieldset">
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" type="submit" value="找回密码">
+                </p>
+            </form>
+
+            <p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="login">返回登录</a></p>
+        </div> <!-- cd-signin-modal__block -->
+        <a href="#0" class="cd-signin-modal__close js-close">Close</a>
+    </div> <!-- cd-signin-modal__container -->
+</div> <!-- cd-signin-modal -->
+</body>
+<script type="text/javascript" src="${s.base}/res/js/placeholders.min.js"></script>
+<script type="text/javascript" src="${s.base}/res/js/modal.js"></script>
+<script>
+    // 获取焦点
+    $('.search_views').focus(function () {
+        if ($('.search-warp').hasClass('search-active')){
+            $('.search-warp').removeClass('search-active')
+        }else{
+            $('.search-warp').addClass('search-active')
+        }
+    });
+    // 失去焦点
+    $('.search_views').blur(function () {
+        $('.search-warp').removeClass('search-active')
+    });
+
+    window.onscroll=function(){
+        var t=document.documentElement.scrollTop||document.body.scrollTop;
+
+        if(t<= 300){
+            $('.elevator-top').removeClass('active');
+        }else{
+            $('.elevator-top').addClass('active');
+        }
+    }
+
+</script>
+
+
+
+</html>

@@ -1,0 +1,83 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+.wrap {
+    width: 100%;
+    background-color: #fff;
+    padding-bottom: 12px;
+}
+.wrap .top {
+    max-width: 1200px;
+    margin: auto;
+}
+.course-content {
+    padding-top: 12px;
+    float: none;
+    width: 100%;
+    box-shadow: none;
+}
+.course-nav-row {
+    position: relative;
+    padding: 16px 0 5px;
+    border-bottom: 1px solid #edf1f2;
+}
+.clearfix {
+}
+.course-nav-row .hd {
+    width: 52px;
+    height: 20px;
+    line-height: 30px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #07111b;
+    text-align: right;
+}
+.l {
+    float: left;
+}
+.course-nav-row .bd {
+    margin-left: 64px;
+}
+.course-nav-row {
+    position: relative;
+    padding: 16px 0 5px;
+    border-bottom: 1px solid #edf1f2;
+}
+.course-nav-row {
+    position: relative;
+    padding: 16px 0 5px;
+    border-bottom: 1px solid #edf1f2;
+}
+.border_bottom_none {
+    border-bottom: none!important;
+}
+.course-nav-item {
+    display: inline-block;
+    margin: 0 4px;
+}
+.course-nav-item a {
+    display: block;
+    line-height: 14px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+a:link, a:visited, body, html {
+    color: #1c1f21;
+}
+a:link, a:visited {
+    color: #5e5e5e;
+}
+:link, :visited, ins {
+    text-decoration: none;
+}
+a, button, input {
+    outline: 0;
+}
+.course-nav-row .bd a:hover{
+    background: #2b333b;
+    color: #fff;
+    border-radius: 2px;
+}
