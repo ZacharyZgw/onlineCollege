@@ -59,7 +59,7 @@
         ( user_id, classify, object_id, tips, create_time, create_user, update_time,
         update_user, del, id ,course_sub_classify)
         VALUES
-        ( #{userId, jdbcType=INTEGER}, #{classify, jdbcType=INTEGER},#{objectId, jdbcType=INTEGER},#{tips, jdbcType=VARCHAR}, #{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP},
+        ( #{userId, jdbcType=INTEGER}, #{classify, jdbcType=INTEGER},#{objectId, jdbcType=INTEGER},#{tips, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP},
         #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR},#{courseSubClassify} )
     </insert>
     <insert id="createSelectivity" parameterType="com.zgw.core.user.entity.UserCollections" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
@@ -111,7 +111,7 @@
                 #{tips, jdbcType=VARCHAR},
             </if>
             <if test="createTime != null ">
-                #{createTime, jdbcType=DATE},
+                #{createTime, jdbcType=TIMESTAMP},
             </if>
             <if test="createUser != null ">
                 #{createUser, jdbcType=VARCHAR},

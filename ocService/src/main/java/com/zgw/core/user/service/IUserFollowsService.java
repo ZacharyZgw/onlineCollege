@@ -1,13 +1,12 @@
-package com.zgw.core.user.dao;
+package com.zgw.core.user.service;
 
 import com.zgw.core.user.entity.UserFollowStudyRecord;
 import com.zgw.core.user.entity.UserFollows;
 import com.zgw.page.TailPage;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@Repository
-public interface IUserFollowsDao {
+
+public interface IUserFollowsService {
     /**
      *根据id获取
      **/
@@ -19,37 +18,27 @@ public interface IUserFollowsDao {
     public List<UserFollows> queryAll(UserFollows queryEntity);
 
     /**
-     *获取总数量
+     *分页获取
      **/
-    public Integer getTotalItemsCount(UserFollows queryEntity);
+    public TailPage<UserFollows> queryPage(UserFollows queryEntity , TailPage<UserFollows> page);
 
     /**
      *分页获取
      **/
-    public List<UserFollows> queryPage(UserFollows queryEntity , TailPage<UserFollows> page);
+    public TailPage<UserFollowStudyRecord> queryUserFollowStudyRecordPage(UserFollowStudyRecord queryEntity , TailPage<UserFollowStudyRecord> page);
 
     /**
-     *获取总数量
-     **/
-    public Integer getFollowStudyRecordCount(UserFollowStudyRecord queryEntity);
-
-    /**
-     *分页获取
-     **/
-    public List<UserFollowStudyRecord> queryFollowStudyRecord(UserFollowStudyRecord queryEntity , TailPage<UserFollowStudyRecord> page);
-
-    /**
-     *创建新记录
+     *创建
      **/
     public void createSelectivity(UserFollows entity);
-    public void create(UserFollows entity);
+    public void create(UserFollows entiry);
     /**
      *根据id更新
      **/
     public void update(UserFollows entity);
 
     /**
-     *根据id选择性更新自动
+     *根据id 进行可选性更新
      **/
     public void updateSelectivity(UserFollows entity);
 
@@ -62,6 +51,7 @@ public interface IUserFollowsDao {
      *逻辑删除
      **/
     public void deleteLogic(UserFollows entity);
+
 
 
 }

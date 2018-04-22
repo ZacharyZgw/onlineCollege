@@ -75,12 +75,12 @@
         ( user_id, follow_id, create_time, create_user, update_time, update_user,
         del, id )
         VALUES
-        ( #{userId, jdbcType=VARCHAR}, #{followId, jdbcType=VARCHAR}, #{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUser, jdbcType=VARCHAR},
+        ( #{userId, jdbcType=VARCHAR}, #{followId, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUser, jdbcType=VARCHAR},
         #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR} )
     </insert>
 
     <insert id="createSelectivity" parameterType="com.zgw.core.user.entity.UserFollows" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
-        INSERT INTO t_user_follows
+        INSERT INTO user_follows
         <trim prefix="(" suffix=")"  suffixOverrides="," >
             <if test="userId != null ">
                 user_id,
@@ -113,7 +113,7 @@
                 #{followId, jdbcType=INTEGER},
             </if>
             <if test="createTime != null ">
-                #{createTime, jdbcType=DATE},
+                #{createTime, jdbcType=TIMESTAMP},
             </if>
             <if test="createUser != null ">
                 #{createUser, jdbcType=VARCHAR},
@@ -131,7 +131,7 @@
     </insert>
 
     <update id="update" parameterType="com.zgw.core.user.entity.UserFollows" flushCache="true">
-        UPDATE t_user_follows SET
+        UPDATE user_follows SET
         user_id = #{userId, jdbcType=VARCHAR},
         follow_id = #{followId, jdbcType=VARCHAR},
         update_time = #{updateTime, jdbcType=TIMESTAMP},
@@ -140,7 +140,7 @@
     </update>
 
     <update id="updateSelectivity" parameterType="com.zgw.core.user.entity.UserFollows" flushCache="true">
-        UPDATE t_user_follows
+        UPDATE user_follows
         <trim prefix="SET" suffixOverrides="," >
             <if test="userId != null ">
                 user_id = #{userId, jdbcType=VARCHAR},
@@ -163,12 +163,12 @@
     </update>
 
     <delete id="delete" parameterType="com.zgw.core.user.entity.UserFollows" >
-        DELETE FROM t_user_follows
+        DELETE FROM user_follows
         WHERE id = #{id, jdbcType=INTEGER}
     </delete>
 
     <update id="deleteLogic" parameterType="com.zgw.core.user.entity.UserFollows" flushCache="true">
-        UPDATE t_user_follows
+        UPDATE user_follows
         SET del = 1
         WHERE id = #{id, jdbcType=INTEGER}
     </update>

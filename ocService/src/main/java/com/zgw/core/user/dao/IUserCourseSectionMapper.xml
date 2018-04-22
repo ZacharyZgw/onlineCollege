@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zgw.core.user.dao.IUserCourseSectionDao">
+    <sql id="All_Columns">
+        id,user_id,course_id,course_status,section_id,
+        section_status,section_time,rate,create_time,create_user,
+        update_time,update_user,del
+    </sql>
+    <select id="getById" parameterType="long" resultType="com.zgw.core.user.entity.UserCourseSection">
+        SELECT
+        <include refid="All_Columns"/>
+        from user_course_section
+        WHERE id= #{id}
+    </select>
+    <select id="queryAll" parameterType="com.zgw.core.user.entity.UserCourseSection"
+            resultType="com.zgw.core.user.entity.UserCourseSection">
+        SELECT
+        <include refid="All_Columns"/>
+        from user_course_section
+        <trim prefix="where" prefixOverrides="AND |OR">
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="courseId != null">
+                and course_id = #{courseId}
+            </if>
+            <if test="sectionId != null">
+                and section_id = #{sectionId}
+            </if>
+        </trim>
+        order by id
+    </select>
+    <select id="queryLatest" parameterType="com.zgw.core.user.entity.UserCourseSection"
+            resultType="com.zgw.core.user.entity.UserCourseSection">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM
+        user_course_section
+        <trim prefix="where" prefixOverrides="AND |OR">
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="courseId != null">
+                and course_id = #{courseId}
+            </if>
+            <if test="sectionId != null">
+                and section_id = #{sectionId}
+            </if>
+        </trim>
+        order by update_time DESC
+        limit 0,1
+    </select>
+    <select id="getTotalItemsCount" parameterType="com.zgw.core.user.entity.UserCourseSection"
+                        resultType="java.lang.Integer">
+        SELECT
+        COUNT (*)
+        from user_course_section
+        WHERE user_id = #{userId}
+    </select>
+    <select id="queryPage" resultType="com.zgw.core.user.entity.UserCourseSectionDto">
+        select
+        t.*,c.name as courseName,c.picture as coursePicture, s.name as sectionName
+        from user_course_section t,course c ,course_section s
+        WHERE
+        t.user_id = #{param1.userId}
+        and t.course_id = c.course_id
+        and t.section_id = s.id
+        order by id DESC
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
+    </select>
+    <insert id="create" parameterType="com.zgw.core.user.entity.UserCourseSection" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO user_course_section
+        ( user_id, course_id,course_status, section_id, section_status,section_time, rate, create_time, create_user,
+        update_time, update_user, del, id )
+        VALUES
+        ( #{userId, jdbcType=INTEGER}, #{courseId, jdbcType=INTEGER},#{courseStatus jdbcType=INTEGER}, #{sectionId, jdbcType=INTEGER},#{sectionStatus,jdbcType=INTEGER}, #{sectionTime,jdbcType=VARCHAR},#{rate, jdbcType=INTEGER}, #{createTime, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR},
+        #{updateTime, jdbcType=TIMESTAMP}, #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR} )
+    </insert>
+    <insert id="createSelectivity" parameterType="com.zgw.core.user.entity.UserCourseSection" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO user_course_section
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="userId != null ">
+                user_id,
+            </if>
+            <if test="courseId != null ">
+                course_id,
+            </if>
+            <if test="courseStatus != null">
+                course_status,
+            </if>
+            <if test="sectionId != null ">
+                section_id,
+            </if>
+            <if test="sectionStatus != null ">
+                section_status,
+            </if>
+            <if test="sectionTime != null">
+                section_time,
+            </if>
+            <if test="rate != null ">
+                rate,
+            </if>
+            <if test="createTime != null ">
+                create_time,
+            </if>
+            <if test="createUser != null ">
+                create_user,
+            </if>
+            <if test="updateTime != null ">
+                update_time,
+            </if>
+            <if test="updateUser != null ">
+                update_user,
+            </if>
+            <if test="del != null ">
+                del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="userId != null ">
+                #{userId, jdbcType=INTEGER},
+            </if>
+            <if test="courseId != null ">
+                #{courseId, jdbcType=INTEGER},
+            </if>
+            <if test="courseStatus != null">
+                #{courseStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sectionId != null ">
+                #{sectionId, jdbcType=INTEGER},
+            </if>
+            <if test="sectionStatus != null ">
+                #{sectionStatus, jdbcType=INTEGER},
+            </if>
+            <if test="sectionTime != null">
+                #{sectionTime,jdbcType = VARCHAR},
+            </if>
+            <if test="rate != null ">
+                #{rate, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null ">
+                #{createTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null ">
+                #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.zgw.core.user.entity.UserCourseSection" flushCache="true">
+        UPDATE user_course_section SET
+        user_id = #{userId, jdbcType=INTEGER},
+        course_id = #{courseId, jdbcType=INTEGER},
+        course_status = #{courseStatus,jdbcType = INTEGER},
+        section_id = #{sectionId, jdbcType=INTEGER},
+        section_status = #{sectionStatus, jdbcType=INTEGER},
+        section_time = #{sectionTime,jdbcType = VARCHAR},
+        rate = #{rate, jdbcType=INTEGER},
+        update_time = #{updateTime, jdbcType=TIMESTAMP},
+        update_user = #{updateUser, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <update id="updateSelectivity" parameterType="com.zgw.core.user.entity.UserCourseSection" flushCache="true">
+        UPDATE user_course_section
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="userId != null ">
+                user_id = #{userId, jdbcType=INTEGER},
+            </if>
+            <if test="courseId != null ">
+                course_id = #{courseId, jdbcType=INTEGER},
+            </if>
+            <if test="courseStatus != null">
+                course_status =#{courseStatus,jdbcType = INTEGER},
+            </if>
+            <if test="sectionId != null ">
+                section_id = #{sectionId, jdbcType=INTEGER},
+            </if>
+            <if test="sectionStatus != null ">
+                section_status = #{sectionStatus, jdbcType=INTEGER},
+            </if>
+            <if test="sectionTime != null">
+                section_time = #{sectionTime,jdbcType = VARCHAR},
+            </if>
+            <if test="rate != null ">
+                rate = #{rate, jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+                update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+                del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+
+    </update>
+
+    <delete id="delete" parameterType="com.zgw.core.user.entity.UserCourseSection" >
+        DELETE
+        FROM user_course_section
+        WHERE id = #{id, jdbcType=INTEGER}
+    </delete>
+
+    <update id="deleteLogic" parameterType="com.zgw.core.user.entity.UserCourseSection" flushCache="true">
+        UPDATE user_course_section
+        SET del = 1
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+</mapper>
