@@ -25,6 +25,7 @@ public class CourseServiceImpl implements ICourseService {
         return courseDao.getByCourseId(courseId);
     }
 
+
     @Override
     public List<Course> queryList(CourseQueryDto queryEntity) {
         return courseDao.queryList(queryEntity);

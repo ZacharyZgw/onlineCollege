@@ -14,6 +14,12 @@ public class CourseSectionServiceImpl implements ICourseSectionService {
 
     @Autowired
     private ICourseSectionDao courseSectionDao;
+
+    @Override
+    public Long getFirstSectionId(Long courseId) {
+        return courseSectionDao.getFirstSectionId(courseId);
+    }
+
     @Override
     public CourseSection getById(Long id) {
         return courseSectionDao.selectCourseSectionById(id);

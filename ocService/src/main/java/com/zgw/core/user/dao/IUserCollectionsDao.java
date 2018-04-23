@@ -13,7 +13,9 @@ public interface IUserCollectionsDao{
          **/
         public UserCollections getById(Long id);
 
-        public List<UserCollections> queryAllByCourseSubCLassify(String courseSubClassify);
+        public List<String> queryAllCourseSubClassify();
+
+        public List<UserCollections> queryAllByCourseSubCLassify(String courseSubClassify,TailPage<UserCollections> page);
 
         /**
          *获取所有

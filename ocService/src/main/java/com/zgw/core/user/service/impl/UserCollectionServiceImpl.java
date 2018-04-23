@@ -20,8 +20,20 @@ public class UserCollectionServiceImpl implements IUserCollectionService{
     }
 
     @Override
-    public List<UserCollections> queryAllByCourseSubClassify(String courseSubClassify) {
-        return userCollectionsDao.queryAllByCourseSubCLassify(courseSubClassify);
+    public List<String> queryAllCourseSubClassify() {
+        return userCollectionsDao.queryAllCourseSubClassify();
+    }
+
+
+    @Override
+    public TailPage<UserCollections> queryAllByCourseSubCLassify(String courseSubClassify, TailPage<UserCollections> page) {
+        UserCollections userCollections = new UserCollections();
+        userCollections.setCourseSubClassify(courseSubClassify);
+        Integer totalCount = userCollectionsDao.getTotalItemsCount(userCollections);
+        List<UserCollections> result = userCollectionsDao.queryAllByCourseSubCLassify(courseSubClassify, page);
+        page.setItemsTotalCount(totalCount);
+        page.setItems(result);
+        return page;
     }
 
     @Override

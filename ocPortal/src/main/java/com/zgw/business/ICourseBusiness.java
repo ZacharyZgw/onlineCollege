@@ -8,4 +8,5 @@ import java.util.List;
 public interface ICourseBusiness {
 
     public List<CourseSectionVo> getCourseSection(Long courseId);
+    public Long getFirstSectionId(Long courseId);
 }

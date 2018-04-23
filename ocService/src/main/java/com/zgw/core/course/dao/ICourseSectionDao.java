@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface ICourseSectionDao {
+    public Long getFirstSectionId(Long courseId);
     public CourseSection selectCourseSectionById(Long id);
     public CourseSection selectCourseSectionByCourseId(Long courseId);
     public List<CourseSection> selectAll(CourseSection queryEntity);

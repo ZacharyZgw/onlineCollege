@@ -11,8 +11,8 @@ public interface IUserCollectionService {
      **/
     public UserCollections getById(Long id);
 
-    public List<UserCollections> queryAllByCourseSubClassify(String courseSubClassify);
-
+    public List<String> queryAllCourseSubClassify();
+    public TailPage<UserCollections> queryAllByCourseSubCLassify(String courseSubClassify,TailPage<UserCollections> page);
     /**
      *获取所有
      **/

@@ -49,4 +49,11 @@ public class CourseBusinessImpl implements ICourseBusiness {
 
 
     }
+
+    @Override
+    public Long getFirstSectionId(Long courseId) {
+        CourseSection qu = new CourseSection();
+
+        return null;
+    }
 }

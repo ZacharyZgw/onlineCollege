@@ -7,13 +7,22 @@ public class UserCollections extends BaseEntity {
     /*
     * 1:代表课程
     * */
-    private Long classify;
+    private Integer classify;
     private Long objectId;
     private String tips;
 
-    private String name;
+    private String courseName;
     /*课程分类，如java*/
     private String courseSubClassify;
+    private String coursePicture;
+
+    public String getCoursePicture() {
+        return coursePicture;
+    }
+
+    public void setCoursePicture(String coursePicture) {
+        this.coursePicture = coursePicture;
+    }
 
     public Long getUserId() {
         return userId;
@@ -23,11 +32,11 @@ public class UserCollections extends BaseEntity {
         this.userId = userId;
     }
 
-    public Long getClassify() {
+    public Integer getClassify() {
         return classify;
     }
 
-    public void setClassify(Long classify) {
+    public void setClassify(Integer classify) {
         this.classify = classify;
     }
 
@@ -47,12 +56,12 @@ public class UserCollections extends BaseEntity {
         this.tips = tips;
     }
 
-    public String getName() {
-        return name;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public String getCourseSubClassify() {
@@ -70,7 +79,7 @@ public class UserCollections extends BaseEntity {
                 ", classify=" + classify +
                 ", objectId=" + objectId +
                 ", tips='" + tips + '\'' +
-                ", name='" + name + '\'' +
+                ", courseName='" + courseName + '\'' +
                 ", courseSubClassify='" + courseSubClassify + '\'' +
                 '}';
     }

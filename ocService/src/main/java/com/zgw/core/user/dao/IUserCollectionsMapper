@@ -7,6 +7,12 @@
         user_id, classify,object_id, tips, create_time, create_user, update_time,
         update_user, del,id,course_sub_classify
     </sql>
+    <select id="queryAllCourseSubClassify" resultType="string">
+        SELECT
+        DISTINCT course_sub_classify
+        from user_collections
+        WHERE del =0
+    </select>
     <select id="getById" parameterType="long" resultType="com.zgw.core.user.entity.UserCollections">
         SELECT
         <include refid="All_Columns"/>
@@ -28,6 +34,9 @@
             <if test="classify != null">
                 AND classify = #{classify, jdbcType=INTEGER}
             </if>
+            <if test="courseSubClassify !=null">
+                AND course_sub_classify = #{courseSubClassify}
+            </if>
         </trim>
         order by id
     </select>
@@ -35,24 +44,41 @@
             resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM user_collections
-        WHERE del = 0
-        AND user_id = #{userId, jdbcType=INTEGER}
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            del =0
+            <if test="userId != null">
+                AND user_id = #{userId, jdbcType=INTEGER}
+            </if>
+            <if test="courseSubClassify != null">
+                AND course_sub_classify = #{courseSubClassify}
+            </if>
+        </trim>
     </select>
     <select id="queryPage" resultType="com.zgw.core.user.entity.UserCollections">
-        SELECT uc.object_id, uc.id, c.name,c.sub_classify uc.create_time, uc.classify, uc.create_time
+        SELECT uc.object_id, uc.id, c.name as courseName,c.picture as coursePicture,uc.course_sub_classify uc.create_time, uc.classify
         FROM user_collections uc , course c
-        WHERE uc.object_id = c.id
-        AND uc.classify = 1
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            <if test="userId != null">
+                user_id = #{param1.userId}
+            </if>
+            and uc.object_id = c.id
+            AND uc.classify = 1
+            <if test="courseSubClassify != null">
+                and course_sub_classify =#{param1.courseSubClassify}
+            </if>
+        </trim>
         ORDER BY id DESC
         LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
     </select>
-    <select id="queryAllByCourseSubCLassify" parameterType="string"
+    <select id="queryAllByCourseSubCLassify"
             resultType="com.zgw.core.user.entity.UserCollections">
         SELECT
         <include refid="All_Columns"/>
         FROM user_collections
         WHERE del=0
-        AND course_sub_classify=#{courseSubClassify}
+        AND course_sub_classify=#{param1}
+        order by id DESC
+        limit #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
     </select>
     <insert id="create" parameterType="com.zgw.core.user.entity.UserCollections" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
         INSERT INTO user_collections

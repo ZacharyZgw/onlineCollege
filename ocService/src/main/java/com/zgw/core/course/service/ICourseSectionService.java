@@ -6,6 +6,7 @@ import com.zgw.page.TailPage;
 import java.util.List;
 
 public interface ICourseSectionService {
+    public Long getFirstSectionId(Long courseId);
     public CourseSection getById(Long id);
     public CourseSection getByCourseId(Long courseId);
     public List<CourseSection> queryAll(CourseSection queryEntity);

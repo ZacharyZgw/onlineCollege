@@ -13,8 +13,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthUser extends BaseEntity implements SessionUser{
 
-	private static final long serialVersionUID = 94044276250229411L;
-	
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	/**
 	*登录用户名
 	**/

@@ -8,6 +8,14 @@
         course_id, parent_id, name, sort, time, onsale, video_url,
         create_time, create_user, update_time, update_user, del, brief,id
     </sql>
+    <select id="getFirstSectionId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        SELECT
+        id
+        from course_section
+        WHERE course_id = #{courseId}
+        and parent_id != 0
+        limit 0,1
+    </select>
   <select id="selectCourseSectionById" parameterType="long"
           resultType="com.zgw.core.course.entity.CourseSection">
       SELECT

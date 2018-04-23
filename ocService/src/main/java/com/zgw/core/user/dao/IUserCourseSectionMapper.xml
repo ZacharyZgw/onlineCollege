@@ -3,11 +3,39 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zgw.core.user.dao.IUserCourseSectionDao">
-    <sql id="All_Columns">
+    <sql id="All_Columns">college
         id,user_id,course_id,course_status,section_id,
         section_status,section_time,rate,create_time,create_user,
-        update_time,update_user,del
+        update_time,update_user,del,course_sub_classify
     </sql>
+    <select id="queryAllCourseSubClassify" resultType="string">
+        SELECT
+        DISTINCT course_sub_classify
+        from user_course_section
+        WHERE del=0
+    </select>
+    <select id="queryPageBycourseSubClassify" resultType="com.zgw.core.user.entity.UserCourseSectionDto">
+        SELECT
+        ab.*,c.name as courseName,s.name as sectionName,c.picture as coursePicture
+        from
+        (select a.* from user_course_section as a
+          RIGHT JOIN
+          (select course_id,max(update_time) as max_time from user_course_section GROUP BY course_id) as b
+              ON a.course_id = b.course_id And a.update_time=b.max_time
+              ORDER BY b.max_time DESC)as ab,course as c,course_section as s
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            <if test="userId != null">
+                ab.user_id = #{param1.userId}
+            </if>
+            and ab.course_id = c.course_id
+            and ab.section_id = s.id
+            <if test="courseSubClassify !=null">
+                and ab.course_sub_classify=#{param1.courseSubClassify}
+            </if>
+        </trim>
+        order by ab.update_time DESC
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
+    </select>
     <select id="getById" parameterType="long" resultType="com.zgw.core.user.entity.UserCourseSection">
         SELECT
         <include refid="All_Columns"/>
@@ -29,6 +57,9 @@
             <if test="sectionId != null">
                 and section_id = #{sectionId}
             </if>
+            <if test="courseSubClassify != null">
+                and course_sub_classify=#{courseSubClassify}
+            </if>
         </trim>
         order by id
     </select>
@@ -48,16 +79,27 @@
             <if test="sectionId != null">
                 and section_id = #{sectionId}
             </if>
+            <if test="courseSubClassify != null">
+                and course_sub_classify=#{courseSubClassify}
+            </if>
         </trim>
         order by update_time DESC
         limit 0,1
     </select>
+
     <select id="getTotalItemsCount" parameterType="com.zgw.core.user.entity.UserCourseSection"
                         resultType="java.lang.Integer">
         SELECT
         COUNT (*)
         from user_course_section
-        WHERE user_id = #{userId}
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            <if test="userId!= null">
+                user_id = #{userId},
+            </if>
+            <if test="courseSubClassify != null">
+                course_sub_classify = #{courseSubClassify},
+            </if>
+        </trim>
     </select>
     <select id="queryPage" resultType="com.zgw.core.user.entity.UserCourseSectionDto">
         select
@@ -67,16 +109,16 @@
         t.user_id = #{param1.userId}
         and t.course_id = c.course_id
         and t.section_id = s.id
-        order by id DESC
+        order by update_time DESC
         LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
     </select>
     <insert id="create" parameterType="com.zgw.core.user.entity.UserCourseSection" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
         INSERT INTO user_course_section
         ( user_id, course_id,course_status, section_id, section_status,section_time, rate, create_time, create_user,
-        update_time, update_user, del, id )
+        update_time, update_user, del, id ,course_sub_classify)
         VALUES
         ( #{userId, jdbcType=INTEGER}, #{courseId, jdbcType=INTEGER},#{courseStatus jdbcType=INTEGER}, #{sectionId, jdbcType=INTEGER},#{sectionStatus,jdbcType=INTEGER}, #{sectionTime,jdbcType=VARCHAR},#{rate, jdbcType=INTEGER}, #{createTime, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR},
-        #{updateTime, jdbcType=TIMESTAMP}, #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR} )
+        #{updateTime, jdbcType=TIMESTAMP}, #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR},#{courseSubClassify})
     </insert>
     <insert id="createSelectivity" parameterType="com.zgw.core.user.entity.UserCourseSection" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
         INSERT INTO user_course_section
@@ -117,6 +159,9 @@
             <if test="del != null ">
                 del,
             </if>
+            <if test="courseSubClassify != null">
+                course_sub_classify,
+            </if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")"  suffixOverrides="," >
@@ -156,6 +201,9 @@
             <if test="del != null ">
                 #{del, jdbcType=TINYINT},
             </if>
+            <if test="courseSubClassify != null">
+                #{courseSubClassify},
+            </if>
         </trim>
     </insert>
     <update id="update" parameterType="com.zgw.core.user.entity.UserCourseSection" flushCache="true">
@@ -168,7 +216,8 @@
         section_time = #{sectionTime,jdbcType = VARCHAR},
         rate = #{rate, jdbcType=INTEGER},
         update_time = #{updateTime, jdbcType=TIMESTAMP},
-        update_user = #{updateUser, jdbcType=VARCHAR}
+        update_user = #{updateUser, jdbcType=VARCHAR},
+        course_sub_classify = #{courseSubClassify}
         WHERE id = #{id, jdbcType=INTEGER}
     </update>
 
@@ -204,6 +253,9 @@
             </if>
             <if test="del != null ">
                 del = #{del, jdbcType=TINYINT},
+            </if>
+            <if test="courseSubClassify != null">
+                course_sub_classify= #{courseSubClassify}
             </if>
         </trim>
         WHERE id = #{id, jdbcType = INTEGER}

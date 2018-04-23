@@ -1,41 +1,35 @@
-package com.zgw.core.user.dao;
+package com.zgw.core.user.service;
 
 import com.zgw.core.user.entity.UserCourseSection;
 import com.zgw.core.user.entity.UserCourseSectionDto;
 import com.zgw.page.TailPage;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface IUserCourseSectionDao {
+public interface IUserCourseSectionService {
     /**
      *根据id获取
      **/
     public UserCourseSection getById(Long id);
     public List<String> queryAllCourseSubClassify();
-    public List<UserCourseSectionDto> queryPageBycourseSubClassify(UserCourseSection queryEntity,TailPage<UserCourseSectionDto> page);
     /**
      *获取所有
      **/
     public List<UserCourseSection> queryAll(UserCourseSection queryEntity);
+
     /**
-     * 获取最新的学习记录
+     * 获取最新的
      */
     public UserCourseSection queryLatest(UserCourseSection queryEntity);
 
     /**
-     *获取总数量
-     **/
-    public Integer getTotalItemsCount(UserCourseSection queryEntity);
-
-    /**
      *分页获取
      **/
-    public List<UserCourseSectionDto> queryPage(UserCourseSection queryEntity , TailPage<UserCourseSectionDto> page);
+    public TailPage<UserCourseSectionDto> queryPage(UserCourseSection queryEntity , TailPage<UserCourseSectionDto> page);
 
+    public TailPage<UserCourseSectionDto> queryPageBycourseSubClassify(UserCourseSection queryEntity,TailPage<UserCourseSectionDto> page);
     /**
-     *创建新记录
+     *创建
      **/
     public void createSelectivity(UserCourseSection entity);
     public void create(UserCourseSection entity);
@@ -45,7 +39,7 @@ public interface IUserCourseSectionDao {
     public void update(UserCourseSection entity);
 
     /**
-     *根据id选择性更新自动
+     *根据id 进行可选性更新
      **/
     public void updateSelectivity(UserCourseSection entity);
 
@@ -58,7 +52,6 @@ public interface IUserCourseSectionDao {
      *逻辑删除
      **/
     public void deleteLogic(UserCourseSection entity);
-
 
 
 }

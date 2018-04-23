@@ -5,11 +5,11 @@ import com.zgw.orm.BaseEntity;
 public class CourseComment extends BaseEntity {
     private String username;
     private String toUsername;
-    private Integer courseId;
-    private Integer sectionId;
+    private Long courseId;
+    private Long sectionId;
     private String sectionTitle;
     private String content;
-    private Integer refId;
+    private Long refId;
     private String refContent;
     private Integer type;
     private String header;
@@ -39,19 +39,19 @@ public class CourseComment extends BaseEntity {
         this.toUsername = toUsername;
     }
 
-    public Integer getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Integer courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
 
-    public Integer getSectionId() {
+    public Long getSectionId() {
         return sectionId;
     }
 
-    public void setSectionId(Integer sectionId) {
+    public void setSectionId(Long sectionId) {
         this.sectionId = sectionId;
     }
 
@@ -71,11 +71,11 @@ public class CourseComment extends BaseEntity {
         this.content = content;
     }
 
-    public Integer getRefId() {
+    public Long getRefId() {
         return refId;
     }
 
-    public void setRefId(Integer refId) {
+    public void setRefId(Long refId) {
         this.refId = refId;
     }
 

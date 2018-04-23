@@ -14,7 +14,6 @@ public interface ICourseService {
     public Course getById(Long id);
 
     public Course getByCourseId(Long courseId);
-
     /**
      *获取所有
      **/

@@ -157,6 +157,7 @@
 </div>
 <div class="tabNavs">
     <div class="container">
+        <!--待修改-->
         <ul class="clearfix">
             <li class="active"><a href="">课程章节</a></li>
             <li><span>78</span><a href="">问答评论</a></li>
@@ -182,25 +183,16 @@
                             <#if item.subSectionList??>
                             <#list item.subSectionList as section>
                             <li data-media-id="16905">
-                                <a href="" class="J-media-item">
-                                    <i class="clipboard fa fa-check-circle done"></i>
+                                <a href="${s.base}/course/video/${section.id}" class="J-media-item">
+                                    <!--<i class="clipboard fa fa-check-circle done"></i>-->
                                     <i class="clipboard fa fa-play-circle type"></i>
-                                    ${section.name}
-                                    (${section.time})
+                                    <span>${section.name}</span>
+                                    <span>(${section.time})</span>
                                 </a>
                             </li>
                             </#list>
                              </#if>
-                            <!--<li data-media-id="16907"><em class="laststudy">最近学习</em>
-                                <a href="" class="J-media-item">
-                                    <i class="clipboard fa fa-adjust ing"></i>
-                                    <i class="clipboard fa fa-play-circle type"></i>
-                                    1-3 小程序官方文档介绍
-                                    (05:07)
 
-
-                                </a>
-                            </li>-->
                         </ul>
                     </div>
                 </div>
@@ -212,14 +204,23 @@
         <div class="pull-right aside">
             <div class="course-wrap course-aside-info js-usercard-box">
                 <div class="learn-btn">
-                    <div class="learn-info">
-                        <span>已学 8% </span>学习耗时 3小时 7分
-                    </div>
-                    <div class="progress">
-                        <ins data-progress="8" style="display: inline-block; width: 8%;"></ins>
-                    </div>
-                    <div class="learn-info-media">上次学至 1-3 小程序官方文档介绍</div>
-                    <a href="" class="moco-btn moco-btn-red moco-btn-lg">继续学习</a>
+                    <@shiro.guest>
+                        <a href="${s.base}/course/video/${firstSectionId}" class="moco-btn moco-btn-red moco-btn-lg">开始学习</a>
+                    </@shiro.guest>
+                    <@shiro.user>
+                        <div class="learn-info">
+                            <span>已学 8% </span>学习耗时 3小时 7分
+                        </div>
+                        <div class="progress">
+                            <ins data-progress="8" style="display: inline-block; width: 8%;"></ins>
+                        </div>
+                        <#if currentUserCourseSection??>
+                        <div class="learn-info-media">${currentUserCourseSection.name}</div>
+                        <a href="${s.base}/course/video/${currentUserCourseSection.id}" class="moco-btn moco-btn-red moco-btn-lg">继续学习</a>
+                        <#else>
+                            <a href="${s.base}/course/video/${firstSectionId}" class="moco-btn moco-btn-red moco-btn-lg">开始学习</a>
+                        </#if>
+                    </@shiro.user>
                 </div>
 
                 <div class="course-info-tip">

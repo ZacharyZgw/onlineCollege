@@ -22,7 +22,15 @@ public class UserCourseSection extends BaseEntity {
     private String sectionTime;
 
     private Integer rate;
+    private String courseSubClassify;
 
+    public String getCourseSubClassify() {
+        return courseSubClassify;
+    }
+
+    public void setCourseSubClassify(String courseSubClassify) {
+        this.courseSubClassify = courseSubClassify;
+    }
 
     public Long getUserId() {
         return userId;
