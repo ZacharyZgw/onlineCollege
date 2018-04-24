@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;">
+    <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>慕课网</title>
+
+    <link href="${s.base}/res/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="${s.base}/res/css/font-awesome.css" type="text/css" rel="stylesheet">
+    <link href="${s.base}/res/css/animate.min.css" type="text/css" rel="stylesheet">
+    <link href="${s.base}/res/css/loginstyle.min.css" type="text/css" rel="stylesheet">
+    <link href="${s.base}/res/css/css.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        .vali-base{
+            display: inline-block;
+            /* clear: both; */
+            height: 34px;
+            float: right;
+            margin-top: -35px;
+            margin-right: 10px;
+        }
+    </style>
+    <script src="${s.base}/res/js/jquery-1.11.3.min.js"></script>
+    <script src="${s.base}/res/js/bootstrap.min.js"></script>
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+</head>
+<body>
+
+<div id="header" class="clearfix">
+    <div id="logo" class="pull-left logo"><a href="" target="_self" class="hide-text" title="首页"></a></div>
+    <div class="page-container" id="nav">
+        <div class="pull-left navList">
+            <ul class="pull-left navView">
+                <li><a href="${s.base}">首页</a></li>
+                <li><a href="${s.base}/course/list">课程<i class="icn-new"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div style="text-align: center;margin: 100px auto;margin-bottom: 30px">
+    <h5 class="logo-name" style="color: #8a9aab" >CODING</h5>
+</div>
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+
+    <div>
+
+        <h3>用户登录</h3>
+
+        <form class="m-t" role="form" action="${s.base}/auth/doLogin" method="post">
+            <div class="form-group">
+                <input name="username" type="text" class="form-control" placeholder="请输入用户名" required="用户名不能为空">
+            </div>
+            <div class="form-group">
+                <input id="password" name="password" type="password" class="form-control" placeholder="请输入密码" required="密码不能为空">
+            </div>
+            <div>
+                <input id="identiryCode" name="identiryCode" maxlength="6" class="form-control" type="text" style="width: 170px;" placeholder="请输入验证码" required="请输入验证码"/>
+                <a class="vali-base" ><img  onclick="reloadIndityImg('indeityImgLogin');" id="indeityImgLogin"  src="${s.base}/tools/identiry/code" style="width:80px;height:34px;float:left;margin-left:10px;"/></a>
+            </div>
+            <div style="margin-top: 10px;margin-bottom: 10px">
+                <label style="background-color:#FFF;"></label>
+                <input type="checkbox" value="1" id="checkbox2" name="rememberMe"  style="float: left;">
+                <span class="text"  style="float: left;margin-left:2px;">下次自动登录</span>
+            </div>
+            <#if errcode ?? && errcode == 1>
+            <li style="text-align: left;">
+                <label style="background-color:#FFF;"></label>
+                <span style="color:red;">请输入正确的验证码</span>
+            </li>
+            </#if>
+            <#if errcode ?? && errcode == 2>
+            <li style="text-align: left;">
+                <label style="background-color:#FFF;"></label>
+                <span style="color:red;">用户名密码错误</span>
+            </li>
+            </#if>
+            <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+
+
+            <p class="text-muted text-center"> <a href=""><small>忘记密码了？</small></a> | <a href="${s.base}/auth/register">注册一个新账号</a>
+            </p>
+
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    function reloadIndityImg(eleId){
+        document.getElementById(eleId).src = "${s.base}" + "/tools/identiry/code?ticket=" + Math.random();
+    }
+</script>
+</body>
+</html>

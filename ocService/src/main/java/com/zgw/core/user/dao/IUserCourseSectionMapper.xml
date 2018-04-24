@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zgw.core.user.dao.IUserCourseSectionDao">
-    <sql id="All_Columns">college
+    <sql id="All_Columns">
         id,user_id,course_id,course_status,section_id,
         section_status,section_time,rate,create_time,create_user,
         update_time,update_user,del,course_sub_classify
@@ -89,17 +89,27 @@
 
     <select id="getTotalItemsCount" parameterType="com.zgw.core.user.entity.UserCourseSection"
                         resultType="java.lang.Integer">
+        SELECT count(*) from (
         SELECT
-        COUNT (*)
-        from user_course_section
+        ab.*,c.name as courseName,s.name as sectionName,c.picture as coursePicture
+        from
+        (select a.* from user_course_section as a
+        RIGHT JOIN
+        (select course_id,max(update_time) as max_time from user_course_section GROUP BY course_id) as b
+        ON a.course_id = b.course_id And a.update_time=b.max_time
+        ORDER BY b.max_time DESC)as ab,course as c,course_section as s
         <trim prefix="WHERE" prefixOverrides="AND |OR">
-            <if test="userId!= null">
-                user_id = #{userId},
+            <if test="userId != null">
+                ab.user_id = #{userId}
             </if>
-            <if test="courseSubClassify != null">
-                course_sub_classify = #{courseSubClassify},
+            and ab.course_id = c.course_id
+            and ab.section_id = s.id
+            <if test="courseSubClassify !=null">
+                and ab.course_sub_classify=#{courseSubClassify}
             </if>
         </trim>
+        order by ab.update_time DESC
+        ) As test
     </select>
     <select id="queryPage" resultType="com.zgw.core.user.entity.UserCourseSectionDto">
         select

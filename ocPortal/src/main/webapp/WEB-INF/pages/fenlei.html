@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;">
+    <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>慕课网</title>
+
+    <#include "./common/newRes.html">
+
+</head>
+<body class="bodyView">
+<!--导航部分-->
+<#include "./common/newHeader.html">
+<!--分类内容部分-->
+<div class="classification">
+    <div class="container">
+        <!--总分类-->
+        <div class="clearfix headNav_1">
+            <div class="pull-left head_ln">方向：</div>
+            <div class="pull-left head_nav1">
+                <a class="<#if currentCode?? && currentCode=='-1'>active</#if>" href="javascript:void(0)" onclick="_queryPage(1,'-1');">全部</a>
+                <#if classifyList??>
+                <#list classifyList as item>
+                <a href="javascript:void(0)" onclick="_queryPage(1,'${item.code!}')" class="<#if currentCode?? && currentCode==item.code>active</#if>">${item.name}</a>
+                </#list>
+                </#if>
+            </div>
+        </div>
+        <!--总分类结束-->
+        <!--子分类-->
+        <div class="clearfix headNav_1">
+            <div class="pull-left head_ln">分类：</div>
+            <div class="pull-left head_nav1">
+                <a class="<#if currentSubCode?? && currentSubCode=='-2'>active</#if>" href="javascript:void(0)" onclick="_queryPage(1,'-2')">全部</a>
+                <#if currentSubClassify??>
+                <#list currentSubClassify as item>
+                <a class="<#if currentSubCode?? && currentSubCode == item.code>active</#if>" href="javascript:void(0)" onClick="_queryPage(1,'${item.code!}')">${item.name}</a>
+                </#list>
+                </#if>
+            </div>
+        </div>
+        <!--子分类结束-->
+        <!--课程类型-->
+        <div class="clearfix headNav_1">
+            <div class="pull-left head_ln">类型：</div>
+            <div class="pull-left head_nav1">
+                <a class="active" href="">全部</a>
+                <a href="">基础</a>
+                <a href="">案例</a>
+                <a href="">框架</a>
+                <a href="">工具</a>
+                <a href="">设计模式</a>
+            </div>
+        </div>
+        <!--课程类型结束-->
+    </div>
+</div>
+
+<div class="classification_view">
+    <div class="container">
+        <div class="clearfix classification_nav">
+            <div class="pull-left fenlei_nav_left">
+                <a class="<#if sort?? && sort=='last'>active</#if>" href="javascript:void(0)" onclick="_queryPage(1,undefined,'last')">最新</a>
+                <a class="<#if sort?? && sort=='pop'>active</#if>"  href="javascript:void(0)" onclick="_queryPage(1,undefined,'pop')">最热</a>
+            </div>
+            <div class="pull-right fenlei_nav_right">
+                <div class="clearfix">
+                    <div class="pull-left nadu_left">
+                        <span>难度：</span>
+                        <a class="active" href="">全部</a>
+                        <a href="">入门</a>
+                        <a href="">初级</a>
+                        <a href="">中级</a>
+                        <a href="">高级</a>
+                    </div>
+                    <div class="pull-left nav_page">
+                        <div class="pull-left number_page"><span>1</span>/34</div>
+                        <div class="pull-right page_btns">
+                            <a href=""><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+                            <a href=""><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix classification_row">
+            <#if page.items??>
+            <#list page.items as item>
+            <#assign n = item_index + 1 />
+            <div class="cols5">
+                <a href="${s.base}/course/learn/${item.courseId}">
+                    <div class="fenlei_img">
+                        <img src="${item.picture}" alt="课程图片">
+                        <div class="clearfix low_tt">
+                            <span>${item.subClassify}</span>
+                        </div>
+                    </div>
+                    <div class="shizhan-intro-box">
+                        <p class="shizan-name" title="${item.name}">${item.name}</p>
+                        <div class="shizhan-info">
+                            <span class="grade">中级</span>
+                            <span><i class="fa fa-user-o"></i>学习人数:${item.studyCount}</span>
+                        </div>
+                        <p class="shizan-desc" title="${item.brief}">${item.brief}</p>
+                    </div>
+                </a>
+            </div>
+             </#list>
+            </#if>
+        </div>
+    </div>
+    <#include "./common/newTailPage.html">
+</div>
+
+<div id="footer">
+    <div class="container">
+        <div class="footerwaper clearfix">
+            <div class="pull-right followus">
+                <a class="followus-weixin" href="javascript:;" target="_blank" title="微信">
+                    <div class="flw-weixin-box"></div>
+                </a>
+                <a class="followus-weibo" href="http://weibo.com/u/3306361973" target="_blank" title="新浪微博"></a>
+                <a class="followus-qzone" href="http://user.qzone.qq.com/1059809142/" target="_blank" title="QQ空间"></a>
+            </div>
+            <div class="footer_intro pull-left">
+                <div class="footer_link">
+                    <ul>
+                        <li><a href="" target="_blank">网站首页</a></li>
+                        <li><a href="" target="_blank" title="企业合作">企业合作</a></li>
+                        <li><a href="" target="_blank">人才招聘</a></li>
+                        <li><a href="" target="_blank">联系我们</a></li>
+                        <li><a href="" target="_blank">讲师招募</a></li>
+                        <li><a href="" target="_blank">常见问题</a></li>
+                        <li><a href="" target="_blank">意见反馈</a></li>
+                        <li><a href="" target="_blank">慕课大学</a></li>
+                        <li><a href="" target="_blank">友情链接</a></li>
+
+                    </ul>
+                </div>
+                <p>Copyright © 2018 imooc.com All Rights Reserved | 京ICP备 12003892号-11 </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    var _code = '${currentCode}';
+    var _subCode = '${currentSubCode}';
+    var _sort = '${sort!}';
+
+    function _queryPage(pageNum,code,sort){
+        var params = '?pageNum='+pageNum;
+        //分类，参数没有就用页面缓存
+        if(code == undefined){//来自于分页按钮
+            code = _code;
+            if(_subCode != '-2'){
+                code = _subCode; //优先使用 subCode
+            }
+        }
+        if(code == '-2'){//点击分类的全部
+            code = _code;
+        }
+        if(code != '-1' && code != ''){
+            params += '&c='+code;
+        }
+
+        //排序，函数参数没有就用页面缓存
+        if(sort == undefined && _sort != ''){
+            sort = _sort;
+        }
+        if(sort != undefined){
+            params += '&sort='+sort;
+        }
+        window.location.href='${s.base}/course/list'+params;
+    }
+</script>
+
+
+
+</html>

@@ -128,6 +128,6 @@ public class CourseListController {
         page = this.courseService.queryPage(queryEntity, page);
         model.addAttribute("page", page);
 
-        return "courseList";
+        return "fenlei";
     }
 }

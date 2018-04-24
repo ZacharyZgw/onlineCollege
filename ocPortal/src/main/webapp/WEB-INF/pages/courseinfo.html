@@ -9,21 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <title>慕课网</title>
 
-    <!-- Bootstrap -->
-    <link href="${s.base}/res/css/navstyle.css" rel="stylesheet">
-
-    <link href="${s.base}/res/css/font-awesome.css" rel="stylesheet">
-    <link href="${s.base}/res/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${s.base}/res/css/css.css" rel="stylesheet">
-
-    <script src="${s.base}/res/js/jquery-1.11.3.min.js"></script>
-    <script src="${s.base}/res/js/bootstrap.min.js"></script>
-    <#include "./common/globe.html">
+    <#include "./common/newRes.html">
 
 </head>
 <body class="bodyView">
 <!--导航部分-->
-<div id="header" class="clearfix">
+<!--<div id="header" class="clearfix">
     <div id="logo" class="pull-left logo"><a href="" target="_self" class="hide-text" title="首页"></a></div>
     <div class="page-container" id="nav">
         <div class="pull-left navList">
@@ -42,7 +33,7 @@
             </div>
             <div class="search-area" data-search="top-banner">
                 <input class="search-input search_views" data-suggest-trigger="suggest-trigger" type="text" autocomplete="off">
-                <!--<input type="hidden" class="btn_search" data-search-btn="search-btn">-->
+                &lt;!&ndash;<input type="hidden" class="btn_search" data-search-btn="search-btn">&ndash;&gt;
                 <ul class="search-area-result" data-suggest-result="suggest-result" style=""></ul>
             </div>
             <div class="showhide-search" data-show="no"><i class="clipboard fa fa-search"></i></div>
@@ -50,8 +41,8 @@
         <div class="pull-right headInfo cd-main-nav js-main-nav ">
             <ul class="clearfix login-area cd-main-nav__list js-signin-modal-trigger">
                 <@shiro.guest>
-                <li><a class=" cd-main-nav__item--signin" href="#0" data-signin="login" style="color: #fff">登录</a></li>
-                <li><a class=" cd-main-nav__item--signup" href="#0" data-signin="signup" style="color: #fff">注册</a></li>
+                <li><a class=" cd-main-nav__item&#45;&#45;signin" href="#0" data-signin="login" style="color: #fff">登录</a></li>
+                <li><a class=" cd-main-nav__item&#45;&#45;signup" href="#0" data-signin="signup" style="color: #fff">注册</a></li>
                 </@shiro.guest>
                 <@shiro.user>
                 <li class="set_btn user-card-box">
@@ -98,7 +89,8 @@
                 </@shiro.user>
             </ul>
         </div>
-    </div>
+    </div>-->
+<#include "./common/newHeader.html">
 </div>
 <div class="head_cont">
     <div class="container">
@@ -147,9 +139,6 @@
             <div class="share-action" data-bd-bind="">
                 <!--收藏-->
                 <div class="share js-follow-action" data-cid="974" data-cmd="follow" title="收藏"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span>收藏</span></div>
-                <!--<a href="javascript:;" class="share wx js-share icon-share-weichat" data-cmd="weixin" title="分享到微信"><i class="clipboard fa fa-weixin"></i></a>
-                <a href="javascript:;" class="share qq js-share icon-share-qq" data-cmd="qzone" title="分享到QQ空间"><i class="clipboard fa fa-qq"></i></a>
-                <a href="javascript:;" class="share sina js-share icon-share-weibo" data-cmd="tsina" title="分享到新浪微博"><i class="clipboard fa fa-weibo"></i></a>-->
             </div>
         </div>
 
@@ -372,128 +361,6 @@
         </div>
     </div>
 </div>
-
-<!--右边浮动框-->
-<div id="J_GotoTop" class="elevator">
-    <a href="" class="elevator-msg" target="_blank">
-        <i class="fa fa-info-circle"></i>
-        <span class="">意见反馈</span>
-    </a>
-    <a href="" class="elevator-faq" target="_blank">
-        <i class="fa fa-question-circle-o"></i>
-        <span class="">常见问题</span>
-    </a>
-    <a href="" target="_blank" class="elevator-app">
-        <i class="fa fa-download"></i>
-        <span class="">APP下载</span>
-        <div class="elevator-app-box"></div>
-    </a>
-    <a href="" class="elevator-weixin no-goto" id="js-elevator-weixin">
-        <i class="fa fa-comments"></i>
-        <span class="">官方微信</span>
-        <div class="elevator-weixin-box"></div>
-    </a>
-    <a href="javascript:window.scrollTo( 0, 0 );" class="elevator-top no-goto" style="display: none;" id="backTop" >
-        <i class="glyphicon glyphicon-menu-up"></i>
-        <span class="">返回顶部</span>
-    </a>
-</div>
-<div class="cd-signin-modal js-signin-modal"> <!-- this is the entire modal form, including the background -->
-    <div class="cd-signin-modal__container"> <!-- this is the container wrapper -->
-        <ul class="cd-signin-modal__switcher js-signin-modal-switcher js-signin-modal-trigger">
-            <li><a href="#0" data-signin="login" data-type="login">登录</a></li>
-            <li><a href="#0" data-signin="signup" data-type="signup">注册</a></li>
-        </ul>
-
-        <div class="cd-signin-modal__block js-signin-modal-block" data-type="login"> <!-- log in form -->
-            <form class="cd-signin-modal__form">
-                <p class="cd-signin-modal__fieldset">
-                    <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signin-email">用户名</label>
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-email" type="email" placeholder="请输入用户名">
-                    <span class="cd-signin-modal__error">Error message here!</span>
-                </p>
-
-                <p class="cd-signin-modal__fieldset">
-                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-password">密码</label>
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-password" type="text"  placeholder="请输入密码">
-                    <a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
-                    <span class="cd-signin-modal__error">Error message here!</span>
-                </p>
-
-                <p class="cd-signin-modal__fieldset">
-                    <input type="checkbox" id="remember-me" checked class="cd-signin-modal__input ">
-                    <label for="remember-me">记住我</label>
-                </p>
-
-                <p class="cd-signin-modal__fieldset">
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width" type="submit" value="登录">
-                </p>
-            </form>
-
-            <p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="reset">Forgot your password?</a></p>
-        </div> <!-- cd-signin-modal__block -->
-
-        <div class="cd-signin-modal__block js-signin-modal-block" data-type="signup"> <!-- sign up form -->
-            <form class="cd-signin-modal__form">
-                <p class="cd-signin-modal__fieldset">
-                    <label class="cd-signin-modal__label cd-signin-modal__label--username cd-signin-modal__label--image-replace" for="signup-username">用户名</label>
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-username" type="text" placeholder="请输入用户名">
-                    <span class="cd-signin-modal__error">Error message here!</span>
-                </p>
-
-                <p class="cd-signin-modal__fieldset">
-                    <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signup-email">E-mail</label>
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-email" type="email" placeholder="请输入邮箱地址">
-                    <span class="cd-signin-modal__error">Error message here!</span>
-                </p>
-
-                <p class="cd-signin-modal__fieldset">
-                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password">Password</label>
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-password" type="text"  placeholder="请输入密码">
-                    <a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
-                    <span class="cd-signin-modal__error">Error message here!</span>
-                </p>
-                <p class="cd-signin-modal__fieldset">
-                    <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password">rePassword</label>
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="resignup-password" type="text"  placeholder="请确认密码">
-                    <a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
-                    <span class="cd-signin-modal__error">Error message here!</span>
-                </p>
-
-                <p class="cd-signin-modal__fieldset">
-                    <input type="checkbox" id="accept-terms" class="cd-signin-modal__input ">
-                    <label for="accept-terms">I agree to the <a style="display: inline-block" href="#0">Terms</a></label>
-                </p>
-
-                <p class="cd-signin-modal__fieldset">
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" type="submit" value="注册新账号">
-                </p>
-            </form>
-        </div> <!-- cd-signin-modal__block -->
-
-        <div class="cd-signin-modal__block js-signin-modal-block" data-type="reset"> <!-- reset password form -->
-            <p class="cd-signin-modal__message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
-
-            <form class="cd-signin-modal__form">
-                <p class="cd-signin-modal__fieldset">
-                    <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="reset-email">E-mail</label>
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="reset-email" type="email" placeholder="邮箱地址">
-                    <span class="cd-signin-modal__error">Error message here!</span>
-                </p>
-
-                <p class="cd-signin-modal__fieldset">
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" type="submit" value="找回密码">
-                </p>
-            </form>
-
-            <p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="login">返回登录</a></p>
-        </div> <!-- cd-signin-modal__block -->
-        <a href="#0" class="cd-signin-modal__close js-close">Close</a>
-    </div> <!-- cd-signin-modal__container -->
-</div> <!-- cd-signin-modal -->
-</body>
-<script type="text/javascript" src="${s.base}/res/js/placeholders.min.js"></script>
-<script type="text/javascript" src="${s.base}/res/js/modal.js"></script>
 <script>
     // 获取焦点
     $('.search_views').focus(function () {

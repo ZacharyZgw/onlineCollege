@@ -42,7 +42,7 @@ public class AuthController {
             return "redirect:"+requestPath;//返回之前的路径
         }else {
             SessionContext.setAttribute(request,"urlLast",requestPath);
-            return "auth/login";
+            return "auth/loginV2";
         }
 
     }
@@ -138,7 +138,7 @@ public class AuthController {
         if (identryCode != null &&
                 !identryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))){
                 model.addAttribute("errcode",1);
-                return "/auth/login";
+                return "/auth/loginV2";
         }
         UsernamePasswordToken token =
                 new UsernamePasswordToken(user.getUsername(),
@@ -151,7 +151,7 @@ public class AuthController {
             return null;
         }catch (AuthenticationException ex){
             model.addAttribute("errcode",2);
-            return "/auth/login";
+            return "/auth/loginV2";
         }
 
     }

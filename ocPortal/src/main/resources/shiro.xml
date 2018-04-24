@@ -60,7 +60,7 @@
 				/index* = anon
 				/auth/** = anon
 				/auth/logout.html = logout 
-				
+				/user/**=authc
 				/course/list* = anon
 				/course/to=anon
 				/course/learn/* = anon

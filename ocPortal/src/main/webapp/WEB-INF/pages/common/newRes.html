@@ -1,0 +1,28 @@
+<!-- Bootstrap -->
+<link href="${s.base}/res/css/font-awesome.css" rel="stylesheet">
+<link href="${s.base}/res/css/modal.css" rel="stylesheet">
+<link href="${s.base}/res/css/bootstrap.min.css" rel="stylesheet">
+<link href="${s.base}/res/css/css.css" rel="stylesheet">
+<script src="${s.base}/res/js/jquery-1.11.3.min.js"></script>
+<script src="${s.base}/res/js/bootstrap.min.js"></script>
+<script src="${s.base}/res/js/oc.min.js"></script>
+<script src="${s.base}/res/js/jquery.form.js"></script>
+<link rel="icon" type="image/png" href="${s.base}/res/i/ico.png" sizes="16x16">
+<script type="text/javascript">
+    CONTEXT_PATH = '${s.base}';
+    <@shiro.guest> SHIRO_LOGIN = false;</@shiro.guest>
+    <@shiro.user> SHIRO_LOGIN = true;</@shiro.user>
+    $(function () {
+        /*设置jquery全局AJAX参数*/
+        $.ajaxSetup({
+            type:"POST",
+            /*请求完成时运行，不管失败还是成功*/
+            complete:function (xhr,status) {
+                if (xhr.responseJSON.errcode==1001){
+                    window.location.href = CONTEXT_PATH+'/auth/login';
+                }
+            }
+        });
+    });
+
+</script>
