@@ -65,7 +65,7 @@
 				/course/to=anon
 				/course/learn/* = anon
 				/course/video/* = authc
-				
+				/collections/**=authc
 				/courseComment/segment* = anon
 				
 				<!--/** = authc-->

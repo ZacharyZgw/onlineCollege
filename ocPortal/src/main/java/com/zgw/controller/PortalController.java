@@ -51,7 +51,7 @@ public class PortalController {
 
         //加载5门实战课程，根据weight进行排序
         CourseQueryDto queryDto = new CourseQueryDto();
-        queryDto.setCount(10);
+        queryDto.setCount(5);
         queryDto.setFree(CourseEnum.FREE_NOT.value());
         queryDto.setOnsale(CourseEnum.ONSALE.value());
         queryDto.descSortField("weight");

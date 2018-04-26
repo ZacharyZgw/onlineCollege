@@ -9,7 +9,28 @@
         recommend, weight, study_count, create_time, create_user, update_time,
         update_user, del, id
     </sql>
+    <select id="getClassifyByUserName" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+        DISTINCT sub_classify
+        from course
+        WHERE username=#{userName}
+    </select>
 
+    <select id="queryPageByTeacher" resultType="com.zgw.core.course.entity.Course">
+        SELECT
+        <include refid="All_Columns"/>
+        FROM course
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            AND del=0
+            <if test="param1.subClassify != null">
+                AND sub_classify=#{param1.subClassify}
+            </if>
+            <if test="param1.username != null">
+                AND username = #{param1.username}
+            </if>
+        </trim>
+        LIMIT #{param2.startIndex} , #{param2.pageSize}
+    </select>
     <select id="getByCourseId" parameterType="long" resultType="com.zgw.core.course.entity.Course">
         SELECT
         <include refid="All_Columns"/>
@@ -66,6 +87,9 @@
             </if>
             <if test="subClassify != null">
                 AND sub_classify = #{subClassify}
+            </if>
+            <if test="username != null">
+                AND username=#{username}
             </if>
             <if test="onsale != null">
                 AND onsale = #{onsale}

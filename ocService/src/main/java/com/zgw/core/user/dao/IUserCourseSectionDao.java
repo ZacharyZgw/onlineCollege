@@ -3,6 +3,7 @@ package com.zgw.core.user.dao;
 import com.zgw.core.user.entity.UserCourseSection;
 import com.zgw.core.user.entity.UserCourseSectionDto;
 import com.zgw.page.TailPage;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface IUserCourseSectionDao {
      **/
     public UserCourseSection getById(Long id);
     public List<String> queryAllCourseSubClassify();
-    public List<UserCourseSectionDto> queryPageBycourseSubClassify(UserCourseSection queryEntity,TailPage<UserCourseSectionDto> page);
+    public List<UserCourseSectionDto> queryPageBycourseSubClassify(@Param("param1") UserCourseSection queryEntity,@Param("param2") TailPage<UserCourseSectionDto> page);
     /**
      *获取所有
      **/

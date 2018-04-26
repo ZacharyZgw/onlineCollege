@@ -14,6 +14,8 @@ public interface ICourseService {
     public Course getById(Long id);
 
     public Course getByCourseId(Long courseId);
+    public List<String> getAllCourseClassify(String userName);
+    public TailPage<Course> queryPageByTeacher(Course queryEntity,TailPage<Course> page);
     /**
      *获取所有
      **/

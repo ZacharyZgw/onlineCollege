@@ -18,6 +18,12 @@ public interface ICourseDao  {
 
     public Course getByCourseId(@Param("courseId") Long courseId);
 
+    /*
+    * 根据老师姓名选择老师课程的分类
+    * */
+    public List<String> getClassifyByUserName(@Param("userName") String userName);
+
+    public List<Course> queryPageByTeacher(@Param("param1") Course queryEntity,@Param("param2") TailPage<Course> page);
     /**
      *根据条件获取所有，
      *queryEntity：查询条件；

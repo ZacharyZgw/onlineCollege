@@ -1,6 +1,7 @@
 package com.zgw.core.user.service;
 
 import com.zgw.core.user.entity.UserCollections;
+import com.zgw.core.user.entity.UserCollectionsDto;
 import com.zgw.page.TailPage;
 
 import java.util.List;
@@ -10,9 +11,9 @@ public interface IUserCollectionService {
      *根据id获取
      **/
     public UserCollections getById(Long id);
-
+    public UserCollections getByEntity(UserCollections entity);
     public List<String> queryAllCourseSubClassify();
-    public TailPage<UserCollections> queryAllByCourseSubCLassify(String courseSubClassify,TailPage<UserCollections> page);
+    public TailPage<UserCollectionsDto> queryAllByCourseSubCLassify(String courseSubClassify, TailPage<UserCollectionsDto> page);
     /**
      *获取所有
      **/
@@ -21,7 +22,7 @@ public interface IUserCollectionService {
     /**
      *分页获取
      **/
-    public TailPage<UserCollections> queryPage(UserCollections queryEntity , TailPage<UserCollections> page);
+    public TailPage<UserCollectionsDto> queryPage(UserCollections queryEntity , TailPage<UserCollectionsDto> page);
 
     /**
      *创建

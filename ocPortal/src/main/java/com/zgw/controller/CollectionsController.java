@@ -35,10 +35,12 @@ public class CollectionsController {
         userCollections.setClassify(CourseEnum.COLLECTION_CLASSIFY_COURSE.value());
         userCollections.setCourseSubClassify(courseService.getByCourseId(courseId).getSubClassify());
         userCollections.setObjectId(courseId);
-        List<UserCollections> userCollectionsList = this.userCollectionService.queryAll(userCollections);
-        if (CollectionUtils.isNotEmpty(userCollectionsList)){
+        userCollections.setTips(userCollections.getCourseSubClassify());
+        UserCollections tmp = this.userCollectionService.getByEntity(userCollections);
+        //List<UserCollections> userCollectionsList = this.userCollectionService.queryAll(userCollections);
+        if (null != tmp){
             //说明用户已经收藏,执行取消收藏
-            userCollectionService.delete(userCollectionsList.get(0));
+            userCollectionService.delete(tmp);
             return JsonView.render(0,"取消收藏成功").toString();
         }else {
             this.userCollectionService.createSelectivity(userCollections);
@@ -57,9 +59,9 @@ public class CollectionsController {
         userCollections.setClassify(CourseEnum.COLLECTION_CLASSIFY_COURSE.value());//课程收藏
         userCollections.setObjectId(courseId);
         userCollections.setCourseSubClassify(this.courseService.getByCourseId(courseId).getSubClassify());
-        List<UserCollections> list = this.userCollectionService.queryAll(userCollections);
-
-        if(CollectionUtils.isNotEmpty(list)){//已经收藏
+        //List<UserCollections> list = this.userCollectionService.queryAll(userCollections);
+        UserCollections tmp = this.userCollectionService.getByEntity(userCollections);
+        if(null!= tmp){//已经收藏
             return new JsonView(1,"已经收藏").toString();
         }else{
             return new JsonView(0,"未收藏").toString();

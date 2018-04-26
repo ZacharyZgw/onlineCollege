@@ -7,13 +7,11 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	<title>网校在线学习平台</title>
-	<#include "./common/res.html">
-	<#include "./common/globe.html">
+	<#include "./common/newRes.html">
 </head>
 
 <body>
-<#include "./common/header3.html">
-<a href="/return">测试</a>
+<#include "./common/newHeader.html">
 <div class="f-main">
 	<div class="clearfix">
 		<div class=main-category>
@@ -106,7 +104,7 @@
 		</div>
 	</div>
 
-	<div class="types-block clearfix text-center">
+	<!--<div class="types-block clearfix text-center">
 		<h3 class="types-title">实/战/推/荐</h3>
 		<div class="types-content">
 			<#if actionCourseList?? && actionCourseList?size gt 0>
@@ -129,33 +127,67 @@
 		</#list>
 		</#if>
 		</div>
+	</div>-->
+	<div class="classification_view margin-top-30">
+		<div class="margin-bottom-20"><h3 class="types-title " style="text-align: center">实/战/推/荐</h3> </div>
+		<div class="container">
+			<div class="clearfix classification_row">
+				<#if actionCourseList?? && actionCourseList?size gt 0>
+				<#list actionCourseList as item>
+				<div class="cols5">
+					<a href="${s.base}/course/learn/${item.courseId}">
+						<div class="fenlei_img">
+							<img src="${item.picture}" alt="课程图片">
+							<div class="clearfix low_tt">
+								<span>${item.subClassify}</span>
+							</div>
+						</div>
+						<div class="shizhan-intro-box">
+							<p class="shizan-name" title="${item.name}">${item.name}</p>
+							<div class="shizhan-info">
+								<span class="grade">中级</span>
+								<span><i class="fa fa-user-o"></i>学习人数:${item.studyCount}</span>
+							</div>
+							<p class="shizan-desc" title="${item.brief}">${item.brief}</p>
+						</div>
+					</a>
+				</div>
+			</#list>
+		</#if>
+	</div>
+	</div>
 	</div>
 
 
-	<div class="types-block clearfix">
-		<h3 class="types-title">免费好课</h3>
-		<div class="types-content">
+<div class="classification_view margin-top-30">
+	<div class="margin-bottom-20"><h3 class="types-title " style="text-align: center">免/费/好/课</h3> </div>
+	<div class="container">
+		<div class="clearfix classification_row">
 			<#if freeCourseList?? && freeCourseList?size gt 0>
 			<#list freeCourseList as item>
-			<a href="">
-				<div class="course-card-container" style="width: 220px">
-					<div class="course-card-top" style="background: url('${item.picture}');height: 135px">
-
-					</div>
-
-					<div class="course-card-content">
-						<h3 class="course-card-name">${item.name}</h3>
-						<div class="course-card-bottom">
-							<div class="course-card-info">学习人数:${item.studyCount}</div>
+			<div class="cols5">
+				<a href="${s.base}/course/learn/${item.courseId}">
+					<div class="fenlei_img">
+						<img src="${item.picture}" alt="课程图片">
+						<div class="clearfix low_tt">
+							<span>${item.subClassify}</span>
 						</div>
 					</div>
-				</div>
-			</a>
-			</#list>
-			</#if>
-		</div>
-
-	</div>
+					<div class="shizhan-intro-box">
+						<p class="shizan-name" title="${item.name}">${item.name}</p>
+						<div class="shizhan-info">
+							<span class="grade">中级</span>
+							<span><i class="fa fa-user-o"></i>学习人数:${item.studyCount}</span>
+						</div>
+						<p class="shizan-desc" title="${item.brief}">${item.brief}</p>
+					</div>
+				</a>
+			</div>
+		</#list>
+	</#if>
+</div>
+</div>
+</div>
 
 	<div class="types-block clearfix">
 		<h3 class="types-title">Java开发工程师</h3>

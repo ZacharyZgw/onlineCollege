@@ -25,6 +25,20 @@ public class CourseServiceImpl implements ICourseService {
         return courseDao.getByCourseId(courseId);
     }
 
+    @Override
+    public List<String> getAllCourseClassify(String userName) {
+        return courseDao.getClassifyByUserName(userName);
+    }
+
+    @Override
+    public TailPage<Course> queryPageByTeacher(Course queryEntity, TailPage<Course> page) {
+        Integer totalCount=courseDao.getTotalItemsCount(queryEntity);
+        List<Course> result=courseDao.queryPageByTeacher(queryEntity,page);
+        page.setItemsTotalCount(totalCount);
+        page.setItems(result);
+        return page;
+    }
+
 
     @Override
     public List<Course> queryList(CourseQueryDto queryEntity) {

@@ -126,6 +126,7 @@ public class CourseListController {
         //分页参数
         queryEntity.setOnsale(CourseEnum.ONSALE.value());
         page = this.courseService.queryPage(queryEntity, page);
+
         model.addAttribute("page", page);
 
         return "fenlei";

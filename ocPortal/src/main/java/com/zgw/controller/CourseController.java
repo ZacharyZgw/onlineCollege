@@ -123,6 +123,7 @@ public class CourseController {
             //新建学习记录
             userCourseSection.setCourseStatus(0);
             userCourseSection.setSectionStatus(0);
+            userCourseSection.setCourseSubClassify(course.getSubClassify());
             userCourseSection.setCreateUser(SessionContext.getUsername());
             userCourseSectionService.createSelectivity(userCourseSection);
         }else {

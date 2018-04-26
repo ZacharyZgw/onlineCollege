@@ -18,54 +18,62 @@
 
 <div class="bg-other user-head-info user_head">
     <div class="container">
+        <#if teacher??>
         <div class="user-info clearfix">
             <div class="pull-left user_himg">
-                <div class="user-pic-bg"><img src='<@shiro.principal property="header"/>' alt=""></div>
+                <div class="user-pic-bg"><img src="${teacher.header}" alt=""></div>
             </div>
             <div class="pull-right user-info-right">
-                <h3 class="user-name clearfix"><span class="pull-left"><@shiro.principal property="username"/></span></h3>
+                <h3 class="user-name clearfix"><span class="pull-left">${teacher.username}</span></h3>
                 <p class="about-info">
+                    <#if teacher.gender?? && teacher.gender ==1>
                     <span>男</span>
-                    <span>学生</span>
+                    <#else>
+                    <span>女</span>
+                    </#if>
+                    <span>讲师</span>
+                    <span>${teacher.city}</span>
+                    <span>${teacher.title}</span>
                     <a class="more-user-info"><i class="glyphicon glyphicon-menu-down"></i>更多信息</a>
                 </p>
             </div>
             <div class="user-sign">
-                <#if user.sign?? && user.sign != "">
-                    <p class="user-desc"><@shiro.principal property="sign"/></p>
-                    <#else>
-                    <p class="user-desc">这位同学很懒，木有签名的说～</p>
-                </#if>
+                <#if teacher.sign?? && teacher.sign != "">
+                <p class="user-desc">${teacher.sign}</p>
+                <#else>
+                <p class="user-desc">这位同学很懒，木有签名的说～</p>
+            </#if>
+        </div>
+        </#if>
+        <div class="study-info clearfix">
+            <!--<div class="item">
+                <div class="u-info-learn" title="学习时长218小时7分" style="cursor:pointer;">
+                    <em>218h</em>
+                    <span>学习时长 </span>
+                </div>
             </div>
-            <div class="study-info clearfix">
-                <div class="item">
-                    <div class="u-info-learn" title="学习时长218小时7分" style="cursor:pointer;">
-                        <em>218h</em>
-                        <span>学习时长 </span>
-                    </div>
-                </div>
-                <div class="item">
-                    <em>5703</em>
-                    <span>经验</span>
-                </div>
-                <div class="item">
-                    <em>2</em>
-                    <span>积分</span>
-                </div>
-                <div class="item">
-                    <a href=""><em>2</em></a>
-                    <span>关注</span>
-                </div>
-                <div class="item follows">
-                    <a href=""><em>0</em></a>
-                    <span>粉丝</span>
-                </div>
-                <!--<div class="item js-fans-msg " data-uid="4014840" data-type="3">
-                    <a class="status-btn add-follow" href="" target="_blank">私信</a>
-                </div>-->
+            <div class="item">
+                <em>5703</em>
+                <span>经验</span>
+            </div>
+            <div class="item">
+                <em>2</em>
+                <span>积分</span>
+            </div>
+            <div class="item">
+                <a href=""><em>2</em></a>
+                <span>关注</span>
+            </div>
+            <div class="item follows">
+                <a href=""><em>0</em></a>
+                <span>粉丝</span>
+            </div>-->
+            <div class="item js-fans-msg " id="follow">
+                <a id="dofollow" class="status-btn add-follow" href="javascript:void(0);" target="_blank">关注</a>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="cont_user">
@@ -117,66 +125,60 @@
                             <i class="tool-item glyphicon glyphicon-triangle-bottom"></i>
                         </span>
                         <ul class="kecheng" style="margin-left: 28px">
-                            <#if courseClassifyList??>
-                            <#list courseClassifyList as item>
+                            <#if courseClassify??>
+                            <#list courseClassify as item>
                             <li><a href="javascript:void(0);" onclick="_queryPageByClassify(1,'${item!}')">${item}</a></li>
-                            </#list>
-                            </#if>
-                        </ul>
+                        </#list>
+                    </#if>
+                    </ul>
 
-                    </div>
                 </div>
             </div>
-
-            <div class="js-course-list my-space-course study-tl">
-                <#if (page.items)??>
-                <#list (page.items) as item>
-                <div class="clearfix tl-item ">
-                    <span class="time">
-                        <b>${item.updateTime?string('yyyy')}</b>
-                        <em>${item.updateTime?string('MM')}月${item.updateTime?string('dd')}日</em>
-                    </span>
-                    <div class="course-list course-list-m">
-                        <ul class="clearfix">
-                            <li class="clearfix course-one">
-                                <div class="course-list-img pull-left">
-                                    <a href="${s.base}/course/learn/${item.courseId}" target="_self">
-                                        <img width="200" height="113" alt="${item.courseName}" src="${item.coursePicture}">
-                                    </a>
-                                </div>
-                                <div class="course-list-cont">
-                                    <h3 class="study-hd">
-                                        <a href="${s.base}/course/learn/${item.courseId}" target="_self">${item.courseName}</a>
-                                        <!--<span class="i-new">更新至5-4</span>-->
-                                    </h3>
-                                    <div class="clearfix study-points">
-                                        <span class="i-left pull-left span-common">已学0%</span>
-                                        <span class="i-mid pull-left span-common">用时 0分</span>
-                                        <span class="i-right pull-left span-common">${item.sectionName}</span>
-                                    </div>
-                                    <div class="catog-points">
-                                        <span class="i-left pull-left span-common"><a href="">笔记 <i>0</i></a></span>
-                                        <span class="i-mid pull-left span-common"><a href="">代码 <i>0</i></a></span>
-                                        <span class="i-right pull-left span-common"><a href="">问答 <i>0</i></a></span>
-                                        <a href="${s.base}/course/video/${item.sectionId}" target="_self" class="btn-red continute-btn">继续学习</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </#list>
-                </#if>
-
-
-
-
-            </div>
-
         </div>
 
-        <#include "../common/newTailPage.html">
+        <div class="js-course-list my-space-course study-tl">
+            <#if (page.items)??>
+            <#list (page.items) as item>
+            <div class="clearfix tl-item ">
+                    <span class="time">
+                        <b>${item.createTime?string('yyyy')}</b>
+                        <em>${item.createTime?string('MM')}月${item.createTime?string('dd')}日</em>
+                    </span>
+                <div class="course-list course-list-m">
+                    <ul class="clearfix">
+                        <li class="clearfix course-one">
+                            <div class="course-list-img pull-left">
+                                <a href="${s.base}/course/learn/${item.courseId}" target="_self">
+                                    <img width="200" height="113" alt="${item.name}"  src="${item.picture}">
+                                </a>
+                            </div>
+                            <div class="course-list-cont">
+                                <h3 class="study-hd">
+                                    <a href="${s.base}/course/learn/${item.courseId}" target="_self">${item.name}</a>
+                                </h3>
+                                <div class="clearfix study-points" style="width: 85%">
+
+                                    <span class="i-right pull-left span-common">${item.brief}</span>
+                                </div>
+                                <div class="catog-points">
+                                    <!--<span class="i-left pull-left span-common"><a href="">笔记 <i>0</i></a></span>
+                                    <span class="i-mid pull-left span-common"><a href="">代码 <i>0</i></a></span>
+                                    <span class="i-right pull-left span-common"><a href="">问答 <i>0</i></a></span>-->
+                                    <a href="${s.base}/course/learn/${item.courseId}" target="_self" class="btn-red continute-btn">去看看</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </#list>
+    </#if>
     </div>
+
+</div>
+
+<#include "../common/newTailPage.html">
+</div>
 </div>
 <#include "../common/footer.html">
 </body>
@@ -185,7 +187,7 @@
     //根据分类分页获取
     var classify;
     <#if classify??>
-        classify = "${classify}";
+    classify = "${classify}";
     </#if>
     function _queryPageByClassify(pageNum,classify){
         var params = '?pageNum='+pageNum;

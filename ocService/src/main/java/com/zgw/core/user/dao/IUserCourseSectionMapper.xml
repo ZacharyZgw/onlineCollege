@@ -8,7 +8,7 @@
         section_status,section_time,rate,create_time,create_user,
         update_time,update_user,del,course_sub_classify
     </sql>
-    <select id="queryAllCourseSubClassify" resultType="string">
+    <select id="queryAllCourseSubClassify" resultType="java.lang.String">
         SELECT
         DISTINCT course_sub_classify
         from user_course_section
@@ -24,12 +24,12 @@
               ON a.course_id = b.course_id And a.update_time=b.max_time
               ORDER BY b.max_time DESC)as ab,course as c,course_section as s
         <trim prefix="WHERE" prefixOverrides="AND |OR">
-            <if test="userId != null">
+            <if test="param1.userId != null">
                 ab.user_id = #{param1.userId}
             </if>
             and ab.course_id = c.course_id
             and ab.section_id = s.id
-            <if test="courseSubClassify !=null">
+            <if test="param1.courseSubClassify !=null">
                 and ab.course_sub_classify=#{param1.courseSubClassify}
             </if>
         </trim>

@@ -4,44 +4,41 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zgw.core.user.dao.IUserCollectionsDao">
     <sql id="All_Columns">
-        user_id, classify,object_id, tips, create_time, create_user, update_time,
-        update_user, del,id,course_sub_classify
+        id,user_id,classify,object_id,tips,create_time,create_user,update_time,update_user,del,course_sub_classify
     </sql>
-    <select id="queryAllCourseSubClassify" resultType="string">
-        SELECT
-        DISTINCT course_sub_classify
-        from user_collections
-        WHERE del =0
-    </select>
-    <select id="getById" parameterType="long" resultType="com.zgw.core.user.entity.UserCollections">
+    <select id="getById" resultType="com.zgw.core.user.entity.UserCollections">
         SELECT
         <include refid="All_Columns"/>
         FROM user_collections
         WHERE id=#{id}
     </select>
-    <select id="queryAll" parameterType="com.zgw.core.user.entity.UserCollections"
-            resultType="com.zgw.core.user.entity.UserCollections">
+    <select id="getByEntity" resultType="com.zgw.core.user.entity.UserCollections">
         SELECT
         <include refid="All_Columns"/>
+        FROM user_collections
+        WHERE user_id=#{param1.userId}
+        and object_id = #{param1.objectId}
+    </select>
+    <select id="queryAllCourseSubClassify" resultType="java.lang.String">
+        SELECT DISTINCT course_sub_classify
         from user_collections
+        WHERE del=0
+    </select>
+
+    <select id="selectAll" parameterType="com.zgw.core.user.entity.UserCollections" resultType="com.zgw.core.user.entity.UserCollections">
+        SELECT <include refid="All_Columns"/>
+        FROM user_collections
         <trim prefix="WHERE" prefixOverrides="AND |OR">
+            del=0
             <if test="userId != null">
-                AND user_id = #{userId, jdbcType=INTEGER}
+              AND user_id = #{userId}
             </if>
             <if test="objectId != null">
-                AND object_id = #{objectId, jdbcType=INTEGER}
-            </if>
-            <if test="classify != null">
-                AND classify = #{classify, jdbcType=INTEGER}
-            </if>
-            <if test="courseSubClassify !=null">
-                AND course_sub_classify = #{courseSubClassify}
+              and object_id=#{objectId}
             </if>
         </trim>
-        order by id
     </select>
-    <select id="getTotalItemsCount" parameterType="com.zgw.core.user.entity.UserCollections"
-            resultType="java.lang.Integer">
+    <select id="getTotalItemsCount" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM user_collections
         <trim prefix="WHERE" prefixOverrides="AND |OR">
@@ -54,7 +51,7 @@
             </if>
         </trim>
     </select>
-    <select id="queryPage" resultType="com.zgw.core.user.entity.UserCollections">
+    <select id="queryPage" resultType="com.zgw.core.user.entity.UserCollectionsDto">
         SELECT uc.object_id, uc.id, c.name as courseName,c.picture as coursePicture,uc.course_sub_classify uc.create_time, uc.classify
         FROM user_collections uc , course c
         <trim prefix="WHERE" prefixOverrides="AND |OR">
@@ -70,8 +67,9 @@
         ORDER BY id DESC
         LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
     </select>
+
     <select id="queryAllByCourseSubCLassify"
-            resultType="com.zgw.core.user.entity.UserCollections">
+            resultType="com.zgw.core.user.entity.UserCollectionsDto">
         SELECT
         <include refid="All_Columns"/>
         FROM user_collections
@@ -88,7 +86,7 @@
         ( #{userId, jdbcType=INTEGER}, #{classify, jdbcType=INTEGER},#{objectId, jdbcType=INTEGER},#{tips, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP},
         #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR},#{courseSubClassify} )
     </insert>
-    <insert id="createSelectivity" parameterType="com.zgw.core.user.entity.UserCollections" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+    <insert id="createSelectivity" parameterType="com.zgw.core.user.entity.UserCollections" flushCache="true" useGeneratedKeys="true" keyProperty="id"  >
         INSERT INTO user_collections
         <trim prefix="(" suffix=")"  suffixOverrides="," >
             <if test="userId != null ">
@@ -119,7 +117,7 @@
                 del,
             </if>
             <if test="courseSubClassify != null">
-                course_sub_classify
+                course_sub_classify,
             </if>
         </trim>
         VALUES
@@ -151,8 +149,8 @@
             <if test="del != null ">
                 #{del, jdbcType=TINYINT},
             </if>
-            <if test="courseSubClassify != null">
-                #{courseSubClassify}
+            <if test="courseSubClassify">
+                #{courseSubClassify},
             </if>
         </trim>
     </insert>
@@ -206,5 +204,4 @@
         SET del = 1
         WHERE id = #{id, jdbcType=INTEGER}
     </update>
-
 </mapper>
