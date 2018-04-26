@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;">
+    <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>慕课网</title>
+
+    <#include "./common/newRes.html">
+    <style type="text/css">
+        #searchMain{
+            padding-top: 0;
+            background: #F8FAFC;
+            overflow: hidden;
+            min-height: 750px;
+            /*padding: 20px 0;*/
+        }
+        .search-main {
+            width: 100%;
+        }
+        .search-main, .search-main input {
+            font-family: "Microsoft YaHei","Helvetica Neue","微软雅黑",Tahoma,Arial,sans-serif;
+        }
+        .search-main .search-header {
+            height: 148px;
+            width: 100%;
+            background: #D9DDE1;
+            padding-top: 36px;
+            box-sizing: border-box;
+        }
+        .search-main .search-header .search-form {
+            height: 48px;
+            width: 840px;
+            margin: 0 auto;
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
+            position: relative;
+        }
+        .search-main .search-header .search-form i {
+            position: absolute;
+            left: 16px;
+            bottom: 12px;
+            font-size: 24px;
+            color: #D9DDE1;
+            float: left;
+        }
+        [class*=" icon-"], [class^=icon-] {
+            font-family: icomoon!important;
+            speak: none;
+            font-style: normal;
+            font-weight: 400;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .icon-search:before {
+            content: "\e610";
+        }
+        .search-main .search-header .search-form .search-form-ipt {
+            font-size: 16px;
+            color: #93999F;
+            width: 684px;
+            line-height: 48px;
+            height: 48px;
+            margin-left: 52px;
+            float: left;
+            outline: 0;
+            border: 0;
+        }
+        .search-main .search-header .search-form .search-form-btn {
+            background: #F01414;
+            width: 104px;
+            height: 48px;
+            line-height: 48px;
+            font-size: 16px;
+            color: #fff;
+            float: left;
+            cursor: pointer;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            outline: 0;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<#include "./common/newHeader.html">
+<div id="searchMain">
+    <div class="search-main">
+        <div class="search-header">
+            <div class="search-form">
+                <i class="clipboard fa fa-search"></i>
+                <input type="text" class="search-form-ipt js-search-ipt" value="java入门第一季" placeholder="请输入想搜索的内容">
+                <button class="search-form-btn js-search-btn" >搜索</button>
+            </div>
+        </div>
+        <div class="search-body">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

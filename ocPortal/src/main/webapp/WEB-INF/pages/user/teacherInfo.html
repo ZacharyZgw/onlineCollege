@@ -69,7 +69,7 @@
                 <span>粉丝</span>
             </div>-->
             <div class="item js-fans-msg " id="follow">
-                <a id="dofollow" class="status-btn add-follow" href="javascript:void(0);" target="_blank">关注</a>
+                <a id="dofollow" class="status-btn add-follow" style="background-color: #C20A0A" href="javascript:void(0);" onclick="doFollow('${(teacher.id!)}')">+关注</a>
             </div>
         </div>
     </div>
@@ -184,6 +184,36 @@
 </body>
 
 <script>
+    $(function () {
+        if(SHIRO_LOGIN){
+            //判断是否已经收藏
+            var followId =${(teacher.id!)};
+            if(followId){
+                var url = '${s.base}/follow/isFollow';
+                doFollow(followId,url);
+            }
+
+        }
+    });
+    function doFollow(followId,url) {
+        if (url == undefined){
+            url = '${s.base}/follow/doFollow';
+        }
+        $.ajax({
+            url:url,
+            type:'POST',
+            dataType:'json',
+            data:{"followId":followId},
+            success:function (resp) {
+                if (resp.errcode ==1){
+                    //状态：关注成功
+                    $('#dofollow').attr('style',"background-color:#4ba634;").html("已关注");
+                }else {
+                    $('#dofollow').attr('style','background-color:##e10601;').html("+关注");
+                }
+            }
+        })
+    }
     //根据分类分页获取
     var classify;
     <#if classify??>
@@ -194,7 +224,7 @@
         if (classify != undefined && classify != ''){//来自分页按钮
             params += '&classify='+classify;
         }
-        window.location.href="${s.base}/user/course"+params;
+        window.location.href="${s.base}/user/teacher/${(teacher.id!)}"+params;
     };
     // 获取焦点
     $('.search_views').focus(function () {

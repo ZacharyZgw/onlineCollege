@@ -67,7 +67,7 @@
 				/course/video/* = authc
 				/collections/**=authc
 				/courseComment/segment* = anon
-				
+				/search/**=anon
 				<!--/** = authc-->
 			</value>
 		</property>
