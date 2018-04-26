@@ -18,6 +18,9 @@
             min-height: 750px;
             /*padding: 20px 0;*/
         }
+        div{
+            display: block;
+        }
         .search-main {
             width: 100%;
         }
@@ -87,6 +90,290 @@
             outline: 0;
             border: 0;
         }
+        .search-main .search-header .search-form .search-history-area {
+            width: 736px;
+            position: absolute;
+            top: 48px;
+            margin-top: 1px;
+            z-index: 100;
+            box-sizing: border-box;
+            box-shadow: rgba(7, 17, 27, 0.1) 0px 8px 16px 0px;
+            display: none;
+            background: rgb(255, 255, 255);
+        }
+        .search-main .search-header ul.search-hot{
+            width: 840px;
+            margin: 0 auto;
+            list-style: none;
+            display: block;
+            padding: 0px;
+            -webkit-margin-before: 1em;
+            -webkit-margin-after: 1em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+            -webkit-padding-start: 40px;
+        }
+        .search-main .search-header .search-hot .fli {
+            margin-right: 12px;
+            font-size: 12px;
+            line-height: 18px;
+            color: rgb(77, 85, 93);
+        }
+        .search-main .search-header .search-hot li {
+            float: left;
+            font-size: 12px;
+            margin-top: 12px;
+            margin-right: 24px;
+            display: list-item;
+            text-align: -webkit-match-parent;
+        }
+        .search-main .search-body {
+            width: 1150px;
+            padding-top: 16px;
+            box-sizing: border-box;
+            margin: 0px auto;
+
+        }
+        .search-main .search-body .search-content {
+            float: left;
+            width: 800px;
+        }
+        .search-main .search-body .search-content .search-classify {
+            margin-bottom: 17px;
+            height: 48px;
+            position: relative;
+        }
+        .search-main .search-body .search-content .search-classify .search-classify-list {
+            float: left;
+        }
+        .clearfix::after {
+            content: " ";
+            display: block;
+            height: 0px;
+            clear: both;
+            visibility: hidden;
+        }
+        .search-main .search-body .search-content .search-classify .search-classify-list li {
+            float: left;
+            margin-right: 48px;
+        }
+        .search-main .search-body .search-content .search-classify .search-classify-list .active {
+            color: rgb(240, 20, 20);
+            border-bottom: 2px solid rgb(240, 20, 20);
+        }
+        .search-main .search-body .search-content .search-classify .search-classify-list li a {
+            display: block;
+            line-height: 48px;
+            font-size: 14px;
+            color: rgb(77, 85, 93);
+        }
+        .search-main .search-body .search-content .search-classify .search-related {
+            line-height: 48px;
+            float: left;
+            color: rgb(147, 153, 159);
+            font-size: 12px;
+        }
+        .search-main .recommend-user {
+            width: 800px;
+            box-sizing: border-box;
+            box-shadow: rgba(7, 17, 27, 0.05) 0px 4px 8px 0px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            padding: 24px 32px;
+            background: rgb(255, 255, 255);
+            border-radius: 8px;
+        }
+        .search-main .recommend-user .recommend-user-left {
+            float: left;
+            width: 96px;
+            height: 96px;
+            margin-right: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .search-main .recommend-user .recommend-user-left img {
+            width: 96px;
+            height: 96px;
+        }
+        fieldset, img {
+            border-width: 0px;
+            border-style: initial;
+            border-color: initial;
+            border-image: initial;
+        }
+        fieldset, img {
+            border-width: 0px;
+            border-style: initial;
+            border-color: initial;
+            border-image: initial;
+        }
+        .search-main .recommend-user .recommend-user-nickname {
+            display: block;
+            font-size: 16px;
+            color: rgb(240, 20, 20);
+            line-height: 32px;
+            margin-bottom: 4px;
+        }
+        .search-main .recommend-user .recommend-user-cont {
+            line-height: 32px;
+            margin-bottom: 4px;
+        }
+        .search-main .recommend-user .recommend-user-desc {
+            padding-bottom: 32px;
+        }
+        .course-item {
+            margin-bottom: 8px;
+            padding-top: 24px;
+            padding-right: 32px;
+            padding-bottom: 24px;
+            background: rgb(255, 255, 255);
+        }
+        .course-item, .course-item .course-item-detail, .wenda-item .wenda-item-detail .wenda-detail-wrap, .wenda-item .wenda-topic-detail {
+            overflow: hidden;
+        }
+        .article-item, .course-item, .wenda-item {
+            box-shadow: rgba(7, 17, 27, 0.05) 0px 4px 8px 0px;
+            box-sizing: border-box;
+        }
+        .course-item img {
+            width: 210px;
+            height: 120px;
+            float: left;
+            margin-left: 32px;
+            margin-right: 32px;
+        }
+        .course-item .course-item-detail a {
+            font-size: 16px;
+            line-height: 32px;
+            font-weight: 700;
+        }
+        .course-item .course-item-detail .highlight {
+            color: red;
+        }
+        .course-item .course-item-detail .course-item-classify {
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+        .course-item .course-item-detail .course-item-classify span {
+            line-height: 24px;
+            color: rgb(77, 85, 93);
+            font-size: 12px;
+            margin-right: 24px;
+            padding-left: 2px;
+            vertical-align: middle;
+        }
+        .course-item .course-item-detail .course-item-classify i {
+            vertical-align: middle;
+        }
+        .course-item .course-item-detail p {
+            color: rgb(77, 85, 93);
+            font-size: 12px;
+            line-height: 24px;
+        }
+        .search-main .search-body .search-recommend {
+            float: right;
+            margin-bottom: 100px;
+            width: 302px;
+        }
+        .search-main .search-body .search-recommend h3 {
+            margin-bottom: 10px;
+            font-size: 16px;
+            line-height: 48px;
+            font-weight: 700;
+            display: block;
+        }
+        .search-main .search-body .search-recommend .recommend-course {
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .search-main .search-body .search-recommend .recommend-course img {
+            float: left;
+            width: 72px;
+            height: 48px;
+            border-radius: 4px;
+        }
+        .search-main .search-body .search-recommend .recommend-course .recommend-course-info {
+            margin-left: 88px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 100%;
+            font-weight: 400;
+        }
+        .search-main .search-body .search-recommend .recommend-course .recommend-course-info h4 a {
+            color: #4D555D;
+            line-height: 20px;
+            word-break: break-all;
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: -o-ellipsis-lastline;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .search-main .search-body .search-recommend .recommend-course .recommend-course-info p {
+            padding: 5px 0;
+            font-size: 12px;
+            color: #93999F;
+            word-break: break-all;
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: -o-ellipsis-lastline;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .search-main .search-body .search-recommend .recommend-course .recommend-course-info .recommend-course-tool {
+            color: #93999F;
+            font-size: 12px;
+            line-height: 20px;
+        }
+        .search-main .search-body .search-recommend .recommend-course .recommend-course-info .recommend-course-tool a {
+            margin-right: 4px;
+        }
+        .search-main .search-body .search-recommend .recommend-course .recommend-course-info .recommend-course-tool i {
+            margin-right: 2px;
+        }
+        .search-main .search-body .search-recommend .recommend-course .recommend-course-info .recommend-course-tool {
+            color: #93999F;
+            font-size: 12px;
+            line-height: 20px;
+        }
+        .search-main .search-body .search-recommend .recommend-course {
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .search-main .search-body .search-recommend .highlight {
+            color: red;
+        }
+        .search-main .search-body .search-recommend .recommend-teacher {
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .search-main, .search-main input {
+            font-family: "Microsoft YaHei","Helvetica Neue","微软雅黑",Tahoma,Arial,sans-serif;
+        }
+        .search-main .search-body .search-recommend .recommend-teacher a {
+            float: left;
+            margin-bottom: 15px;
+            width: 33.33%;
+            text-align: center;
+            font-size: 0;
+        }
+        .search-main .search-body .search-recommend .recommend-teacher a img {
+            width: 48px;
+            height: 48px;
+            opacity: .9;
+            border-radius: 24px;
+        }
+        .search-main .search-body .search-recommend .recommend-teacher a span {
+            display: block;
+            font-size: 12px;
+            color: #4D555D;
+            line-height: 18px;
+            height: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 </head>
 <body>
@@ -98,12 +385,262 @@
                 <i class="clipboard fa fa-search"></i>
                 <input type="text" class="search-form-ipt js-search-ipt" value="java入门第一季" placeholder="请输入想搜索的内容">
                 <button class="search-form-btn js-search-btn" >搜索</button>
+                <div class="search-history-area js-search-history"></div>
             </div>
+            <ul class="search-hot" style="width: 60%;margin: 0 auto;">
+                <li class="fli">
+                    热搜关键词：
+                </li>
+	            <li>
+                    <a href="">python</a>
+                </li>
+	            <li>
+                    <a href="">小程序</a>
+                </li>
+	            <li>
+                    <a href="">java</a>
+                </li>
+	            <li>
+                    <a href="">人工智能</a>
+                </li>
+	            <li>
+                    <a href="">前端</a>
+                </li>
+            </ul>
         </div>
         <div class="search-body">
+            <div class="search-content">
+	            <div class="search-classify clearfix">
+                    <ul class="search-classify-list clearfix">
+                        <li><a href="javascript:;" data-page="index" class="active">全站</a></li>
+                        <li><a href="javascript:;" data-page="course">课程</a></li>
+                        <li><a href="javascript:;" data-page="wenda">猿问</a></li>
+                    </ul>
+                    <span class="search-related">共找到 62914 个相关内容</span>
+                </div>
+                <div class="recommend-user clearfix">
+                    <a class="recommend-user-left" href="/u/1217253/courses?sort=publish" target="_blank">
+                        <img src="${s.base}/res/i/header1.jpg">
+                    </a>
+                    <div class="recommend-user-right">
+                        <a class="recommend-user-nickname" href="/u/1217253/courses?sort=publish" target="_blank">一丝</a>
+                        <div class="recommend-user-cont">
+                            <span>Web前端工程师</span>
+                        </div>
+                        <div class="recommend-user-desc">一丝，阿里巴巴前端工程师， Cube.css，CSS Grace 作者。</div>
+                    </div>
+                </div>
+                <div class="course-item">
+                    <a href="//class.imooc.com/sc/?plan_id=39" target="_blank" class="course-detail-title">
+                        <img src="//climg.mukewang.com/5a2756820001d3c306000338.jpg">
+                    </a>
 
+                    <div class="course-item-detail">
+                        <a href="//class.imooc.com/sc/?plan_id=39" target="_blank" class="course-detail-title">
+                            <span class="highlight">Java</span> Web进阶：数据库与MyBatis<span class="highlight">入</span><span class="highlight">门</span>
+                        </a>
+                        <div class="course-item-classify">
+                            <span>职业路径</span>
+                            <span>JAVA攻城狮培养计划</span>
+                            <span>3步&nbsp;/&nbsp;12课</span>
+                            <i class="course-study-number icon-set_sns"></i><span>548</span>
+                        </div>
+                        <p><span class="highlight">Java</span>数据库开发的必备技能，从流行的MySQL数据库开始，到<span class="highlight">Java</span>原生的数据库管理接口JDBC的使用，再到常用的数据持久化框架MyBatis，让你向<span class="highlight">Java</span>工程师的目标又迈进了<span class="highlight">一</span>步！
+                        </p>
+                    </div>
+                </div>
+                <div class="course-item">
+                    <a href="//class.imooc.com/sc/?plan_id=39" target="_blank" class="course-detail-title">
+                        <img src="//climg.mukewang.com/5a2756820001d3c306000338.jpg">
+                    </a>
+
+                    <div class="course-item-detail">
+                        <a href="//class.imooc.com/sc/?plan_id=39" target="_blank" class="course-detail-title">
+                            <span class="highlight">Java</span> Web进阶：数据库与MyBatis<span class="highlight">入</span><span class="highlight">门</span>
+                        </a>
+                        <div class="course-item-classify">
+                            <span>职业路径</span>
+                            <span>JAVA攻城狮培养计划</span>
+                            <span>3步&nbsp;/&nbsp;12课</span>
+                            <i class="course-study-number icon-set_sns"></i><span>548</span>
+                        </div>
+                        <p><span class="highlight">Java</span>数据库开发的必备技能，从流行的MySQL数据库开始，到<span class="highlight">Java</span>原生的数据库管理接口JDBC的使用，再到常用的数据持久化框架MyBatis，让你向<span class="highlight">Java</span>工程师的目标又迈进了<span class="highlight">一</span>步！
+                        </p>
+                    </div>
+                </div>
+                <div class="course-item">
+                    <a href="//class.imooc.com/sc/?plan_id=39" target="_blank" class="course-detail-title">
+                        <img src="//climg.mukewang.com/5a2756820001d3c306000338.jpg">
+                    </a>
+
+                    <div class="course-item-detail">
+                        <a href="//class.imooc.com/sc/?plan_id=39" target="_blank" class="course-detail-title">
+                            <span class="highlight">Java</span> Web进阶：数据库与MyBatis<span class="highlight">入</span><span class="highlight">门</span>
+                        </a>
+                        <div class="course-item-classify">
+                            <span>职业路径</span>
+                            <span>JAVA攻城狮培养计划</span>
+                            <span>3步&nbsp;/&nbsp;12课</span>
+                            <i class="course-study-number icon-set_sns"></i><span>548</span>
+                        </div>
+                        <p><span class="highlight">Java</span>数据库开发的必备技能，从流行的MySQL数据库开始，到<span class="highlight">Java</span>原生的数据库管理接口JDBC的使用，再到常用的数据持久化框架MyBatis，让你向<span class="highlight">Java</span>工程师的目标又迈进了<span class="highlight">一</span>步！
+                        </p>
+                    </div>
+                </div>
+                <div class="course-item">
+                    <a href="//class.imooc.com/sc/?plan_id=39" target="_blank" class="course-detail-title">
+                        <img src="//climg.mukewang.com/5a2756820001d3c306000338.jpg">
+                    </a>
+
+                    <div class="course-item-detail">
+                        <a href="//class.imooc.com/sc/?plan_id=39" target="_blank" class="course-detail-title">
+                            <span class="highlight">Java</span> Web进阶：数据库与MyBatis<span class="highlight">入</span><span class="highlight">门</span>
+                        </a>
+                        <div class="course-item-classify">
+                            <span>职业路径</span>
+                            <span>JAVA攻城狮培养计划</span>
+                            <span>3步&nbsp;/&nbsp;12课</span>
+                            <i class="course-study-number icon-set_sns"></i><span>548</span>
+                        </div>
+                        <p><span class="highlight">Java</span>数据库开发的必备技能，从流行的MySQL数据库开始，到<span class="highlight">Java</span>原生的数据库管理接口JDBC的使用，再到常用的数据持久化框架MyBatis，让你向<span class="highlight">Java</span>工程师的目标又迈进了<span class="highlight">一</span>步！
+                        </p>
+                    </div>
+                </div>
+                <div class="course-item">
+                    <a href="//class.imooc.com/sc/?plan_id=39" target="_blank" class="course-detail-title">
+                        <img src="//climg.mukewang.com/5a2756820001d3c306000338.jpg">
+                    </a>
+
+                    <div class="course-item-detail">
+                        <a href="//class.imooc.com/sc/?plan_id=39" target="_blank" class="course-detail-title">
+                            <span class="highlight">Java</span> Web进阶：数据库与MyBatis<span class="highlight">入</span><span class="highlight">门</span>
+                        </a>
+                        <div class="course-item-classify">
+                            <span>职业路径</span>
+                            <span>JAVA攻城狮培养计划</span>
+                            <span>3步&nbsp;/&nbsp;12课</span>
+                            <i class="course-study-number icon-set_sns"></i><span>548</span>
+                        </div>
+                        <p><span class="highlight">Java</span>数据库开发的必备技能，从流行的MySQL数据库开始，到<span class="highlight">Java</span>原生的数据库管理接口JDBC的使用，再到常用的数据持久化框架MyBatis，让你向<span class="highlight">Java</span>工程师的目标又迈进了<span class="highlight">一</span>步！
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="search-recommend">
+                <h3><span class="highlight">java入门第一季...</span>相关内容推荐</h3>
+                <div class="recommend-course">
+                    <a href="//coding.imooc.com/class/13.html" target="_blank">
+                        <img src="${s.base}/res/i/java/java1.jpg" alt="">
+                    </a>
+                    <div class="recommend-course-info">
+                        <h4><a href="//coding.imooc.com/class/13.html" target="_blank">WebApp 书城整站开发</a></h4>
+                        <p>最前沿前端技术精讲， HTML5 、Vue.js 、Koa 、zepto 综合运用 </p>
+                        <div class="recommend-course-tool">
+                            讲师：
+                            <a href="/u/101686" target="_blank">远人</a>
+                            <i class="imv2-set-sns"></i>3268
+                        </div>
+                    </div>
+                </div>
+                <div class="recommend-course">
+                    <a href="//coding.imooc.com/class/13.html" target="_blank">
+                        <img src="${s.base}/res/i/java/java1.jpg" alt="">
+                    </a>
+                    <div class="recommend-course-info">
+                        <h4><a href="//coding.imooc.com/class/13.html" target="_blank">WebApp 书城整站开发</a></h4>
+                        <p>最前沿前端技术精讲， HTML5 、Vue.js 、Koa 、zepto 综合运用 </p>
+                        <div class="recommend-course-tool">
+                            讲师：
+                            <a href="/u/101686" target="_blank">远人</a>
+                            <i class="imv2-set-sns"></i>3268
+                        </div>
+                    </div>
+                </div>
+                <div class="recommend-course">
+                    <a href="//coding.imooc.com/class/13.html" target="_blank">
+                        <img src="${s.base}/res/i/java/java1.jpg" alt="">
+                    </a>
+                    <div class="recommend-course-info">
+                        <h4><a href="//coding.imooc.com/class/13.html" target="_blank">WebApp 书城整站开发</a></h4>
+                        <p>最前沿前端技术精讲， HTML5 、Vue.js 、Koa 、zepto 综合运用 </p>
+                        <div class="recommend-course-tool">
+                            讲师：
+                            <a href="/u/101686" target="_blank">远人</a>
+                            <i class="imv2-set-sns"></i>3268
+                        </div>
+                    </div>
+                </div>
+                <div class="recommend-course">
+                    <a href="//coding.imooc.com/class/13.html" target="_blank">
+                        <img src="${s.base}/res/i/java/java1.jpg" alt="">
+                    </a>
+                    <div class="recommend-course-info">
+                        <h4><a href="//coding.imooc.com/class/13.html" target="_blank">WebApp 书城整站开发</a></h4>
+                        <p>最前沿前端技术精讲， HTML5 、Vue.js 、Koa 、zepto 综合运用 </p>
+                        <div class="recommend-course-tool">
+                            讲师：
+                            <a href="/u/101686" target="_blank">远人</a>
+                            <i class="imv2-set-sns"></i>3268
+                        </div>
+                    </div>
+                </div>
+                <div class="recommend-course">
+                    <a href="//coding.imooc.com/class/13.html" target="_blank">
+                        <img src="${s.base}/res/i/java/java1.jpg" alt="">
+                    </a>
+                    <div class="recommend-course-info">
+                        <h4><a href="//coding.imooc.com/class/13.html" target="_blank">WebApp 书城整站开发</a></h4>
+                        <p>最前沿前端技术精讲， HTML5 、Vue.js 、Koa 、zepto 综合运用 </p>
+                        <div class="recommend-course-tool">
+                            讲师：
+                            <a href="/u/101686" target="_blank">远人</a>
+                            <i class="imv2-set-sns"></i>3268
+                        </div>
+                    </div>
+                </div>
+                <h3><span class="highlight">java入门第一季...</span>相关讲师</h3>
+                <div class="recommend-teacher">
+                    <input type="hidden" value="0">
+                    <a href="/u/101686" target="_blank">
+                        <img src="${s.base}/res/i/header1.jpg" alt="远人">
+                        <span>远人</span>
+                    </a>
+                    <input type="hidden" value="0">
+                    <a href="/u/101686" target="_blank">
+                        <img src="${s.base}/res/i/header1.jpg" alt="远人">
+                        <span>远人</span>
+                    </a>
+                    <input type="hidden" value="0">
+                    <a href="/u/101686" target="_blank">
+                        <img src="${s.base}/res/i/header1.jpg" alt="远人">
+                        <span>远人</span>
+                    </a>
+                    <input type="hidden" value="0">
+                    <a href="/u/101686" target="_blank">
+                        <img src="${s.base}/res/i/header1.jpg" alt="远人">
+                        <span>远人</span>
+                    </a>
+                    <input type="hidden" value="0">
+                    <a href="/u/101686" target="_blank">
+                        <img src="${s.base}/res/i/header1.jpg" alt="远人">
+                        <span>远人</span>
+                    </a>
+                    <input type="hidden" value="0">
+                    <a href="/u/101686" target="_blank">
+                        <img src="${s.base}/res/i/header1.jpg" alt="远人">
+                        <span>远人</span>
+                    </a>
+                    <input type="hidden" value="0">
+                    <a href="/u/101686" target="_blank">
+                        <img src="${s.base}/res/i/header1.jpg" alt="远人">
+                        <span>远人</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<#include "./common/newTailPage.html">
+<#include "./common/footer.html">
 </body>
 </html>
