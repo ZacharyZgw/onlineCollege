@@ -1,0 +1,27 @@
+<#if (page.pageTotalCount)?? && page.pageTotalCount gt 1>
+<div class="qa-comment-page">
+    <div class="page">
+        <input type="hidden" id="_id_pageNum" name="pageNum" value="${page.pageNum}"/>
+        <#if !page.firstPage>
+        <a href="javascript:void(0);" onclick="_queryPage(1)"><span style="color: #4d555d">首页</span></a>
+        <a href="javascript:void(0);" onclick="_queryPage(${page.pageNum-1})"><span style="color: #4d555d">上一页</span></a>
+    </#if>
+    <#list page.showNums as n>
+    <#if page.showDot && n_index ==6>
+    <span>...</span>
+</#if>
+<#if page.pageNum == n>
+<span class="text-page-tag" style="background: #C20A0A;color: #fff;border-radius: 50%;">${n}</span>
+<#else>
+<#if n!= -1 && n!= 0>
+<a class="text-page-tag" href="javascript:void(0);" onclick="_queryPage(${n});">${n}</a>
+</#if>
+</#if>
+</#list>
+<#if !page.lastPage>
+<a href="javascript:void(0);"  onclick="_queryPage(${page.pageNum+1})">下一页</a>
+<a href="javascript:void(0);"  onclick="_queryPage(${page.pageTotalCount!})">尾页</a>
+</#if>
+</div>
+</div>
+</#if>

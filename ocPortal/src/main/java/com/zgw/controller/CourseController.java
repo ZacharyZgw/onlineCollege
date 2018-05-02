@@ -6,6 +6,7 @@ import com.zgw.core.auth.service.IAuthUserService;
 import com.zgw.core.course.entity.Course;
 import com.zgw.core.course.entity.CourseQueryDto;
 import com.zgw.core.course.entity.CourseSection;
+import com.zgw.core.course.service.ICourseCommentService;
 import com.zgw.core.course.service.ICourseSectionService;
 import com.zgw.core.course.service.ICourseService;
 import com.zgw.core.user.entity.UserCourseSection;
@@ -44,6 +45,8 @@ public class CourseController {
     @Autowired
     private IUserCourseSectionService userCourseSectionService;
 
+    @Autowired
+    private ICourseCommentService courseCommentService;
 
     @RequestMapping("/learn/{courseId}")
     public String learn(@PathVariable("courseId") Long courseId, Model model){

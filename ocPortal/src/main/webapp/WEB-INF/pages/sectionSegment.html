@@ -1,0 +1,27 @@
+<div class="pl-container">
+    <ul>
+        <#if (page.items)??>
+        <#list page.items as item>
+        <li class="pl-list">
+            <div class="clearfix">
+                <div class="pl-list-avator">
+                    <a href="" target="_blank"><img width="40" height="40" src="${item.header}" title="用户头像"></a>
+                </div>
+                <div class="pl-list-main">
+                    <div class="pl-list-nick"> <a href="" target="_blank">${item.username}评论到：</a> </div>
+                    <div class="pl-list-content">${item.content}</div>
+                    <div class="pl-list-btm clearfix">
+                        <#if item.createTime??>
+                        <span class="pl-list-time pull-left">时间: ${item.createTime?string('yyyy-MM-dd')}</span>
+                        </#if>
+                        <!--<a title="赞" href="" class="js-pl-praise list-praise pull-right"><i class="icon-thumb-revert"></i><span>4</span></a>
+                        <a href="" class="js-tip-off pull-right tipoff">举报</a>-->
+                    </div>
+                </div>
+
+            </div>
+        </li>
+        </#list>
+        </#if>
+    </ul>
+</div>

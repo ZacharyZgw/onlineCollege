@@ -84,5 +84,22 @@ public class TailPage<E> extends AbstractPage<E> {
 	public int getPageTotalCount(){
 		return this.pageTotalCount;
 	}
+
+	@Override
+	public String toString() {
+		return "TailPage{" +
+				"showPage=" + showPage +
+				", showNums=" + showNums +
+				", showDot=" + showDot +
+				", pageSize=" + pageSize +
+				", pageNum=" + pageNum +
+				", itemsTotalCount=" + itemsTotalCount +
+				", pageTotalCount=" + pageTotalCount +
+				", items=" + items +
+				", firstPage=" + firstPage +
+				", lastPage=" + lastPage +
+				", startIndex=" + startIndex +
+				'}';
+	}
 }
 

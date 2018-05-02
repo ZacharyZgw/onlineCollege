@@ -52,16 +52,16 @@
         </trim>
     </select>
     <select id="queryPage" resultType="com.zgw.core.user.entity.UserCollectionsDto">
-        SELECT uc.object_id, uc.id, c.name as courseName,c.picture as coursePicture,uc.course_sub_classify uc.create_time, uc.classify
+        SELECT uc.object_id, uc.id, c.name as courseName,c.picture as coursePicture,c.brief as courseBrief,uc.course_sub_classify, uc.create_time, uc.classify
         FROM user_collections uc , course c
         <trim prefix="WHERE" prefixOverrides="AND |OR">
-            <if test="userId != null">
-                user_id = #{param1.userId}
+            <if test="param1.userId != null">
+             AND  uc.user_id = #{param1.userId}
             </if>
-            and uc.object_id = c.id
+            and uc.object_id = c.course_id
             AND uc.classify = 1
-            <if test="courseSubClassify != null">
-                and course_sub_classify =#{param1.courseSubClassify}
+            <if test="param1.courseSubClassify != null">
+                and uc.course_sub_classify =#{param1.courseSubClassify}
             </if>
         </trim>
         ORDER BY id DESC

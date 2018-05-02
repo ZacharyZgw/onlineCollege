@@ -25,14 +25,24 @@
 
     <select id="getTotalItemsCount" parameterType="com.zgw.core.user.entity.UserFollows" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM user_follows
-        WHERE del = 0
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            AND del=0
+            <if test="param1.userId != null">
+            AND  user_id = #{param1.userId}
+            </if>
+        </trim>
     </select>
 
     <select id="queryPage" resultType="com.zgw.core.user.entity.UserFollows">
         SELECT
         <include refid="All_Columns" />
         FROM user_follows
-        WHERE del = 0
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            AND del = 0
+            <if test="param1.userId != null">
+                AND user_id = #{param1.userId}
+            </if>
+        </trim>
         ORDER BY id
         LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER}
     </select>

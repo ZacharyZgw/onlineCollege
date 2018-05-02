@@ -4,12 +4,10 @@ import com.zgw.core.auth.domain.AuthUser;
 import com.zgw.core.auth.service.IAuthUserService;
 import com.zgw.core.course.entity.Course;
 import com.zgw.core.course.service.ICourseService;
-import com.zgw.core.user.entity.UserCollections;
-import com.zgw.core.user.entity.UserCollectionsDto;
-import com.zgw.core.user.entity.UserCourseSection;
-import com.zgw.core.user.entity.UserCourseSectionDto;
+import com.zgw.core.user.entity.*;
 import com.zgw.core.user.service.IUserCollectionService;
 import com.zgw.core.user.service.IUserCourseSectionService;
+import com.zgw.core.user.service.IUserFollowsService;
 import com.zgw.page.TailPage;
 import com.zgw.web.SessionContext;
 import org.apache.commons.collections.CollectionUtils;
@@ -38,6 +36,9 @@ public class UserController{
 
     @Autowired
     private ICourseService courseService;
+
+    @Autowired
+    private IUserFollowsService userFollowsService;
 
     @RequestMapping("/teacher/{teacherId}")
     public String showTeacher(@PathVariable("teacherId") Long id,Model model,String classify,TailPage<Course> page){
@@ -122,8 +123,26 @@ public class UserController{
             page = collectionService.queryPage(userCollections,page);
         }
         model.addAttribute("page",page);
-        return "user/collections";
+        System.out.println("cvbrhjngvmkyj,ljghfrcdvbhcvnjmkncfevgrbhnjmytfcfvgbnhjmurfdcvgbnhjm"+page.getPageTotalCount());
+
+        return "user/userCollections";
     }
+
+    @RequestMapping("/follows")
+    public String follows(Model model , TailPage<UserFollows> page){
+        AuthUser user = authUserService.getById(SessionContext.getUserId());
+        model.addAttribute("user",user);
+        model.addAttribute("curnav","follows");
+        UserFollows userFollows = new UserFollows();
+        userFollows.setUserId(SessionContext.getUserId());
+        page = this.userFollowsService.queryPage(userFollows,page);
+        if (null != page){
+            model.addAttribute("page",page);
+        }
+        return "user/userFollows";
+
+    }
+
 
 
 

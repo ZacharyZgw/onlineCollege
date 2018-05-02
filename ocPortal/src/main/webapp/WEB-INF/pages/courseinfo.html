@@ -7,10 +7,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>慕课网</title>
+    <title>MOOC在线教育平台</title>
 
     <#include "./common/newRes.html">
-
+    <style type="text/css">
+        .mod-qa-list {
+            margin-bottom: 8px;
+            padding: 32px;
+            background: #FFF;
+            box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
+            border-radius: 12px;
+            position: relative;
+        }
+        .mod-qa-list .qa-medias {
+            width: 96px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .l {
+            float: left;
+        }
+        .mod-qa-list .qa-medias img {
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            border-radius: 50%;
+            vertical-align: top;
+            border: 0px;
+        }
+        .mod-qa-list .qa-content {
+            padding-right: 20px;
+            min-height: 85px;
+            position: relative;
+            overflow: hidden;
+        }
+        .mod-qa-list .qa-content, .mod-qa-list .qa-header .name, .mod-qa-list .qa-header .qa-tit, .replydes {
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+        .mod-qa-list .qa-footer {
+            margin-top: 12px;
+            color: #93999f;
+            font-size: 12px!important;
+        }
+        .clearfix:after {
+            content: '\0020';
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+        .r {
+            float: right;
+        }
+        .mod-qa-list .qa-footer .l-box a {
+            color: #93999f;
+            margin-right: 30px;
+        }
+        .aactive{
+            color: red;
+        }
+    </style>
 </head>
 <body class="bodyView">
 <!--导航部分-->
@@ -76,18 +134,18 @@
 <div class="tabNavs">
     <div class="container">
         <!--待修改-->
-        <ul class="clearfix">
-            <li class="active"><a href="">课程章节</a></li>
-            <li><span>78</span><a href="">问答评论</a></li>
-            <li><a href="">同学笔记</a></li>
-            <li><span>13</span><a href="">用户评价</a></li>
+        <ul class="clearfix" id="courseNav">
+            <li class="active menu-items" onclick="showTab(this,'courseList')"><a  href="javascript:void(0);" >课程章节</a></li>
+            <li class="menu-items " onclick="showTab(this,'wenda',1)"><span>78</span><a  href="javascript:void(0);" >课程问答</a></li>
+            <li class="menu-items" onclick="showTab(this,'wenda',0)"><a  href="javascript:void(0);" >课程评论</a></li>
         </ul>
+
     </div>
 </div>
 <div class="mainView">
     <div class="container clearfix">
         <div class="pull-left content-wrap">
-            <div class="content">
+            <div class="content"  id="courseList">
                 <div class="course-wrap">简介：${course.brief}</div>
                 <#if courseSectionList??>
                 <#list courseSectionList as item>
@@ -110,13 +168,18 @@
                             </li>
                             </#list>
                              </#if>
-
                         </ul>
                     </div>
                 </div>
                 </#list>
                 </#if>
             </div>
+            <div class="content" id="wenda">
+
+            </div>
+            <!--<div class="content" id="commentQ">
+
+            </div>-->
         </div>
         <!--</div>-->
         <div class="pull-right aside">
@@ -151,9 +214,6 @@
                         <dd class="autowrap">${course.teachersay}</dd>
                     </dl>
                 </div>
-
-
-
             </div>
             <div class="js-commend-box">
                 <div class="mb40 recom-course-list-box">
@@ -260,6 +320,7 @@
 
     </div>
 </div>
+
 <div id="footer">
     <div class="container">
         <div class="footerwaper clearfix">
@@ -324,6 +385,45 @@
 
         }
     });
+
+    /*
+    * type：0：表示评论
+    *       1：表示问答
+    * */
+    function showTab(ele,divID,type) {
+        $('.container').find('li').each(function (i,item) {
+            $(item).removeClass('active');
+        });
+        $(ele).addClass('active');
+        if (divID == 'courseList'){
+            $('#courseList').show();
+            $('#wenda').hide();
+        }else{
+            $('#wenda').show();
+            $('#courseList').hide();
+            _queryPage(1,type);
+        };
+    }
+    var _type = 1;/!*默认加载的是问答type=1*!/
+    function _queryPage(pageNum,type) {
+        if (type == undefined) {
+            type = _type;
+        } else {
+            _type = type;
+        }
+        if (pageNum == undefined) {
+            pageNum = 1;
+        }
+        var courseId =${(course.courseId)!};
+        var url = "${s.base}/courseComment/segment";
+        $('#wenda').load(
+            url,
+            {'courseId': courseId, 'type': type, 'pageNum': pageNum},
+            function () {
+                
+            }
+        );
+    };
     function doCollection(courseId,url) {
         if(url == undefined){
             url = '${s.base}/collections/doCollection';

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>慕课网</title>
+    <title>MOOC在线教育平台</title>
 
     <!-- Bootstrap -->
     <link href="${s.base}/res/css/font-awesome.css" rel="stylesheet">
@@ -16,6 +16,8 @@
     <link href="${s.base}/res/css/css.css" rel="stylesheet">
     <script src="${s.base}/res/js/jquery-1.11.3.min.js"></script>
     <script src="${s.base}/res/js/bootstrap.min.js"></script>
+    <script src="${s.base}/res/js/oc.min.js"></script>
+    <script src="${s.base}/res/js/jquery.form.js"></script>
 
 </head>
 <body >
@@ -36,33 +38,11 @@
                         <em>${courseSection.name}</em>
                     </a>
                 </li>
-                <!--<li class="nv nv-share bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1523973016341">
-                    &lt;!&ndash; note:bdshare cannt user inner icon tag&ndash;&gt;
-                    <span>分享</span>
-                    <a class="bds_weixin" data-cmd="weixin" title="分享到微信"><i class="clipboard fa fa-weixin"></i></a>
-                    <a class="bds_qzone" data-cmd="qzone" href="#" title="分享到QQ空间"><i class="clipboard fa fa-qq"></i></a>
-                    <a class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"><i class="clipboard fa fa-weibo"></i></a>
-                    <div style="display:none" id="coursePic"><img src="//img.mukewang.com/5ac3418d0001a9b806000338-590-330.jpg"></div>
-                </li>-->
             </ul>
             </#if>
         </div>
         <div class="pull-right headInfo">
             <ul class="clearfix login-area">
-                <!--<li class="app-load" id="js-app-load">
-                    <a href="" target="_blank" >下载APP</a>
-                </li>
-                <li class="shop-cart" id="shop-cart">
-                    <a href="" class="shop-cart-icon" target="_blank">
-                        <span class="glyphicon glyphicon-shopping-cart js-endcart"></span><span>购物车</span><span class="shopping_icon js-cart-num" data-ordernum="0" data-cartnum="0" style="display: none">0</span>
-                    </a>
-                </li>
-                <li class="remind_warp">
-                    <i class="msg_remind" style="display: inline;"></i>
-                    <a target="_blank" href="">
-                        <i class="clipboard fa fa-bell" aria-hidden="true"></i>
-                    </a>
-                </li>-->
                 <@shiro.user>
                 <li class="set_btn user-card-box">
                     <a href="${s.base}/user/course">
@@ -141,10 +121,10 @@
                 </div>
                 <div class="next-box" id="next-box">
                     <div class="next-box-inner">
-                        <div class="course-tip-layer J-next-course" data-next-src="/video/16906">
-                            <h2>下一节课程： 小程序有哪些宣传方式
+                        <div class="course-tip-layer J-next-course" >
+                            <!--<h2>下一节课程： 小程序有哪些宣传方式
                                 <span class="course-duration"> (01:51)</span>
-                            </h2>
+                            </h2>-->
                             <div class="J-next-auto hide next-auto"><em>3</em> 秒后播放下一节</div>
                             <div class="J-next-btn next-auto btn btn-green">
                                 <#assign nextSectionId = courseSection.id + 1 />
@@ -198,12 +178,6 @@
                 <div class="nano-pane" style="display: block;"><div class="nano-slider fa fa-circle-o" style="height: 153px; -webkit-transform: translate(0, 0px);"></div></div></div>
             </div>
         </div>
-    <!--<div class="maybe-wenda" id="maybe-wenda" style="display: none;">
-        <i class="icon-chat"></i>
-        <p class="text">你发的评论可能会是问题？<br>是否将他发到问答中</p>
-        <input class="btn ok" type="button" value="好的" id="wenda-ok">
-        <input class="btn no" type="button" value="不用" id="wenda-no">
-    </div>-->
 </div>
 
 <div class="videoViews">
@@ -211,92 +185,43 @@
         <div class="clearfix">
             <div class="pull-left course-left">
                 <ul class="clearfix course-menu" role="tablist">
-                    <li class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">评论</a></li>
-                    <li><a href="#home2" aria-controls="home2" role="tab" data-toggle="tab">问答</a></li>
-                    <li><a href="#home3" aria-controls="home3" role="tab" data-toggle="tab">笔记</a></li>
+                    <li class=" menu-items active" onclick="showTab(this,0);"><a href="javascript:void(0);" aria-controls="home" role="tab" data-toggle="tab">评论</a></li>
+                    <li class="menu-items" onclick="showTab(this,1);"><a href="javascript:void(0);" aria-controls="home2" role="tab" data-toggle="tab">问答</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content lists-container list-wrap">
                     <div role="tabpanel" class="tab-pane active" id="home">
                         <div class="list-tab-con">
+                            <!--写评论-->
+                            <form id="commentForm" method="post" action="${s.base}/courseComment/doComment">
                             <div class="publish">
                                 <div class="clearfix pl-input-box">
                                     <a href="" class="pull-left user-head">
-                                        <img src="//img.mukewang.com/images/avatar_default.png">
+                                        <img src='<@shiro.principal property="header"/>'>
                                     </a>
                                     <div id="js-pl-input-fake" class="pull-left pl-input-inner">
-                                        <textarea id="js-pl-textarea" class="js-placeholder" placeholder="扯淡、吐槽、表扬、鼓励……想说啥就说啥！"></textarea>
-                                        <span class="num-limit"><span id="js-pl-limit">0</span>/300</span>
+                                        <input type="hidden" id="commentType" name="type" value="0"/>
+                                        <input type="hidden" name="sectionId" value="${(courseSection.id)!}"/>
+                                        <input type="hidden" name="courseId" value="${(courseSection.courseId)!}"/>
+                                        <textarea id="content" name="content" class="js-placeholder" placeholder="扯淡、吐槽、表扬、鼓励……想说啥就说啥！"></textarea>
+                                        <span class="num-limit"><span id="js-pl-limit">0</span>/200
+                                        </span>
+
                                     </div>
+                                    <div style="margin-left: 100px;clear: both;" ><span id="commentTip" style="display: none;color:#777;"></span></div>
                                 </div>
                                 <div class="pl-input-btm input-btm clearfix">
                                     <div class="captcha-verify-box js-verify-box hide"></div>
-                                    <input type="button" id="js-pl-submit" class="pull-right course-btn" value="发表评论">
+                                    <input type="button" onclick="doCommentQA()" id="js-pl-submit" class="pull-right course-btn" value="发表评论">
                                 </div>
                             </div>
-                            <div class="pl-container">
-                                <ul>
-                                    <li class="pl-list">
-                                        <div class="clearfix">
-                                            <div class="pl-list-avator">
-                                                <a href="" target="_blank"><img width="40" height="40" src="images/header2.jpg" title="月下背影"></a>
-                                            </div>
-                                            <div class="pl-list-main">
-                                                <div class="pl-list-nick"> <a href="" target="_blank">月下背影</a> </div>
-                                                <div class="pl-list-content">https://github.com/liumingmusic/toilet-webapp<br><br>拿走不谢，自己做的小程序。</div>
-                                                <div class="pl-list-btm clearfix">
-                                                    <span class="pl-list-time pull-left">时间: 6天前</span>
-                                                    <a title="赞" href="" class="js-pl-praise list-praise pull-right"><i class="icon-thumb-revert"></i><span>4</span></a>
-                                                    <a href="" class="js-tip-off pull-right tipoff">举报</a>
-                                                </div>
-                                            </div>
+                            </form>
+                            <!--写评论-->
+                            <!--评论区-->
+                            <div id="commentQA">
 
-                                        </div>
-                                    </li>
-                                </ul>
                             </div>
-                            <div class="pl-container">
-                                <ul>
-                                    <li class="pl-list">
-                                        <div class="clearfix">
-                                            <div class="pl-list-avator">
-                                                <a href="" target="_blank"><img width="40" height="40" src="images/header2.jpg" title="月下背影"></a>
-                                            </div>
-                                            <div class="pl-list-main">
-                                                <div class="pl-list-nick"> <a href="" target="_blank">月下背影</a> </div>
-                                                <div class="pl-list-content">https://github.com/liumingmusic/toilet-webapp<br><br>拿走不谢，自己做的小程序。</div>
-                                                <div class="pl-list-btm clearfix">
-                                                    <span class="pl-list-time pull-left">时间: 6天前</span>
-                                                    <a title="赞" href="" class="js-pl-praise list-praise pull-right"><i class="icon-thumb-revert"></i><span>4</span></a>
-                                                    <a href="" class="js-tip-off pull-right tipoff">举报</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="pl-container">
-                                <ul>
-                                    <li class="pl-list">
-                                        <div class="clearfix">
-                                            <div class="pl-list-avator">
-                                                <a href="" target="_blank"><img width="40" height="40" src="images/header2.jpg" title="月下背影"></a>
-                                            </div>
-                                            <div class="pl-list-main">
-                                                <div class="pl-list-nick"> <a href="" target="_blank">月下背影</a> </div>
-                                                <div class="pl-list-content">https://github.com/liumingmusic/toilet-webapp<br><br>拿走不谢，自己做的小程序。</div>
-                                                <div class="pl-list-btm clearfix">
-                                                    <span class="pl-list-time pull-left">时间: 6天前</span>
-                                                    <a title="赞" href="" class="js-pl-praise list-praise pull-right"><i class="icon-thumb-revert"></i><span>4</span></a>
-                                                    <a href="" class="js-tip-off pull-right tipoff">举报</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            <!--评论区-->
                         </div>
                     </div>
 
@@ -310,49 +235,7 @@
                             <li>
                                 <a href="">
                                     <div class="clearfix">
-                                        <div class="pull-left course-img"><img src="images/header.jpg" alt=""></div>
-                                        <div class="pull-left content-box">
-                                            <p class="smalle-title">WebApp 书城整站开发</p>
-                                            <p class="content-text" title=""></p>
-                                            <div class="clearfix learn-detail">
-                                                <span>·</span>3255人在学
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="clearfix">
-                                        <div class="pull-left course-img"><img src="images/header.jpg" alt=""></div>
-                                        <div class="pull-left content-box">
-                                            <p class="smalle-title">WebApp 书城整站开发</p>
-                                            <p class="content-text" title=""></p>
-                                            <div class="clearfix learn-detail">
-                                                <span>·</span>3255人在学
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="clearfix">
-                                        <div class="pull-left course-img"><img src="images/header.jpg" alt=""></div>
-                                        <div class="pull-left content-box">
-                                            <p class="smalle-title">WebApp 书城整站开发</p>
-                                            <p class="content-text" title=""></p>
-                                            <div class="clearfix learn-detail">
-                                                <span>·</span>3255人在学
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="clearfix">
-                                        <div class="pull-left course-img"><img src="images/header.jpg" alt=""></div>
+                                        <div class="pull-left course-img"><img src="${s.base}/res/i/header1.jpg" alt=""></div>
                                         <div class="pull-left content-box">
                                             <p class="smalle-title">WebApp 书城整站开发</p>
                                             <p class="content-text" title=""></p>
@@ -394,147 +277,14 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="">
-                                    <div class="clearfix">
-                                        <div class="pull-left course-img"><img src="images/header.jpg" alt=""></div>
-                                        <div class="pull-left content-box">
-                                            <p class="smalle-title">AC2016腾讯前端技术大会</p>
-                                            <p class="content-text" title="">本课程是腾讯前端团队Alloyteam参与主办的AC2016前端技术大会现场实录。大会分享议题涉及最近流行的ReactNative、Node.js、Angular.js、RXjs等技术。精彩分享不容错过！</p>
-                                            <div class="clearfix learn-detail">
-                                                <span>·</span>3255人在学
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="clearfix">
-                                        <div class="pull-left course-img"><img src="images/header.jpg" alt=""></div>
-                                        <div class="pull-left content-box">
-                                            <p class="smalle-title">AC2016腾讯前端技术大会</p>
-                                            <p class="content-text" title="">本课程是腾讯前端团队Alloyteam参与主办的AC2016前端技术大会现场实录。大会分享议题涉及最近流行的ReactNative、Node.js、Angular.js、RXjs等技术。精彩分享不容错过！</p>
-                                            <div class="clearfix learn-detail">
-                                                <span>·</span>3255人在学
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="clearfix">
-                                        <div class="pull-left course-img"><img src="images/header.jpg" alt=""></div>
-                                        <div class="pull-left content-box">
-                                            <p class="smalle-title">AC2016腾讯前端技术大会</p>
-                                            <p class="content-text" title="">本课程是腾讯前端团队Alloyteam参与主办的AC2016前端技术大会现场实录。大会分享议题涉及最近流行的ReactNative、Node.js、Angular.js、RXjs等技术。精彩分享不容错过！</p>
-                                            <div class="clearfix learn-detail">
-                                                <span>·</span>3255人在学
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <div class="clearfix">
-                                        <div class="pull-left course-img"><img src="images/header.jpg" alt=""></div>
-                                        <div class="pull-left content-box">
-                                            <p class="smalle-title">AC2016腾讯前端技术大会</p>
-                                            <p class="content-text" title="">本课程是腾讯前端团队Alloyteam参与主办的AC2016前端技术大会现场实录。大会分享议题涉及最近流行的ReactNative、Node.js、Angular.js、RXjs等技术。精彩分享不容错过！</p>
-                                            <div class="clearfix learn-detail">
-                                                <span>·</span>3255人在学
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>
-                <!--<div class="articlelist">
-                    <div class="course-right-title">
-                        <h3>手记推荐</h3>
-                        <a href="/article/?block_id=tuijian_wz" target="_blank" class="more">更多</a>
-                    </div>
-                    <ul>
-                        <li><a href="">危险的文件夹上传框</a></li>
-                        <li><a href="">危险的文件夹上传框</a></li>
-                        <li><a href="">危险的文件夹上传框</a></li>
-                        <li><a href="">危险的文件夹上传框</a></li>
-                        <li><a href="">危险的文件夹上传框</a></li>
-                        <li><a href="" target="_blank"><img src="images/header.jpg" width="40" height="40"><div>投稿001期|爱情路，职业路</div></a></li>
-                    </ul>
-                </div>-->
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-<div id="footer">
-    <div class="container">
-        <div class="footerwaper clearfix">
-            <div class="pull-right followus">
-                <a class="followus-weixin" href="javascript:;" target="_blank" title="微信">
-                    <div class="flw-weixin-box"></div>
-                </a>
-                <a class="followus-weibo" href="http://weibo.com/u/3306361973" target="_blank" title="新浪微博"></a>
-                <a class="followus-qzone" href="http://user.qzone.qq.com/1059809142/" target="_blank" title="QQ空间"></a>
-            </div>
-            <div class="footer_intro pull-left">
-                <div class="footer_link">
-                    <ul>
-                        <li><a href="" target="_blank">网站首页</a></li>
-                        <li><a href="" target="_blank" title="企业合作">企业合作</a></li>
-                        <li><a href="" target="_blank">人才招聘</a></li>
-                        <li><a href="" target="_blank">联系我们</a></li>
-                        <li><a href="" target="_blank">讲师招募</a></li>
-                        <li><a href="" target="_blank">常见问题</a></li>
-                        <li><a href="" target="_blank">意见反馈</a></li>
-                        <li><a href="" target="_blank">慕课大学</a></li>
-                        <li><a href="" target="_blank">友情链接</a></li>
-
-                    </ul>
-                </div>
-                <p>Copyright © 2018 imooc.com All Rights Reserved | 京ICP备 12003892号-11 </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--右边浮动框-->
-<!--<div id="J_GotoTop" class="elevator">
-    <a href="" class="elevator-msg" target="_blank">
-        <i class="fa fa-info-circle"></i>
-        <span class="">意见反馈</span>
-    </a>
-    <a href="" class="elevator-faq" target="_blank">
-        <i class="fa fa-question-circle-o"></i>
-        <span class="">常见问题</span>
-    </a>
-    <a href="" target="_blank" class="elevator-app">
-        <i class="fa fa-download"></i>
-        <span class="">APP下载</span>
-        <div class="elevator-app-box"></div>
-    </a>
-    <a href="" class="elevator-weixin no-goto" id="js-elevator-weixin">
-        <i class="fa fa-comments"></i>
-        <span class="">官方微信</span>
-        <div class="elevator-weixin-box"></div>
-    </a>
-    <a href="javascript:window.scrollTo( 0, 0 );" class="elevator-top no-goto" style="display: none;" id="backTop" >
-        <i class="glyphicon glyphicon-menu-up"></i>
-        <span class="">返回顶部</span>
-    </a>
-</div>-->
-
-
+<#include "./common/footer.html">
 </body>
 
 <script src="${s.base}/res/js/video.min.js"></script>
@@ -543,8 +293,39 @@
     CONTEXT_PATH = '${s.base}';
     <@shiro.guest> SHIRO_LOGIN = false;</@shiro.guest>
     <@shiro.user> SHIRO_LOGIN = true;</@shiro.user>
+    var _type = 0; //全局变量
+    function _queryPage(pageNum,type){
+        if(type == undefined)
+            type = _type;
+        else
+            _type = type;
+
+        console.log("type"+type);
+        //加载评论或者QA
+        if(pageNum == undefined)
+            pageNum = 1;
+
+        console.log("pageNum"+pageNum);
+        var courseId =${(courseSection.courseId)!};//课程id
+        var sectionId =${(courseSection.id)!};//章节id
+        console.log("courseId/sectionId"+courseId+"  "+sectionId);
+        var url = '${s.base}/courseComment/segment';
+        $("#commentQA").load(
+            url,
+            {
+                'courseId':courseId,
+                'sectionId':sectionId,
+                'type':type,
+                'pageNum':pageNum
+            },
+            function(){}
+        );
+        console.log("执行了load方法");
+    };
     $(function () {
         if(SHIRO_LOGIN){
+            /*默认加载评论*/
+            _queryPage(1,0);
             $.ajax({
                 url:CONTEXT_PATH + '/course/getCurLearnInfo',
                 type:'POST',
@@ -568,6 +349,51 @@
             });
         }
     });
+    function showTab(ele,type) {
+        $('.course-menu').find('li').each(function (i,item) {
+            $(item).removeClass('active');
+        });
+        $(ele).addClass("active");
+        _queryPage(1,type);
+        console.log("执行了_queryPage type"+type);
+        $('#commentType').val(type);
+    };
+
+
+    function doCommentQA() {
+        var content = $('#content').val();
+        if ($.trim(content).length>200 || $.trim(content).length==0){
+            $('#commentTip').css('color','red').show().html("内容长度请 &gt; 0 , &lt; 200");
+            return;
+        }
+        $('#commentForm').ajaxSubmit({
+            dataType:'JSON',
+            success:function (resp) {
+                if (resp.errcode==0 && resp.data){
+
+                };
+                if (resp.errcode==1 && resp.data){
+                    $('#commentTip').css('color','green').show().html("评论成功");
+                    setTimeout(function(){
+                        window.location.reload();
+                    },1000);
+                };
+                if (resp.errcode==3){
+                    $('#commentTip').css('color','red').show().html('文字长度大于两百');
+                };
+                if (resp.errcode==4){
+                    $('#commentTip').css('color','red').show().html('文字内容不能为空');
+                };
+                if (resp.errcode==5){
+                    $('#commentTip').css('color','red').show().html('评论失败');
+                }
+            },
+            error:function (xhr) {
+                
+            }
+        })
+        
+    }
     $('.chapter').click(function () {
         if ($(this).hasClass('light')){
             $(this).removeClass('light');

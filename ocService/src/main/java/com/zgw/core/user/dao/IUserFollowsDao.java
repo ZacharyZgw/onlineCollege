@@ -3,6 +3,7 @@ package com.zgw.core.user.dao;
 import com.zgw.core.user.entity.UserFollowStudyRecord;
 import com.zgw.core.user.entity.UserFollows;
 import com.zgw.page.TailPage;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,12 +22,12 @@ public interface IUserFollowsDao {
     /**
      *获取总数量
      **/
-    public Integer getTotalItemsCount(UserFollows queryEntity);
+    public Integer getTotalItemsCount(@Param("param1") UserFollows queryEntity);
 
     /**
      *分页获取
      **/
-    public List<UserFollows> queryPage(UserFollows queryEntity , TailPage<UserFollows> page);
+    public List<UserFollows> queryPage(@Param("param1") UserFollows queryEntity ,@Param("param2") TailPage<UserFollows> page);
 
     /**
      *获取总数量

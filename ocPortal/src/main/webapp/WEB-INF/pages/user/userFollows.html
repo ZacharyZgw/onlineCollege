@@ -10,7 +10,53 @@
     <title>慕课网</title>
 
     <#include "../common/newRes.html">
-
+    <style type="text/css">
+        .recommend-user {
+            width: 800px;
+            padding: 24px 32px;
+            box-sizing: border-box;
+            background: #FFF;
+            box-shadow: 0 4px 8px 0 rgba(7,17,27,.05);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        .recommend-user .recommend-user-left {
+            float: left;
+            width: 96px;
+            height: 96px;
+            margin-right: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .recommend-user .recommend-user-left img {
+            width: 96px;
+            height: 96px;
+            border: 0px;
+        }
+        .recommend-user .recommend-user-right {
+            float: left;
+            width: 608px;
+            color: #4D555D;
+        }
+        .recommend-user .recommend-user-nickname {
+            display: block;
+            font-size: 16px;
+            color: #F01414;
+            line-height: 32px;
+            margin-bottom: 4px;
+        }
+        .recommend-user .recommend-user-cont {
+            line-height: 32px;
+            margin-bottom: 4px;
+        }
+        .recommend-user .recommend-user-cont span {
+            margin-right: 24px;
+        }
+        .recommend-user .recommend-user-desc {
+            padding-bottom: 32px;
+        }
+    </style>
 </head>
 <body>
 <!--导航部分-->
@@ -32,40 +78,40 @@
             </div>
             <div class="user-sign">
                 <#if user.sign?? && user.sign != "">
-                    <p class="user-desc"><@shiro.principal property="sign"/></p>
-                    <#else>
-                    <p class="user-desc">这位同学很懒，木有签名的说～</p>
-                </#if>
+                <p class="user-desc"><@shiro.principal property="sign"/></p>
+                <#else>
+                <p class="user-desc">这位同学很懒，木有签名的说～</p>
+            </#if>
+        </div>
+        <div class="study-info clearfix">
+            <div class="item">
+                <div class="u-info-learn" title="学习时长218小时7分" style="cursor:pointer;">
+                    <em>218h</em>
+                    <span>学习时长 </span>
+                </div>
             </div>
-            <div class="study-info clearfix">
-                <div class="item">
-                    <div class="u-info-learn" title="学习时长218小时7分" style="cursor:pointer;">
-                        <em>218h</em>
-                        <span>学习时长 </span>
-                    </div>
-                </div>
-                <div class="item">
-                    <em>5703</em>
-                    <span>经验</span>
-                </div>
-                <div class="item">
-                    <em>2</em>
-                    <span>积分</span>
-                </div>
-                <div class="item">
-                    <a href=""><em>2</em></a>
-                    <span>关注</span>
-                </div>
-                <div class="item follows">
-                    <a href=""><em>0</em></a>
-                    <span>粉丝</span>
-                </div>
-                <div class="item js-fans-msg " data-uid="4014840" data-type="3">
-                    <a class="status-btn add-follow" href="" target="_blank">个人设置</a>
-                </div>
+            <div class="item">
+                <em>5703</em>
+                <span>经验</span>
+            </div>
+            <div class="item">
+                <em>2</em>
+                <span>积分</span>
+            </div>
+            <div class="item">
+                <a href=""><em>2</em></a>
+                <span>关注</span>
+            </div>
+            <div class="item follows">
+                <a href=""><em>0</em></a>
+                <span>粉丝</span>
+            </div>
+            <div class="item js-fans-msg " data-uid="4014840" data-type="3">
+                <a class="status-btn add-follow" href="" target="_blank">个人设置</a>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="cont_user">
@@ -78,7 +124,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="active" href="javascript:void(0);">
+                    <a  href="${s.base}/user/course">
                         <i class="fa fa-list-alt"></i><span>课程</span><b class="icon-drop_right"></b>
                     </a>
                 </li>
@@ -88,7 +134,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${s.base}/user/follows">
+                    <a href="javascript:void(0);" class="active">
                         <i class="fa fa-user-plus"></i><span>关注</span><b class="icon-drop_right"></b>
                     </a>
                 </li>
@@ -106,77 +152,45 @@
             </ul>
         </div>
         <div class="u-container">
-            <div class="c-tab clearfix">
-                <div class="tool-left pull-left">
-                    <a href="${s.base}/user/course" class="sort-item active">最近学习</a>
-                </div>
-                <div class="tool-right pull-right">
-                    <div class="tool-all">
-                        <span id="js-columall" class="tool-item">
-                            <span id="kecheng_tt">全部课程</span>
-                            <i class="tool-item glyphicon glyphicon-triangle-bottom"></i>
-                        </span>
-                        <ul class="kecheng" style="margin-left: 28px">
-                            <#if courseClassifyList??>
-                            <#list courseClassifyList as item>
-                            <li><a href="javascript:void(0);" onclick="_queryPageByClassify(1,'${item!}')">${item}</a></li>
-                            </#list>
-                            </#if>
-                        </ul>
-
+                <div class="c-tab clearfix">
+                    <div class="tool-left pull-left">
+                        <a href="${s.base}/user/course" class="sort-item active">关注列表</a>
                     </div>
                 </div>
-            </div>
 
-            <div class="js-course-list my-space-course study-tl">
-                <#if (page.items)??>
-                <#list (page.items) as item>
-                <div class="clearfix tl-item ">
+        <div class="js-course-list my-space-course study-tl">
+            <#if (page.items)??>
+            <#list (page.items) as item>
+            <div class="clearfix tl-item ">
                     <span class="time">
                         <b>${item.updateTime?string('yyyy')}</b>
                         <em>${item.updateTime?string('MM')}月${item.updateTime?string('dd')}日</em>
                     </span>
-                    <div class="course-list course-list-m">
-                        <ul class="clearfix">
-                            <li class="clearfix course-one">
-                                <div class="course-list-img pull-left">
-                                    <a href="${s.base}/course/learn/${item.courseId}" target="_self">
-                                        <img width="200" height="113" alt="${item.courseName}" src="${item.coursePicture}">
-                                    </a>
-                                </div>
-                                <div class="course-list-cont">
-                                    <h3 class="study-hd">
-                                        <a href="${s.base}/course/learn/${item.courseId}" target="_self">${item.courseName}</a>
-                                        <!--<span class="i-new">更新至5-4</span>-->
-                                    </h3>
-                                    <div class="clearfix study-points">
-                                        <span class="i-left pull-left span-common">已学0%</span>
-                                        <span class="i-mid pull-left span-common">用时 0分</span>
-                                        <span class="i-right pull-left span-common">${item.sectionName}</span>
-                                    </div>
-                                    <div class="catog-points">
-                                        <span class="i-left pull-left span-common"><a href="">笔记 <i>0</i></a></span>
-                                        <span class="i-mid pull-left span-common"><a href="">代码 <i>0</i></a></span>
-                                        <span class="i-right pull-left span-common"><a href="">问答 <i>0</i></a></span>
-                                        <a href="${s.base}/course/video/${item.sectionId}" target="_self" class="btn-red continute-btn">继续学习</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                <div class="recommend-user clearfix">
+                    <a class="recommend-user-left" href="/u/1217253/courses?sort=publish" target="_blank">
+                        <img src="${s.base}/res/i/header1.jpg">
+                    </a>
+                    <div class="recommend-user-right">
+                        <a class="recommend-user-nickname" href="/u/1217253/courses?sort=publish" target="_blank">一丝</a>
+                        <div class="recommend-user-cont">
+                            <span>Web前端工程师</span>
+                        </div>
+                        <div class="recommend-user-desc">一丝，阿里巴巴前端工程师， Cube.css，CSS Grace 作者。</div>
                     </div>
                 </div>
-                </#list>
-                </#if>
-
-
-
-
             </div>
+        </#list>
+    </#if>
 
-        </div>
 
-        <#include "../common/newTailPage.html">
-    </div>
+
+
+</div>
+
+</div>
+
+<#include "../common/newTailPage.html">
+</div>
 </div>
 <#include "../common/footer.html">
 </body>
@@ -185,7 +199,7 @@
     //根据分类分页获取
     var classify;
     <#if classify??>
-        classify = "${classify}";
+    classify = "${classify}";
     </#if>
     function _queryPageByClassify(pageNum,classify){
         var params = '?pageNum='+pageNum;

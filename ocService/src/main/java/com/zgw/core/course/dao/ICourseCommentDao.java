@@ -2,6 +2,7 @@ package com.zgw.core.course.dao;
 
 import com.zgw.core.course.entity.CourseComment;
 import com.zgw.page.TailPage;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public interface ICourseCommentDao {
     /**
      *获取总数量
      **/
-    public Integer getTotalItemsCount(CourseComment queryEntity);
+    public Integer getTotalItemsCount(@Param("param") CourseComment queryEntity);
 
     /**
      *分页获取

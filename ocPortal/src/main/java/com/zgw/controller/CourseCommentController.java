@@ -10,12 +10,14 @@ import com.zgw.page.TailPage;
 import com.zgw.vo.CourseCommentVo;
 import com.zgw.web.JsonView;
 import com.zgw.web.SessionContext;
+import net.sf.json.JSONObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,14 +44,16 @@ public class CourseCommentController {
      * type
     */
     @RequestMapping("/segment")
-    public String segment(CourseComment entity, TailPage<CourseComment> page, Model model){
+    public ModelAndView segment(CourseComment entity, TailPage<CourseComment> page){
 
         if (null == entity.getCourseId() || null ==entity.getType()){
-            return "error/404";
+            return new ModelAndView("error/404");
         }
+        ModelAndView mv = new ModelAndView("courseSegment");
+        System.out.println(entity);
         TailPage<CourseComment> commentTailPage= courseCommentService.queryPage(entity,page);
-        model.addAttribute("page",commentTailPage);
-        return "courseSegment";
+        mv.addObject("page",commentTailPage);
+        return mv ;
     }
 
     /**
@@ -60,10 +64,12 @@ public class CourseCommentController {
     */
     @RequestMapping("/doComment")
     @ResponseBody
-    public String doComment(HttpServletRequest request,String identiryCOde,CourseComment entity){
-        if (null != identiryCOde && identiryCOde.equalsIgnoreCase(SessionContext.getIdentifyCode(request))){
+    public String doComment(HttpServletRequest request,CourseComment entity){
+        /*if (null != identiryCOde && identiryCOde.equalsIgnoreCase(SessionContext.getIdentifyCode(request))){
             return JsonView.render(2).toString();//验证码错误
-        }
+        }*/
+        JsonView jv = new JsonView();
+        JSONObject jsonObject = new JSONObject();
         if (entity.getContent().trim().length()>200){
             return JsonView.render(3).toString();//文字太长
         }
@@ -82,7 +88,7 @@ public class CourseCommentController {
                     //以下部分无论是ref还是用户的评论,内容都是一样的
                     entity.setCourseId(refComment.getCourseId());
                     entity.setSectionId(refComment.getSectionId());
-                    entity.setCourseName(refComment.getCourseName());
+                    //entity.setCourseName(refComment.getCourseName());
                     entity.setSectionTitle(refComment.getSectionTitle());
                     entity.setType(refComment.getType());
                     //设置当前用户的其他属性
@@ -96,7 +102,10 @@ public class CourseCommentController {
                     BeanUtils.copyProperties(entity,courseCommentVo);
                     courseCommentVo.setHeader(this.authUserService.getById(SessionContext.getUserId()).getHeader());
                     //把entity的内容返回到页面展示
-                    return new JsonView(0,"对别人的评论/问答成功",courseCommentVo).toString();
+                    jsonObject.put("courseCommentVo",courseCommentVo);
+                    jv.setData(jsonObject);
+                    jv.setErrcode(0);
+                    return jv.toString();
                 }
             }
 
@@ -113,7 +122,10 @@ public class CourseCommentController {
                 CourseCommentVo courseCommentVo = new CourseCommentVo();
                 BeanUtils.copyProperties(entity,courseCommentVo);
                 courseCommentVo.setHeader(this.authUserService.getById(SessionContext.getUserId()).getHeader());
-                return new JsonView(1,"发表评论成功",courseCommentVo).toString();
+                jsonObject.put("courseCommentVo",courseCommentVo);
+                jv.setData(jsonObject);
+                jv.setErrcode(1);
+                return jv.toString();
             }
         }
         return new JsonView(5,"评论失败").toString();

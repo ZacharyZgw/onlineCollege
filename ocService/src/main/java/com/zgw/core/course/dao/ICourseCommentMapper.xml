@@ -14,14 +14,14 @@
         <result column="ref_id" property="refId"  jdbcType="INTEGER" />
         <result column="ref_content" property="refContent"  jdbcType="VARCHAR" />
         <result column="type" property="type"  jdbcType="INTEGER" />
-        <result column="create_time" property="createTime"  jdbcType="DATE" />
+        <result column="create_time" property="createTime"  jdbcType="TIMESTAMP" />
         <result column="create_user" property="createUser"  jdbcType="VARCHAR" />
         <result column="update_time" property="updateTime"  jdbcType="TIMESTAMP" />
         <result column="update_user" property="updateUser"  jdbcType="VARCHAR" />
         <result column="del" property="del"  jdbcType="TINYINT" />
 
         <result column="header" property="header"  jdbcType="VARCHAR" />
-        <result column="course_name" property="courseName"  jdbcType="VARCHAR" />
+        <!--<result column="course_name" property="courseName"  jdbcType="VARCHAR" />-->
     </resultMap>
     <sql id="All_Columns">
         username, to_username, course_id, section_id, section_title, content,
@@ -38,15 +38,15 @@
     <select id="getTotalItemsCount" parameterType="com.zgw.core.course.entity.CourseComment" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM course_comment
-        <trim prefix="WHERE " prefixOverrides="AND |OR ">
-            <if test="type != null">
-                AND type = #{type, jdbcType=INTEGER}
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="param.type != null">
+                AND type = #{param.type, jdbcType=INTEGER}
             </if>
-            <if test="courseId != null">
-                AND course_id = #{courseId, jdbcType=INTEGER}
+            <if test="param.courseId != null">
+                AND course_id = #{param.courseId, jdbcType=INTEGER}
             </if>
-            <if test="sectionId != null">
-                AND section_id = #{sectionId, jdbcType=INTEGER}
+            <if test="param.sectionId != null">
+                AND section_id = #{param.sectionId, jdbcType=INTEGER}
             </if>
             AND del = 0
         </trim>
@@ -56,7 +56,7 @@
         SELECT
         c.username, c.to_username, c.course_id, c.section_id, c.section_title, c.content,
         c.ref_id, c.ref_content, c.type, c.create_time, c.create_user, c.update_time,
-        c.update_user, c.del, c.id, u.header
+        c.update_user, c.del, c.id, u.header as header
 
         FROM course_comment c
         LEFT JOIN user u

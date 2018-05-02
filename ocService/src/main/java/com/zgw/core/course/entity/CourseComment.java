@@ -13,7 +13,7 @@ public class CourseComment extends BaseEntity {
     private String refContent;
     private Integer type;
     private String header;
-    private String courseName;
+    //private String courseName;
 
     public String getHeader() {
         return header;
@@ -97,13 +97,13 @@ public class CourseComment extends BaseEntity {
 
 
 
-    public String getCourseName() {
+    /*public String getCourseName() {
         return courseName;
     }
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -118,7 +118,6 @@ public class CourseComment extends BaseEntity {
                 ", refContent='" + refContent + '\'' +
                 ", type=" + type +
                 ", header='" + header + '\'' +
-                ", courseName='" + courseName + '\'' +
                 '}';
     }
 }

@@ -1,0 +1,29 @@
+<#if (page.items)??>
+<#list page.items as item>
+<div class="wenda-listcon mod-qa-list clearfix">
+    <div class="headslider qa-medias l">
+        <a href="" class="media" target="_blank" title="用户头像"><img src="${item.header}" width="40" height="40"></a>
+    </div>
+    <div class="wendaslider qa-content">
+        <div class="tit">
+            <a href="/u/2923708/courses" target="_blank">${(item.username)!}评论到:</a>
+        </div>
+        <#if item.refContent?? && item.refContent != ''>
+        <div style="margin-top:5px;padding: 5px;border:1px solid #ccc;background-color:#eee;">
+            ${(item.refContent)!}
+        </div>
+        </#if>
+        <div class="cnt">${(item.content)!}</div>
+        <div class="replymegfooter qa-footer clearfix">
+            <div class="l-box l">
+                <a href="/video/16958" class="from">${(item.sectionTitle)!}</a>
+            </div>
+            <#if item.createTime??>
+            <span class="r timeago">时间：${item.createTime?string('yyyy-MM-dd')}</span>
+            </#if>
+        </div>
+    </div>
+</div>
+</#list>
+</#if>
+<#include "./common/tailPageSegment.html">

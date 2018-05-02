@@ -17,6 +17,7 @@
         /*设置jquery全局AJAX参数*/
         $.ajaxSetup({
             type:"POST",
+            cache:false,
             /*请求完成时运行，不管失败还是成功*/
             complete:function (xhr,status) {
                 if (xhr.responseJSON.errcode==1001){
