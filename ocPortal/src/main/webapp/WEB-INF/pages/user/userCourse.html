@@ -38,7 +38,7 @@
                 </#if>
             </div>
             <div class="study-info clearfix">
-                <div class="item">
+                <!--<div class="item">
                     <div class="u-info-learn" title="学习时长218小时7分" style="cursor:pointer;">
                         <em>218h</em>
                         <span>学习时长 </span>
@@ -59,7 +59,7 @@
                 <div class="item follows">
                     <a href=""><em>0</em></a>
                     <span>粉丝</span>
-                </div>
+                </div>-->
                 <div class="item js-fans-msg " data-uid="4014840" data-type="3">
                     <a class="status-btn add-follow" href="" target="_blank">个人设置</a>
                 </div>
@@ -92,7 +92,7 @@
                         <i class="fa fa-user-plus"></i><span>关注</span><b class="icon-drop_right"></b>
                     </a>
                 </li>
-                <li>
+                <!--<li>
                     <a href="">
                         <i class="fa fa-file-text"></i><span>文章</span><b class="icon-drop_right"></b>
                     </a>
@@ -101,7 +101,7 @@
                     <a href="">
                         <i class="fa fa-file-word-o"></i><span>wiki</span><b class="icon-drop_right"></b>
                     </a>
-                </li>
+                </li>-->
 
             </ul>
         </div>
@@ -129,6 +129,7 @@
             </div>
 
             <div class="js-course-list my-space-course study-tl">
+                <form id="queryPageForm" action="">
                 <#if (page.items)??>
                 <#list (page.items) as item>
                 <div class="clearfix tl-item ">
@@ -150,14 +151,14 @@
                                         <!--<span class="i-new">更新至5-4</span>-->
                                     </h3>
                                     <div class="clearfix study-points">
-                                        <span class="i-left pull-left span-common">已学0%</span>
-                                        <span class="i-mid pull-left span-common">用时 0分</span>
+                                        <!--<span class="i-left pull-left span-common">已学0%</span>
+                                        <span class="i-mid pull-left span-common">用时 0分</span>-->
                                         <span class="i-right pull-left span-common">${item.sectionName}</span>
                                     </div>
                                     <div class="catog-points">
-                                        <span class="i-left pull-left span-common"><a href="">笔记 <i>0</i></a></span>
+                                        <!--<span class="i-left pull-left span-common"><a href="">笔记 <i>0</i></a></span>
                                         <span class="i-mid pull-left span-common"><a href="">代码 <i>0</i></a></span>
-                                        <span class="i-right pull-left span-common"><a href="">问答 <i>0</i></a></span>
+                                        <span class="i-right pull-left span-common"><a href="">问答 <i>0</i></a></span>-->
                                         <a href="${s.base}/course/video/${item.sectionId}" target="_self" class="btn-red continute-btn">继续学习</a>
                                     </div>
                                 </div>
@@ -167,16 +168,14 @@
                 </div>
                 </#list>
                 </#if>
-
-
-
-
+        </form
             </div>
 
         </div>
 
-        <#include "../common/newTailPage.html">
+
     </div>
+<!--<#include "../common/newTailPage.html">-->
 </div>
 <#include "../common/footer.html">
 </body>

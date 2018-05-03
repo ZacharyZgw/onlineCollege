@@ -20,13 +20,17 @@
         from
         (select a.* from user_course_section as a
           RIGHT JOIN
-          (select course_id,max(update_time) as max_time from user_course_section GROUP BY course_id) as b
-              ON a.course_id = b.course_id And a.update_time=b.max_time
+          (select user_id, course_id,max(update_time) as max_time
+            from user_course_section
+            <trim prefix="WHERE" prefixOverrides="AND |OR">
+                <if test="param1.userId != null">
+                    AND user_id = #{param1.userId}
+                </if>
+            </trim>
+            GROUP BY course_id) as b
+              ON a.course_id = b.course_id And a.update_time=b.max_time and a.user_id=b.user_id
               ORDER BY b.max_time DESC)as ab,course as c,course_section as s
         <trim prefix="WHERE" prefixOverrides="AND |OR">
-            <if test="param1.userId != null">
-                ab.user_id = #{param1.userId}
-            </if>
             and ab.course_id = c.course_id
             and ab.section_id = s.id
             <if test="param1.courseSubClassify !=null">
@@ -95,17 +99,21 @@
         from
         (select a.* from user_course_section as a
         RIGHT JOIN
-        (select course_id,max(update_time) as max_time from user_course_section GROUP BY course_id) as b
-        ON a.course_id = b.course_id And a.update_time=b.max_time
+        (select user_id, course_id,max(update_time) as max_time
+        from user_course_section
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            <if test="param1.userId != null">
+                AND user_id = #{param1.userId}
+            </if>
+        </trim>
+        GROUP BY course_id) as b
+        ON a.course_id = b.course_id And a.update_time=b.max_time and a.user_id=b.user_id
         ORDER BY b.max_time DESC)as ab,course as c,course_section as s
         <trim prefix="WHERE" prefixOverrides="AND |OR">
-            <if test="userId != null">
-                ab.user_id = #{userId}
-            </if>
             and ab.course_id = c.course_id
             and ab.section_id = s.id
-            <if test="courseSubClassify !=null">
-                and ab.course_sub_classify=#{courseSubClassify}
+            <if test="param1.courseSubClassify !=null">
+                and ab.course_sub_classify=#{param1.courseSubClassify}
             </if>
         </trim>
         order by ab.update_time DESC

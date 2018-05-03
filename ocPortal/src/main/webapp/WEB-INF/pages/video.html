@@ -232,24 +232,28 @@
                     <div class="recom-course-list-box">
                         <h4>推荐课程</h4>
                         <ul class="clearfix recom-course-list">
+                            <#if recomdCourseList??>
+                            <#list recomdCourseList as item>
                             <li>
-                                <a href="">
+                                <a href="${s.base}/course/learn/${item.courseId}">
                                     <div class="clearfix">
-                                        <div class="pull-left course-img"><img src="${s.base}/res/i/header1.jpg" alt=""></div>
+                                        <div class="pull-left course-img"><img src="${item.picture}" alt="课程图片"></div>
                                         <div class="pull-left content-box">
-                                            <p class="smalle-title">WebApp 书城整站开发</p>
-                                            <p class="content-text" title=""></p>
-                                            <div class="clearfix learn-detail">
+                                            <p class="smalle-title">${item.name}</p>
+                                            <p class="content-text" title="">${item.brief}</p>
+                                            <!--<div class="clearfix learn-detail">
                                                 <span>·</span>3255人在学
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
                                 </a>
                             </li>
+                             </#list>
+                            </#if>
                         </ul>
                     </div>
                 </div>
-                <div class="js-tag-box">
+                <!--<div class="js-tag-box">
                     <div class="box mb40 all-attention-box">
                         <h4>大家都关注</h4>
                         <div class="js-all-attention all-attention">
@@ -279,7 +283,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

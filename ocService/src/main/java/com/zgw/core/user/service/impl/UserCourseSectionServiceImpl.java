@@ -46,9 +46,11 @@ public class UserCourseSectionServiceImpl implements IUserCourseSectionService {
     @Override
     public TailPage<UserCourseSectionDto> queryPageBycourseSubClassify(UserCourseSection queryEntity, TailPage<UserCourseSectionDto> page) {
         Integer totalCount = userCourseSectionDao.getTotalItemsCount(queryEntity);
-        List<UserCourseSectionDto> result = userCourseSectionDao.queryPageBycourseSubClassify(queryEntity, page);
-        page.setItems(result);
         page.setItemsTotalCount(totalCount);
+        page.setPageSize(10);
+        List<UserCourseSectionDto> result = userCourseSectionDao.queryPageBycourseSubClassify(queryEntity, page);
+
+        page.setItems(result);
         return page;
     }
 

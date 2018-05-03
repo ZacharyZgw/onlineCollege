@@ -138,7 +138,7 @@
                         <i class="fa fa-user-plus"></i><span>关注</span><b class="icon-drop_right"></b>
                     </a>
                 </li>
-                <li>
+                <!--<li>
                     <a href="">
                         <i class="fa fa-file-text"></i><span>文章</span><b class="icon-drop_right"></b>
                     </a>
@@ -147,7 +147,7 @@
                     <a href="">
                         <i class="fa fa-file-word-o"></i><span>wiki</span><b class="icon-drop_right"></b>
                     </a>
-                </li>
+                </li>-->
 
             </ul>
         </div>
@@ -167,13 +167,12 @@
                         <em>${item.updateTime?string('MM')}月${item.updateTime?string('dd')}日</em>
                     </span>
                 <div class="recommend-user clearfix">
-                    <a class="recommend-user-left" href="/u/1217253/courses?sort=publish" target="_blank">
-                        <img src="${s.base}/res/i/header1.jpg">
+                    <a class="recommend-user-left" href="${s.base}/user/teacher/${item.id}" target="_blank">
                     </a>
                     <div class="recommend-user-right">
-                        <a class="recommend-user-nickname" href="/u/1217253/courses?sort=publish" target="_blank">一丝</a>
+                        <a class="recommend-user-nickname" href="${s.base}/user/teacher/${item.id}" target="_blank"></a>
                         <div class="recommend-user-cont">
-                            <span>Web前端工程师</span>
+                            <span></span>
                         </div>
                         <div class="recommend-user-desc">一丝，阿里巴巴前端工程师， Cube.css，CSS Grace 作者。</div>
                     </div>

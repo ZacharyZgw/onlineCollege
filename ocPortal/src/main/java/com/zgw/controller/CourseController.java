@@ -116,6 +116,14 @@ public class CourseController {
         model.addAttribute("courseSection",courseSection);
         model.addAttribute("courseName",course.getName());
 
+        /*获取相关推荐课程*/
+        CourseQueryDto queryEntity = new CourseQueryDto();
+        queryEntity.descSortField("weight");
+        queryEntity.setCount(5);//5门推荐课程
+        queryEntity.setSubClassify(course.getSubClassify());
+        List<Course> recomdCourseList = this.courseService.queryList(queryEntity);
+        model.addAttribute("recomdCourseList", recomdCourseList);
+
         //学习记录
         UserCourseSection userCourseSection = new UserCourseSection();
         userCourseSection.setUserId(SessionContext.getUserId());

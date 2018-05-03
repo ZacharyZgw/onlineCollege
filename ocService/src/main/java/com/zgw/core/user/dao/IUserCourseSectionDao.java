@@ -28,7 +28,7 @@ public interface IUserCourseSectionDao {
     /**
      *获取总数量
      **/
-    public Integer getTotalItemsCount(UserCourseSection queryEntity);
+    public Integer getTotalItemsCount(@Param("param1") UserCourseSection queryEntity);
 
     /**
      *分页获取
