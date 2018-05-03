@@ -206,6 +206,7 @@
 		SELECT 
 		<include refid="All_Columns" />
 		FROM user
+		WHERE role=1
 		ORDER BY weight DESC 
 		LIMIT 5
 	</select>

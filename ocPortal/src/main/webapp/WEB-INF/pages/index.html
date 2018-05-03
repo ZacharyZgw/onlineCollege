@@ -45,7 +45,7 @@
 				<#list classify as item>
 				<#if item_index lt 6>
 				<div class="category" c-id="classify_${item.id!}">
-					<a href="http://www.baidu.com">
+					<a href="${s.base}/course/list?pageNum=1&c=${item.code}&sort=last">
 						<div class="group">${item.name!}
 						</div>
 					</a>
@@ -65,9 +65,9 @@
 					<div class="panel-body">
 					<#if item.subClassifyList??>
 					<#list item.subClassifyList as subItem>
-					<a class="submenu-item" href="http://www.baidu.com">${subItem.name!}</a>
+					<a class="submenu-item" href="${s.base}/course/list?pageNum=1&c=${subItem.code}&sort=last">${subItem.name!}</a>
 					<#if subItem_index lt (item.subClassifyList?size - 1)>
-					<a class="submenu-item">/</a>
+					<a href="${s.base}/course/list?pageNum=1&c=${subItem.code}&sort=last" class="submenu-item">/</a>
 					</#if>
 					</#list>
 					</#if>
@@ -189,7 +189,7 @@
 </div>
 </div>
 
-	<div class="types-block clearfix">
+	<!--<div class="types-block clearfix">
 		<h3 class="types-title">Java开发工程师</h3>
 
 		<div class="types-content-left "
@@ -290,19 +290,22 @@
 
 			</div>
 		</div>
-	</div>
+	</div>-->
 
 	<div class="types-block clearfix">
-		<h3 class="types-title">名校讲师</h3>
+		<div class="margin-bottom-20"><h3 class="types-title " style="text-align: center;font-size: 16px;">课/程/讲/师</h3> </div>
+		<#if teacherList??>
+		<#list teacherList as item>
 		<div class="lecturer-card-container" style="margin-right: 0px;">
 			<div class="lecturer-item">
-				<img class="lecturer-uimg" src="../res/i/header.jpg">
-				<span class="lecturer-name">王阳明</span>
-				<span class="lecturer-title">中华大学</span>
-				<span class="lecturer-p" >中华大学高级讲师，擅长写代码</span>
+				<img class="lecturer-uimg" src="${item.header}">
+				<span class="lecturer-name">${item.username}</span>
+				<span class="lecturer-title">${item.title}</span>
+				<span class="lecturer-p" >${item.sign}</span>
 			</div>
 		</div>
-
+		</#list>
+		</#if>
 	</div>
 
 </div>

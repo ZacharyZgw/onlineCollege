@@ -1,6 +1,8 @@
 package com.zgw.controller;
 
 import com.zgw.business.IPortalBusiness;
+import com.zgw.core.auth.domain.AuthUser;
+import com.zgw.core.auth.service.IAuthUserService;
 import com.zgw.core.consts.entity.SiteCarousel;
 import com.zgw.core.consts.service.ISiteCarouselService;
 import com.zgw.core.course.CourseEnum;
@@ -30,6 +32,8 @@ public class PortalController {
     @Autowired
     private ICourseService courseService;
 
+    @Autowired
+    private IAuthUserService authUserService;
     @RequestMapping("/return")
     public void return1(HttpServletResponse resp){
         try {
@@ -62,7 +66,13 @@ public class PortalController {
         queryDto.setFree(CourseEnum.FREE.value());//非免费的：实战课
         List<Course> freeCourseList = this.courseService.queryList(queryDto);
         model.addAttribute("freeCourseList", freeCourseList);
+
+
+        //加载讲师信息
+        List<AuthUser> teacherList = authUserService.queryRecomd();
+        model.addAttribute("teacherList",teacherList);
         return "index";
+
     }
 
 }
