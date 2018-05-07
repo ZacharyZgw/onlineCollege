@@ -44,27 +44,26 @@ public interface ICourseDao  {
 
     /**
      *创建新记录
-     **//*
-    public void create(Course entity);
+     **/
+    //public void create(Course entity);
     public void createSelectivity(Course entity);
 
-    *//**
+    /**
      *根据id更新
-     **//*
-    public void update(Course entity);
+     **/
+    //public void update(Course entity);
 
-    *//**
+    /**
      *根据id选择性更新自动
-     **//*
+     **/
     public void updateSelectivity(Course entity);
-
-    *//**
+    /**
      *物理删除
-     **//*
+     **/
     public void delete(Course entity);
 
-    *//**
+    /**
      *逻辑删除
-     **//*
-    public void deleteLogic(Course entity);*/
+     **/
+    public void deleteLogic(Course entity);
 }

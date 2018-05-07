@@ -62,21 +62,21 @@ public class CourseServiceImpl implements ICourseService {
 
     @Override
     public void createSelectivity(Course entity) {
-
+        courseDao.createSelectivity(entity);
     }
 
     @Override
     public void updateSelectivity(Course entity) {
-
+        courseDao.updateSelectivity(entity);
     }
 
     @Override
     public void delete(Course entity) {
-
+        courseDao.delete(entity);
     }
 
     @Override
     public void deleteLogic(Course entity) {
-
+        courseDao.deleteLogic(entity);
     }
 }

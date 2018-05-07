@@ -122,9 +122,7 @@ public class AuthController {
                           HttpServletResponse response,
                           Model model){
 
-        logger.error("rememberMe+*&*^$%^&^&&&&&&&&&&&&&&&&&&&"+String.valueOf(rememberMe));
-        logger.error("user"+user.toString());
-        logger.error("urlLast",SessionContext.getAttribute(request,"urlLast").toString());
+
         Boolean isRememberMe=false;
         if (null != rememberMe && rememberMe == 1){
             isRememberMe=true;
