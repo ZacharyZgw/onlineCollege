@@ -25,5 +25,45 @@ public class SiteCarouselServiceImpl implements ISiteCarouselService {
         return siteCarouselList;
     }
 
+    @Override
+    public TailPage<SiteCarousel> queryPage(SiteCarousel queryEntity, TailPage<SiteCarousel> page) {
+        Integer totalCount = this.siteCarouselDao.getTotalItemsCount(queryEntity);
+        List<SiteCarousel> result = this.siteCarouselDao.queryPage(queryEntity, page);
+        page.setItemsTotalCount(totalCount);
+        page.setItems(result);
+        return page;
+    }
+
+    @Override
+    public void create(SiteCarousel entity) {
+        this.siteCarouselDao.create(entity);
+
+    }
+
+    @Override
+    public void createSelectivity(SiteCarousel entity) {
+        this.siteCarouselDao.createSelectivity(entity);
+    }
+
+    @Override
+    public void update(SiteCarousel entity) {
+        this.siteCarouselDao.update(entity);
+    }
+
+    @Override
+    public void updateSelectivity(SiteCarousel entity) {
+        this.siteCarouselDao.updateSelectivity(entity);
+    }
+
+    @Override
+    public void delete(SiteCarousel entity) {
+        this.siteCarouselDao.delete(entity);
+    }
+
+    @Override
+    public void deleteLogic(SiteCarousel entity) {
+        this.siteCarouselDao.deleteLogic(entity);
+    }
+
 
 }

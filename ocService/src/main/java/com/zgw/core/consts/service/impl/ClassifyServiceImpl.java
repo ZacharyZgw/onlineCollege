@@ -48,4 +48,24 @@ public class ClassifyServiceImpl implements IClassifyService {
     public int queryAllItemsCount() {
         return classifyDao.getTotalItemsCount();
     }
+
+    @Override
+    public void createSelectivity(Classify entity) {
+        this.classifyDao.createSelectivity(entity);
+    }
+
+    @Override
+    public void updateSelectivity(Classify entity) {
+        this.classifyDao.updateSelectivity(entity);
+    }
+
+    @Override
+    public void delete(Classify entity) {
+        this.classifyDao.delete(entity);
+    }
+
+    @Override
+    public void deleteLogic(Classify entity) {
+        this.classifyDao.deleteLogic(entity);
+    }
 }

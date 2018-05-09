@@ -29,4 +29,9 @@ public interface IClassifyService {
      * 查询记录数
      */
     public int queryAllItemsCount();
+
+    public void createSelectivity(Classify entity);
+    public void updateSelectivity(Classify enttity);
+    public void delete(Classify entity);
+    public void deleteLogic(Classify entity);
 }

@@ -12,6 +12,9 @@ public interface IClassifyDao {
     public List<Classify> selectByCondition(Classify classify);
     public Integer getTotalItemsCount();
     public Classify selectByCode(@Param("code") String code);
-
+    public void createSelectivity(Classify classify);
+    public void updateSelectivity(Classify classify);
+    public void delete(Classify classify);
+    public void deleteLogic(Classify classify);
 
 }
