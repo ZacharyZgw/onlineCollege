@@ -62,5 +62,10 @@ public class AuthController {
             return "/auth/login";
         }
     }
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        SessionContext.shiroLogout();
+        return "redirect:/index";
+    }
 
 }
