@@ -61,7 +61,7 @@
 									<td style="width:120px;">
 										<p>推荐权重：${course.weight!}</p> 
 										<p><a href="javascript:void(0)" onclick="toEdit(${course.id!})">修改信息</a></p>
-										<p><a href="${s.base}/course/append.html?courseId=${course.id!}" >添加章节</a></p> 
+										<p><a href="${s.base}/course/append?courseId=${course.courseId!}" >添加章节</a></p>
 									</td>
 							</tr>
 						</tbody>
@@ -259,7 +259,7 @@
 			if(type == 1){
 				elId = 'qa';
 			}
-			var url = '${s.base}/courseComment/pagelist.html';
+			var url = '${s.base}/courseComment/pagelist';
 			$("#" + elId).load(
 				url,
 				{'courseId':courseId,'type':type,'pageNum':1},

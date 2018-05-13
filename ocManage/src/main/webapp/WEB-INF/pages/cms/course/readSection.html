@@ -42,7 +42,7 @@
 					</div>
 					
 					<div class="modal-body">
-						<form role="form" id="sectionForm" method="post" action="${s.base}/courseSection/doMerge.html">
+						<form role="form" id="sectionForm" method="post" action="${s.base}/courseSection/doMerge">
 							<input type="hidden" id="sectionHiddenId" name="id" value=""/>
 							<input type="hidden" id="sectionHiddenParentId" name="parentId" value=""/>
 							<div class="form-group">
@@ -84,7 +84,7 @@
 				$('#time-group').hide();
 			}
 			$.ajax({
-				url:'${s.base}/courseSection/getById.html',
+				url:'${s.base}/courseSection/getById',
 			    type:'POST',
 			    dataType:'json',
 			    data:{"id":id},
@@ -126,7 +126,7 @@
 		function doDeleteSection(id,type){
 			Modal.confirm('确定删除?',function(){
 				$.ajax({
-					url:'${s.base}/courseSection/deleteLogic.html',
+					url:'${s.base}/courseSection/deleteLogic',
 				    type:'POST',
 				    dataType:'json',
 				    data:{"id":id},
@@ -146,7 +146,7 @@
 		//排序
 		function toSortSection(id,sortType){
 			$.ajax({
-				url:'${s.base}/courseSection/sortSection.html',
+				url:'${s.base}/courseSection/sortSection',
 			    type:'POST',
 			    dataType:'json',
 			    data:{"id":id,"sortType":sortType},

@@ -225,19 +225,19 @@ public class CourseController {
     }
     //继续添加章节
     @RequestMapping("/append")
-    public ModelAndView appendSection(Long courseId){
+    public String  appendSection(Long courseId,Model model){
         Course course = courseService.getByCourseId(courseId);
         if(null == course)
-            return new ModelAndView("error/404");
+            return "error/404";
 
-        ModelAndView mv = new ModelAndView("cms/course/append");
-        mv.addObject("curNav", "course");
-        mv.addObject("course", course);
+        //ModelAndView mv = new ModelAndView("cms/course/append");
+        model.addAttribute("curNav", "course");
+        model.addAttribute("course", course);
 
         List<CourseSectionVO> chaptSections = this.portalBusiness.queryCourseSection(courseId);
-        mv.addObject("chaptSections", chaptSections);
+        model.addAttribute("chaptSections", chaptSections);
 
-        return mv;
+        return "cms/course/append";
     }
 
 }

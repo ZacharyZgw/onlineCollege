@@ -9,6 +9,7 @@ import com.zgw.core.user.service.IUserCollectionService;
 import com.zgw.core.user.service.IUserCourseSectionService;
 import com.zgw.core.user.service.IUserFollowsService;
 import com.zgw.page.TailPage;
+import com.zgw.web.JsonView;
 import com.zgw.web.SessionContext;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +80,13 @@ public class UserController{
         }
         return "user/userInfo";
     }
-
+    @RequestMapping("/update")
+    @ResponseBody
+    public String update(AuthUser user){
+        user.setId(SessionContext.getUserId());
+        this.authUserService.updateSelectivity(user);
+        return JsonView.render(0).toString();
+    }
     @RequestMapping("/course")
     public String home(String classify,Model model, TailPage<UserCourseSectionDto> page){
         page.setPageSize(2);

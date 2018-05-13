@@ -61,4 +61,39 @@ public class CourseSectionServiceImpl implements ICourseSectionService {
     public CourseSection getSortSectionMin(CourseSection curCourseSection) {
         return courseSectionDao.getSortSectionMin(curCourseSection);
     }
+
+    @Override
+    public void createSelectivity(CourseSection entity) {
+        this.courseSectionDao.createSelectivity(entity);
+    }
+
+    @Override
+    public void createList(List<CourseSection> entityList) {
+        this.courseSectionDao.createList(entityList);
+    }
+
+    @Override
+    public void updateSelectivity(CourseSection entity) {
+        this.courseSectionDao.updateSelectivity(entity);
+    }
+
+    @Override
+    public void delete(CourseSection entity) {
+        this.courseSectionDao.delete(entity);
+    }
+
+    @Override
+    public void deleteLogic(CourseSection entity) {
+        this.courseSectionDao.deleteLogic(entity);
+    }
+
+    @Override
+    public void deleteByCourseId(CourseSection entity) {
+        this.courseSectionDao.deleteByCourseId(entity);
+    }
+
+    @Override
+    public void deleteLogicByCourseId(CourseSection entity) {
+        this.courseSectionDao.deleteLogicByCourseId(entity);
+    }
 }

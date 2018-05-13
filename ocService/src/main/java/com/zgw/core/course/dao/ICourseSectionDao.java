@@ -28,4 +28,34 @@ public interface ICourseSectionDao {
      */
     public CourseSection getSortSectionMin(CourseSection curCourseSection);
     public Integer getTotalItemsCount();
+    /**
+     *创建新记录
+     **/
+    public void createSelectivity(CourseSection entity);
+
+    /**
+     * 批量创建
+     */
+    public void createList(List<CourseSection> entityList);
+    public void updateSelectivity(CourseSection entity);
+    /**
+     *物理删除
+     **/
+    public void delete(CourseSection entity);
+
+    /**
+     *逻辑删除
+     **/
+    public void deleteLogic(CourseSection entity);
+
+    /**
+     *物理删除课程对应的章节
+     **/
+    public void deleteByCourseId(CourseSection entity);
+
+    /**
+     *逻辑删除课程对应的章节
+     **/
+    public void deleteLogicByCourseId(CourseSection entity);
+
 }

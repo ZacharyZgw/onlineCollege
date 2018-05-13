@@ -197,7 +197,7 @@
 			#{del, jdbcType=TINYINT},
 			</if>
 			<if test="email != null">
-			#{email}
+			#{email},
 			</if>
 		</trim>
 	</insert>
@@ -338,7 +338,7 @@
 			del = #{del, jdbcType=TINYINT},
 			</if>
 			<if test="email != null">
-				email=#{email}
+				email = #{email},
 			</if>
 		</trim>
 		WHERE id = #{id, jdbcType = INTEGER}
